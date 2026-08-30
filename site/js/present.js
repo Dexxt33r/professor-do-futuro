@@ -230,7 +230,7 @@
     var backLbl = state.deckKey ? '← Biblioteca' : '← Módulos';
     els.head.innerHTML =
       '<button class="btn btn-ghost" id="backInline" style="margin-bottom:.8rem;padding:.5rem 1rem;font-size:.88rem">'+backLbl+'</button>' +
-      '<h2 style="color:var(--indigo-900);margin-bottom:1.3rem">'+ info.icon +' '+ esc(info.title) +' <span style="color:var(--text-muted);font-size:.9rem;font-weight:400">(<span>'+ total +'</span> slides â€” clique num card para apresentar)</span></h2>';
+      '<h2 style="color:var(--indigo-900);margin-bottom:1.3rem">'+ info.icon +' '+ esc(info.title) +' <span style="color:var(--text-muted);font-size:.9rem;font-weight:400">(<span>'+ total +'</span> slides — clique num card para apresentar)</span></h2>';
     var back = document.getElementById('backInline');
     if(back) back.addEventListener('click', function(){
       if(state.deckKey) openLibrary(); else renderModuleStart();
