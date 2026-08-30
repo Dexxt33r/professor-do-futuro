@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
+  <!-- bolha principal = prompt -->
+  <rect x="50" y="30" width="180" height="100" rx="20" fill="#ffffff" opacity="0.94"/>
+  <path d="M80 130 L70 158 L108 130 z" fill="#ffffff" opacity="0.94"/>
+  <rect x="72" y="52" width="70" height="12" rx="6" fill="#c9971c"/>
+  <rect x="72" y="76" width="136" height="9" rx="4.5" fill="#fbe38d"/>
+  <rect x="72" y="94" width="118" height="9" rx="4.5" fill="#fbe38d"/>
+  <rect x="72" y="112" width="90" height="9" rx="4.5" fill="#fbe38d"/>
+  <!-- cursor digitação -->
+  <rect x="168" y="52" width="8" height="12" fill="#f59e0b"><animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/></rect>
+  <!-- resposta da IA -->
+  <rect x="120" y="152" width="140" height="40" rx="14" fill="#fcd34d"/>
+  <text x="190" y="178" font-size="15" text-anchor="middle" fill="#062b1b" font-weight="700">⚡ Pronto! ⚡</text>
+  <!-- avatar IA -->
+  <circle cx="250" cy="60" r="24" fill="#ffffff" opacity="0.94"/>
+  <text x="250" y="69" font-size="24" text-anchor="middle">🤖</text>
+  <text x="30" y="70" font-size="24">✨</text>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 460" width="520" height="460">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b7a5e"/><stop offset="1" stop-color="#c9971c"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef3e4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- fundo -->
+  <rect width="520" height="460" rx="26" fill="url(#bg)"/>
+  <circle cx="70" cy="60" r="90" fill="#ffffff" opacity="0.06"/>
+  <circle cx="470" cy="400" r="120" fill="#ffffff" opacity="0.06"/>
+
+  <!-- professor -->
+  <g>
+    <rect x="200" y="120" width="34" height="70" rx="17" fill="#f59e0b"/>
+    <circle cx="217" cy="95" r="30" fill="#fcd34d"/>
+    <path d="M150 210 h134 v60 a30 30 0 0 1 -30 30 h-74 a30 30 0 0 1 -30 -30 z" fill="#fcd34d"/>
+    <path d="M150 210 h134 v34 h-134 z" fill="#fbbf24"/>
+    <path d="M158 232 h118" stroke="#96690a" stroke-width="3" stroke-linecap="round"/>
+    <path d="M176 300 v56 c0 14 12 26 26 26 h30 c14 0 26 -12 26 -26 v-56" fill="none" stroke="#fcd34d" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <!-- quadro / slide -->
+  <g>
+    <rect x="330" y="70" width="150" height="100" rx="12" fill="url(#card)"/>
+    <rect x="345" y="86" width="70" height="10" rx="5" fill="#c9971c"/>
+    <rect x="345" y="106" width="120" height="8" rx="4" fill="#fbe38d"/>
+    <rect x="345" y="122" width="100" height="8" rx="4" fill="#fbe38d"/>
+    <rect x="345" y="138" width="112" height="8" rx="4" fill="#fbe38d"/>
+    <rect x="420" y="86" width="45" height="45" rx="10" fill="#fcd34d"/>
+    <text x="442" y="116" font-size="28" text-anchor="middle">🤖</text>
+  </g>
+
+  <!-- painéis flutuantes IA -->
+  <g>
+    <rect x="60" y="300" width="130" height="60" rx="14" fill="#ffffff" opacity="0.95"/>
+    <text x="125" y="322" font-size="14" text-anchor="middle" fill="#062b1b">Slide gerado</text>
+    <text x="125" y="344" font-size="26" text-anchor="middle">⚡</text>
+
+    <rect x="300" y="330" width="150" height="70" rx="14" fill="#fcd34d"/>
+    <text x="375" y="356" font-size="15" text-anchor="middle" fill="#062b1b" font-weight="700">Inclusão + AEE</text>
+    <text x="375" y="382" font-size="22" text-anchor="middle">♿ ✨</text>
+  </g>
+
+  <!-- estrelas -->
+  <text x="60" y="120" font-size="26">✨</text>
+  <text x="452" y="230" font-size="26">📊</text>
+  <text x="120" y="210" font-size="20">⭐</text>
+</svg>

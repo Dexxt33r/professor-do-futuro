@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitar acesso — Professor do Futuro</title>
+  <meta name="description" content="Solicite seu acesso ao curso Professor do Futuro. As contas são criadas pelo professor responsável.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-page{ display:flex; flex-direction:column; min-height:100vh; }
+    .auth-wrap{ flex:1; display:grid; place-items:center; padding:3.5rem 1rem 4rem; position:relative; }
+    .auth-card{
+      width:min(520px,100%);
+      background:var(--glass-bg-strong); backdrop-filter:blur(var(--glass-blur)) saturate(150%);
+      -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(150%);
+      border:1px solid var(--glass-border); border-radius:24px;
+      box-shadow:0 30px 70px rgba(6,43,27,.18), inset 0 1px 0 rgba(255,255,255,.6);
+      padding:2.4rem 2rem;
+    }
+    .auth-head{ text-align:center; margin-bottom:1.6rem; }
+    .auth-icon{
+      width:64px; height:64px; margin:0 auto 1rem; border-radius:18px; display:grid; place-items:center;
+      font-size:1.9rem; background:linear-gradient(135deg,#0b7a5e,#c9971c);
+      box-shadow:0 12px 28px rgba(201,151,28,.35);
+    }
+    .auth-head h1{ font-size:1.6rem; color:var(--heading); }
+    .auth-head p{ color:var(--text-muted); font-size:.95rem; margin-top:.4rem; }
+    .access-steps{ margin:0 0 1.8rem; }
+    .access-steps li{
+      display:flex; align-items:flex-start; gap:.8rem; padding:.7rem 0; border-bottom:1px dashed var(--glass-border);
+      color:var(--body); font-size:.98rem; line-height:1.5;
+    }
+    .access-steps li:last-child{ border-bottom:none; }
+    .access-steps .n{
+      width:28px; height:28px; flex:none; border-radius:50%; display:grid; place-items:center; font-weight:800; font-size:.85rem;
+      color:#fff; background:linear-gradient(135deg,#0b7a5e,#c9971c);
+    }
+    .btn-block{ width:100%; }
+    .auth-links{ text-align:center; margin-top:1.4rem; font-size:.92rem; color:var(--text-muted); }
+    .auth-links a{ color:var(--violet-600); font-weight:700; }
+    html[data-theme="dark"] .auth-links a{ color:#f7d98c; }
+  </style>
+</head>
+<body class="auth-page">
+
+  <header class="nav" id="siteNav"></header>
+
+  <main class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-head">
+        <div class="auth-icon">🎟️</div>
+        <h1>Solicitar acesso</h1>
+        <p>As contas são criadas pelo professor responsável</p>
+      </div>
+
+      <ol class="access-steps">
+        <li><span class="n">1</span><span><b>Envie um e-mail</b> pedindo seu acesso ao curso para o responsável.</span></li>
+        <li><span class="n">2</span><span>O responsável <b>cria sua conta</b> e informa seu <b>e-mail e senha</b> de acesso.</span></li>
+        <li><span class="n">3</span><span>Use o e-mail e a senha recebidos para <b>fazer login</b> e acessar os módulos, prompts e slides.</span></li>
+      </ol>
+
+      <a href="login.html" class="btn btn-primary btn-block">Ir para o login</a>
+
+      <div class="auth-links">
+        Já tem uma conta? <a href="login.html">Entrar</a>
+      </div>
+    </div>
+  </main>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fcefc4"/><stop offset="1" stop-color="#fbe38d"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" rx="22" fill="url(#g2)"/>
+  <circle cx="60" cy="60" r="70" fill="#ffffff" opacity="0.5"/>
+  <circle cx="340" cy="250" r="90" fill="#ffffff" opacity="0.4"/>
+
+  <!-- projeção / tela de apresentação -->
+  <g>
+    <rect x="90" y="70" width="220" height="130" rx="12" fill="#062b1b"/>
+    <rect x="106" y="86" width="90" height="10" rx="5" fill="#f59e0b"/>
+    <rect x="106" y="106" width="130" height="8" rx="4" fill="#fbe38d"/>
+    <rect x="106" y="122" width="188" height="8" rx="4" fill="#fbe38d"/>
+    <rect x="106" y="138" width="150" height="8" rx="4" fill="#fbe38d"/>
+    <rect x="250" y="88" width="44" height="44" rx="10" fill="#fcd34d"/>
+    <text x="272" y="118" font-size="24" text-anchor="middle">📊</text>
+    <rect x="185" y="200" width="30" height="40" rx="5" fill="#d9a621"/>
+    <rect x="115" y="200" width="30" height="40" rx="5" fill="#d9a621"/>
+    <rect x="255" y="200" width="30" height="40" rx="5" fill="#d9a621"/>
+  </g>
+  <text x="330" y="60" font-size="24">▶</text>
+</svg>

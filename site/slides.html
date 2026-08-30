@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca de Slides â€” Professor do Futuro</title>
+  <meta name="description" content="Biblioteca de apresentaÃ§Ãµes do Professor do Futuro: o curso completo em 60 slides mais coleÃ§Ãµes rÃ¡pidas sobre gestÃ£o, silÃªncio, interesse e alunos rebeldes.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ðŸŽ“</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/guard.js"></script>
+  <noscript><meta http-equiv="refresh" content="0;url=login.html"></noscript>
+</head>
+<body class="pres-shell">
+
+  <header class="nav" id="siteNav"></header>
+
+  <!-- Toolbar -->
+  <div class="pres-toolbar">
+    <div class="container">
+      <button class="btn btn-ghost" id="btnBack" style="display:none;padding:.6rem 1rem;font-size:.9rem">â† Biblioteca</button>
+      <div class="search-wrap" id="searchWrap">
+        <span class="s-ic">ðŸ”</span>
+        <input id="presSearch" type="text" placeholder="Buscar slide deste tema...">
+      </div>
+      <div class="pres-mod-wrap" id="presModWrap">
+        <select id="presMod" class="pres-mod-select">
+          <option value="all">Todos os mÃ³dulos</option>
+          <option value="intro">IntroduÃ§Ã£o</option>
+          <option value="1">MÃ³dulo 1 Â· Slides com IA</option>
+          <option value="2">MÃ³dulo 2 Â· InclusÃ£o e AEE</option>
+          <option value="3">MÃ³dulo 3 Â· IA na PrÃ¡tica</option>
+          <option value="4">MÃ³dulo 4 Â· GestÃ£o de Sala</option>
+          <option value="fim">Encerramento</option>
+        </select>
+      </div>
+      <span id="presCount" style="display:none"></span>
+    </div>
+  </div>
+
+  <!-- Grade de slides -->
+  <main class="pres-stage" id="presStage">
+    <div class="container">
+      <div id="presHead"></div>
+      <div class="deck-grid" id="deckGrid"></div>
+      <span class="hint" id="presHint">Dica: no modo apresentaÃ§Ã£o use â† â†’ para navegar, <kbd>F</kbd> para tela cheia e <kbd>Esc</kbd> para sair.</span>
+    </div>
+  </main>
+
+  <!-- Viewer -->
+  <div class="viewer" id="viewer">
+    <div class="viewer-top">
+      <div class="vt-left">
+        <span id="vtProgress" class="vt-progress">1 / 1</span>
+        <span id="vtTitle" class="vt-title">Professor do Futuro</span>
+      </div>
+      <div class="viewer-actions">
+        <button class="vbtn" id="btnClose" title="Fechar (Esc)">âœ•</button>
+      </div>
+    </div>
+
+    <div class="viewer-stage">
+      <div class="stage-inner">
+        <div class="board" id="board"></div>
+      </div>
+      <div class="nav-zone left" id="navLeft" title="Anterior"></div>
+      <div class="nav-zone right" id="navRight" title="PrÃ³ximo"></div>
+    </div>
+
+    <div class="progbar"><div class="fill" id="progFill" style="width:0%"></div></div>
+    <div class="viewer-bottom">
+      <span class="lowerbar">
+        <span class="kb-item"><kbd>â†</kbd><kbd>â†’</kbd> navegar</span>
+        <span class="kb-item"><kbd>Esc</kbd> fechar</span>
+      </span>
+      <span id="vtModule"></span>
+    </div>
+  </div>
+
+  <footer id="siteFooter"></footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/decks.js"></script>
+  <script src="js/present.js"></script>
+<script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

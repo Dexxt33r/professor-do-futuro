@@ -1,0 +1,26 @@
+# ============================================================
+# PROFESSOR DO FUTURO — arquivos que NÃO devem ir ao GitHub
+# ============================================================
+
+# CONTÉM A SUPABASE_SECRET_KEY — NUNCA ENVIAR!
+criar_conta.js
+
+# Scripts auxiliares locais
+*.ps1
+
+# Credenciais e segredos em geral
+.env
+.env.*
+*.key
+secret*
+
+# Arquivos de teste temporários
+_test*.js
+
+# Sistema / lixo
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Node (caso use ferramentas locais)
+node_modules/

@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca de Leitura â€” Professor do Futuro</title>
+  <meta name="description" content="Biblioteca de leitura e estudo do Professor do Futuro: materiais por mÃ³dulo, leituras rÃ¡pidas, glossÃ¡rio e guias para aprofundar o curso.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>ðŸ“–</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .leitura-toc{ display:flex; flex-wrap:wrap; gap:.6rem; margin:1.2rem 0 .4rem; }
+    .leitura-toc a{ background:var(--bg-soft); border:1px solid var(--glass-border); border-radius:999px; padding:.4rem .9rem; font-size:.85rem; font-weight:600; color:var(--body); transition:.2s; }
+    .leitura-toc a:hover{ background:var(--violet-600); color:#fff; border-color:var(--violet-600); }
+    .lect-group{ margin-top:1rem; }
+    .lect-topic{ border-left:3px solid var(--violet-500); background:var(--bg-soft); border-radius:0 12px 12px 0; padding:.9rem 1.1rem; margin:.7rem 0; }
+    .lect-topic h4{ color:var(--indigo-800); margin-bottom:.3rem; }
+    .lect-topic p{ color:var(--body); font-size:.95rem; line-height:1.6; margin:0; }
+  </style>
+  <script src="js/guard.js"></script>
+  <noscript><meta http-equiv="refresh" content="0;url=login.html"></noscript>
+</head>
+<body>
+
+  <header class="nav" id="siteNav"></header>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="ph-flex">
+        <div class="ph-txt">
+          <div class="crumbs"><a href="index.html">InÃ­cio</a> â€º Biblioteca de Leitura</div>
+          <h1>ðŸ“– Biblioteca de Leitura & Estudo</h1>
+          <p style="max-width:none">Aprofunde cada mÃ³dulo com leituras rÃ¡pidas, glossÃ¡rios e guias prÃ¡ticos. Ideal para estudar com calma, preparar a aula ou revisar antes de aplicar â€” no seu ritmo, sem sobrecarga, e sem depender de slides.</p>
+        </div>
+        <div class="ph-img"><img src="img/cat-biblioteca.svg" alt="IlustraÃ§Ã£o: livro de estudo com Ã­cones de mÃ³dulos" width="300" height="200"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:1.6rem">
+    <div class="container">
+
+      <div class="leitura-toc" id="leituraToc"></div>
+
+      <div class="panel reveal">
+        <h2>ðŸ—ºï¸ Trilha de leitura do curso</h2>
+        <p>Se preferir estudar em ordem, siga esta trilha: comece pela base (MÃ³dulo 1), entenda inclusÃ£o (MÃ³dulo 2), aplique a IA com Ã©tica (MÃ³dulo 3) e por fim cuide da gestÃ£o (MÃ³dulo 4). Cada capÃ­tulo abaixo traz leitura de apoio + guia prÃ¡tico.</p>
+      </div>
+
+      <div id="leituraContent"></div>
+
+      <div class="panel reveal">
+        <h2>ðŸ’¡ Como usar esta biblioteca</h2>
+        <ul>
+          <li><b>Leia junto com os mÃ³dulos:</b> cada capÃ­tulo acompanha os slides de leitura (ðŸ“–) da apresentaÃ§Ã£o.</li>
+          <li><b>Copie os roteiros:</b> vÃ¡rios capÃ­tulos tÃªm dicas prontas para vocÃª aplicar amanhÃ£.</li>
+          <li><b>Imprima se quiser:</b> use a impressÃ£o do navegador (Ctrl+P) â€” o site jÃ¡ se adapta para imprimir bonito.</li>
+          <li><b>Estude no seu ritmo:</b> escolha 1 capÃ­tulo por semana. Menos Ã© mais â€” sem sobrecarga.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <footer id="siteFooter"></footer>
+
+  <script>
+  /* ConteÃºdo da biblioteca de leitura â€” organizado por mÃ³dulo */
+  var LEITURA = [
+    { key:'m1', ic:'ðŸŽ¨', titulo:'MÃ³dulo 1 Â· Slides com IA', desc:'Base: escolher ferramenta, gerar e revisar slides com IA.', itens:[
+      { h:'Como escolher a ferramenta pelo tempo', t:'Tempo curto (3â€“10 min): ChatGPT/Claude para roteiro e texto, ou Gamma/Canva para slides prontos. Tempo sobrando (20+ min): Tome para storytelling. Sempre revise fatos antes de projetar.' },
+      { h:'O "teste do 6"', t:'Se houver mais de 6 palavras por linha ou 6 pontos por slide, corte. Slide Ã© para a turma ler com o olhar, nÃ£o um documento.' },
+      { h:'O que revisar antes de projetar', t:'Fatos e datas com fonte; fonte grande; cores com contraste (sem verde/vermelho); nada de dado sensÃ­vel de alunos; 1 pergunta de engajamento no fim.' }
+    ]},
+    { key:'m2', ic:'â™¿', titulo:'MÃ³dulo 2 Â· InclusÃ£o e AEE', desc:'Acolher todos: lÃ­ngua fÃ¡cil, rotina visual e acessibilidade.', itens:[
+      { h:'LÃ­ngua fÃ¡cil (Easy Read)', t:'1 ideia por frase; palavra do dia a dia; pictograma ao lado de cada ideia; tÃ­tulos e listas curtas; confirme se o aluno entendeu, nÃ£o presuma.' },
+      { h:'Rotina visual / quadro de antecipaÃ§Ã£o', t:'Liste as etapas da aula em ordem, represente com Ã­cone/foto e deixe Ã  altura dos olhos. Avise mudanÃ§as fora da rotina antes.' },
+      { h:'Sinais de sobrecarga sensorial', t:'Tapar os ouvidos, agitaÃ§Ã£o, irritabilidade, querer sair ou "congelar". Previna com ambiente calmo, avisos prÃ©vios e uma "Ã¡rea calma" para autorregulaÃ§Ã£o.' },
+      { h:'Desmistificando o AEE', t:'O AEE Ã© complementar Ã  aula comum, atua na acessibilidade curricular e planeja em parceria com o professor. Material adaptado ajuda todos, com ou sem laudo.' }
+    ]},
+    { key:'m3', ic:'ðŸ¤–', titulo:'MÃ³dulo 3 Â· IA na PrÃ¡tica', desc:'Usar IA com Ã©tica: tutoria, detectores, feedback e avaliaÃ§Ã£o.', itens:[
+      { h:'IA como tutora (para o aluno)', t:'Explique â†’ dÃª 1 exemplo â†’ peÃ§a 2 perguntas para testar o entendimento â†’ confira a resposta. Quem decide se entendeu Ã© o aluno.' },
+      { h:'Detectores de IA: como sÃ£o', t:'Estimam por padrÃµes, nÃ£o dÃ£o certeza; erram com textos curtos/editados e em falsos positivos. Nunca acuse sÃ³ pelo detector: converse.' },
+      { h:'Feedback sobre trabalho com IA', t:'Pergunte "como vocÃª fez?"; valorize a revisÃ£o; peÃ§a 1 explicaÃ§Ã£o do trabalho. Pergunta-chave: "que parte deste texto Ã© sua e por quÃª?".' },
+      { h:'Defesa oral Ã  prova de IA', t:'2â€“3 minutos de fala + perguntas de aprofundamento + rubrica (domÃ­nio, clareza, exemplo prÃ³prio, reflexÃ£o). A IA nÃ£o fala por ninguÃ©m.' }
+    ]},
+    { key:'m4', ic:'ðŸ§­', titulo:'MÃ³dulo 4 Â· GestÃ£o de Sala', desc:'Engajar, organizar e cuidar: comportamento, combinados e jogos.', itens:[
+      { h:'O que hÃ¡ por trÃ¡s do comportamento', t:'Comportamento Ã© comunicaÃ§Ã£o: cansaÃ§o, tÃ©dio, atenÃ§Ã£o ou pertencimento. Separe a pessoa da atitude e dÃª um papel produtivo.' },
+      { h:'Plano de contingÃªncia', t:'Tenha 1 atividade "coringa", roteiro de respiraÃ§Ã£o (parar, respirar, responder) e sinais de pausa combinados. Humanize quando o dia for difÃ­cil.' },
+      { h:'Combinados que funcionam', t:'Feitos COM a turma, poucos, em frases positivas ("falar um por vez"), visuais (Ã­cones) e revisados toda semana.' },
+      { h:'Jogos por faixa etÃ¡ria', t:'Infantil/Anos Iniciais: movimento e cores. Anos Finais: desafios em grupo e storytelling. EM: problemas reais e protagonismo. Sempre ligado ao conteÃºdo.' }
+    ]}
+  ];
+
+  (function(){
+    'use strict';
+    function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+    function $(id){ return document.getElementById(id); }
+
+    var toc = '';
+    LEITURA.forEach(function(m){ toc += '<a href="#'+m.key+'">'+m.ic+' '+esc(m.titulo)+'</a>'; });
+    $('leituraToc').innerHTML = toc;
+
+    var h = '';
+    LEITURA.forEach(function(m){
+      h += '<div class="panel reveal" id="'+m.key+'">' +
+        '<h2>'+m.ic+' '+esc(m.titulo)+'</h2>' +
+        '<p style="color:var(--text-muted)">'+esc(m.desc)+'</p>' +
+        '<div class="lect-group">';
+      m.itens.forEach(function(it){
+        h += '<div class="lect-topic"><h4>'+esc(it.h)+'</h4><p>'+esc(it.t)+'</p></div>';
+      });
+      h += '</div></div>';
+    });
+    $('leituraContent').innerHTML = h;
+  })();
+  </script>
+
+<script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
