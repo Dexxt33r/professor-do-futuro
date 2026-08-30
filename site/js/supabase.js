@@ -21,8 +21,10 @@
     return new Promise(function(res, rej){
       if(window.supabase && window.supabase.createClient){ res(); return; }
       var s = document.createElement('script');
-      // CDN do supabase-js v2 — expõe globalmente como window.supabase
-      s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+      // SDK do supabase-js v2 HOSPEDADO LOCALMENTE (js/vendor/supabase-js.js).
+      // Nada de CDN externo: carrega pelo mesmo servidor do site, muito mais
+      // rápido e não depende da disponibilidade de terceiros.
+      s.src = 'js/vendor/supabase-js.js';
       s.onload = res;
       s.onerror = function(){ rej(new Error('Falha ao carregar o SDK do Supabase.')); };
       document.head.appendChild(s);
