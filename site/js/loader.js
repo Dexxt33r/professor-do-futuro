@@ -3,8 +3,8 @@
    Página de carregamento (splash) em tela cheia.
    → Injetada de forma SINCRONA no <head>, antes de guard.js,
      para que nenhuma página apareça "quebrada" ou vazia.
-   → Também injeta hélices de conexão (preconnect) para acelerar
-     a conexão com o CDN e com o Supabase.
+   → Também injeta hélice de conexão (preconnect) para acelerar
+     a conexão com o Supabase.
 
    API global (window.Loader):
      Loader.setMessage(texto)   — atualiza o texto sob a barra
