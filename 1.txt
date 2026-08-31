@@ -1,0 +1,52 @@
+Curso professor do futuro 
+
+script inicial :
+
+Atue como um Especialista em Tecnologia Educacional, Design Instrucional e Inclusão Escolar. Sua missão é criar o plano de curso definitivo e ultra-detalhado intitulado: "Criação de Slides com IA, Inclusão e Gestão da Sala de Aula Digital".
+
+O curso deve cobrir da Educação Infantil ao Ensino Médio, além de focar fortemente em Educação Especial (AEE) e Gestão de Comportamento.
+
+Gere o programa do curso dividindo-o estritamente nos seguintes módulos e tópicos obrigatórios:
+
+---
+
+### MÓDULO 1: Fundamentos e Criação de Slides Rápidos com IA
+1. **Ferramentas Práticas:** Passo a passo para criar apresentações em minutos usando Gamma App, Canva (Design Mágico), Tome e ChatGPT/Claude.
+2. **Adaptação por Faixa Etária:**
+   - **Educação Infantil e Anos Iniciais (1º ao 5º ano):** Design com alta carga visual, cores estratégicas, poucas palavras, ilustrações geradas por IA e elementos lúdicos.
+   - **Anos Finais (6º ao 9º ano) e Ensino Médio:** Design dinâmico, resumos visuais, dados concretos, infográficos e elementos de gamificação.
+
+---
+
+### MÓDULO 2: Educação Especial, Inclusão e AEE (Atendimento Educacional Especializado)
+1. **Deficiência Intelectual e Transtornos do Desenvolvimento:**
+   - Como usar a IA para criar slides com **Comunicação Alternativa e Aumentativa (CAA)**, pictogramas e linguagem simples (Easy Read).
+   - Prompts para adaptar conceitos complexos em explicações visuais de passo a passo.
+2. **Autismo (TEA) e TDAH:**
+   - Técnicas de design para evitar sobrecarga sensorial (cores neutras, redução de poluentes visuais).
+   - Estruturação de rotinas visuais e quadros de antecipação em formato de slides.
+3. **Acessibilidade Universal:** Como gerar automaticamente legendas, audiodescrição e alto contraste nos slides usando IA.
+
+---
+
+### MÓDULO 3: IA na Prática Escolar e Enajamento dos Alunos
+1. **Ensinando Alunos a Usarem a IA para Estudar:**
+   - Como orientar os alunos a usarem a IA como tutora de estudos (fazer resumos, mapas mentais, simulados e tirar dúvidas).
+   - Atividades práticas: Criando trabalhos e apresentações usando IA ética e conscientemente.
+2. **Detecção de IA e Ética em Trabalhos Escolares:**
+   - Como identificar trabalhos 100% gerados por IA e como funcionam os detectores (CopyLeaks, GPTZero) com suas limitações e falsos positivos.
+   - **Mudança de Avaliação:** Como criar rubricas e trabalhos à prova de plágio por IA (foco em defesa oral, análise crítica e aplicação prática).
+
+---
+
+### MÓDULO 4: Gestão de Sala de Aula e Alunos Rebeldes / Desengajados
+1. **Resolução de Conflitos e Engajamento:**
+   - Como usar a IA para gerar dinâmicas de grupo, jogos educativos e *storytelling* interativo que prendam a atenção de turmas difíceis.
+2. **Personalização do Ensino:** Usando a IA para adaptar o mesmo tema em 3 níveis diferentes de dificuldade na mesma sala de aula.
+3. **Combinados e Contratos de Convivência:** Uso de elementos visuais e jogos nos slides para pactuar regras com alunos rebeldes.
+
+---
+
+**DIRETRIZES DE RESPOSTA:**
+- Escreva um conteúdo extremamente detalhado para cada tópico, fornecendo **Exemplos Práticos de Prompts** que o professor pode copiar e usar.
+- Mantenha um tom acolhedor, prático, direto e voltado à realidade do professor brasileiro.

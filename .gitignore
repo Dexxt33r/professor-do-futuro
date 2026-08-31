@@ -24,3 +24,5 @@ desktop.ini
 
 # Node (caso use ferramentas locais)
 node_modules/
+
+vendas/
