@@ -25,4 +25,5 @@ desktop.ini
 # Node (caso use ferramentas locais)
 node_modules/
 
+# Repositório próprio do site de vendas (está em vendas/ como repo git embutido)
 vendas/
