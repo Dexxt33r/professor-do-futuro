@@ -21,7 +21,7 @@
         <div class="ph-txt">
           <div class="crumbs"><a href="index.html">Início</a> › Laboratório</div>
           <h1>🧪 Laboratório do Professor</h1>
-          <p>Ferramentas prontas para usar em sala — sem cadastro, sem internet e sem depender de IA externa. Monte, gere e projete. Você encontra o semáforo da sala, o gerador de plano de aula, o quiz em sala, o cronômetro, o sorteador de grupos, a rubrica, o checklist de acessibilidade — <b>e as novidades</b>: cartaz de <b>Combinados da Turma</b>, <b>Simplificador de Texto</b> em língua fácil e o gerador de <b>Atividade Rápida</b>. Cada ferramenta nasce de uma técnica ensinada nos módulos do curso.</p>
+          <p>Ferramentas prontas para usar em sala — sem cadastro, sem internet e sem depender de IA externa. Monte, gere e projete. Você encontra o semáforo da sala, o gerador de plano de aula, o quiz em sala, o cronômetro, o sorteador de grupos, a rubrica, o checklist de acessibilidade — <b>e as novidades</b>: cartaz de <b>Combinados da Turma</b>, <b>Corretor de Redação ENEM</b> (escala oficial 0–20), <b>Simplificador de Texto</b> em língua fácil e o gerador de <b>Atividade Rápida</b>. Cada ferramenta nasce de uma técnica ensinada nos módulos do curso.</p>
         </div>
         <div class="ph-img"><img src="img/banner-lab.svg" alt="Ilustração: painel de controles com frasco de experimento" width="300" height="200"></div>
       </div>
@@ -33,6 +33,12 @@
 
       <!-- Índice das ferramentas -->
       <div class="lab-grid" style="margin-bottom:2.6rem">
+        <a class="lab-card reveal" href="#enem">
+          <div class="lab-ic li-gold">📝</div>
+          <h3>Corretor de Redação ENEM</h3>
+          <p>Corrija como a banca oficial: texto dissertativo-argumentativo e carta, 5 competências (C1–C5) com níveis de 0 a 4 e nota 0–20 automática. Gera comentário formativo para o aluno e prompt de IA.</p>
+          <span class="chip">Corrigir agora →</span>
+        </a>
         <a class="lab-card reveal" href="#semaforo">
           <div class="lab-ic li-green">🚦</div>
           <h3>Semáforo da Sala</h3>
@@ -96,6 +102,62 @@
       </div>
 
       <div class="toolbox">
+
+        <!-- ============ CORRETOR DE REDAÇÃO ENEM ============ -->
+        <div class="tbox reveal" id="enem">
+          <h2>📝 Corretor de Redação ENEM</h2>
+          <p>Corrija redações <b>exatamente como a banca oficial do ENEM</b> (chaves de correção do INEP): o texto vale <b>0 a 20 pontos</b> e é avaliado em <b>5 competências</b> (C1–C5), cada uma com <b>4 níveis</b> de desempenho (de 0 a 4 pontos). A prova de redação pede <b>dois textos</b> produzidos a partir do mesmo tema — o <b>texto dissertativo-argumentativo</b> e a <b>carta</b> — e ambos são corrigidos com esta mesma chave.</p>
+          <p><b>Como usar:</b> cole o tema e a redação do aluno, escolha o tipo de texto, marque <b>um nível por competência</b> na rúbrica e clique em calcular. A ferramenta soma a nota 0–20 automaticamente, monta um <b>comentário formativo pronto para devolver</b> ao aluno e gera um <b>prompt de IA</b> que faz a análise no estilo da banca. Tudo funciona offline, sem cadastro.</p>
+
+          <div class="enem-info">
+            <details class="enem-det" open>
+              <summary>🎯 Como o ENEM corrige? (a chave oficial)</summary>
+              <ul>
+                <li><b>Escala 0–20:</b> resultado da soma das 5 competências, cada uma de 0 a 4 (NV4=4 · NV3=3 · NV2=2 · NV1=1 · Zero=0).</li>
+                <li><b>Corretor duplo:</b> cada texto é corrigido por 2 corretores; em caso de grande discrepância, entra um terceiro corretor e, se necessário, até uma banca.</li>
+                <li><b>Dois textos:</b> o <b>texto dissertativo-argumentativo</b> (defesa de um ponto de vista com argumentos e proposta de intervenção) e a <b>carta</b> (dirigida a um destinatário específico, com apresentação, desenvolvimento e feição).</li>
+                <li><b>Ideias valorizadas:</b> respeito aos direitos humanos, sustentabilidade ambiental, cidadania e justiça social.</li>
+              </ul>
+            </details>
+          </div>
+
+          <form class="tform no-print" id="enemForm" style="margin-top:1rem">
+            <div class="trow">
+              <div>
+                <label for="enemAluno">Aluno (opcional)</label>
+                <input type="text" id="enemAluno" placeholder="Nome do aluno">
+              </div>
+              <div>
+                <label for="enemTipo">Texto a corrigir</label>
+                <select id="enemTipo">
+                  <option value="argumentativo">Texto dissertativo-argumentativo</option>
+                  <option value="carta">Carta</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="enemTema">Tema da redação (conforme a pauta) *</label>
+              <input type="text" id="enemTema" placeholder="Ex.: A importância do voto jovem na democracia" required>
+            </div>
+            <div id="enemDestWrap" style="display:none">
+              <label for="enemDest">Destinatário da carta *</label>
+              <input type="text" id="enemDest" placeholder="Ex.: Ao prefeito(a) da sua cidade">
+            </div>
+            <div>
+              <label for="enemTexto">Redação do aluno *</label>
+              <textarea id="enemTexto" rows="10" placeholder="Cole aqui a redação completa (texto argumentativo ou carta)..." required></textarea>
+            </div>
+          </form>
+
+          <!-- Rúbrica oficial C1–C5 (renderizada por js/enemcorrector.js) -->
+          <div class="enem-rub no-print" id="enemRub"></div>
+
+          <div class="enem-actions no-print">
+            <button class="btn btn-primary" id="enemCalc">🧮 Calcular nota (0–20)</button>
+          </div>
+
+          <div class="enem-out" id="enemOut"></div>
+        </div>
 
         <!-- ============ SEMÁFORO ============ -->
         <div class="tbox reveal" id="semaforo">
@@ -1073,7 +1135,8 @@
   })();
   </script>
 
-<script src="js/supabase.js"></script>
+<script src="js/enemcorrector.js"></script>
+  <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
 </body>

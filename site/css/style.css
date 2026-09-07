@@ -1209,3 +1209,66 @@ html[data-theme="dark"] .leitura-dica b{ color:#fcd34d; }
 .board-body .leitura-intro,
 .board-body .leitura-lead,
 .board-body .leitura-dica{ text-align:left; }
+/* ============================================================
+   CORRECTOR DE REDAÇÃO ENEM (ferramentas.html)
+   Escala oficial 0–20 · 5 competências · 4 níveis por competência
+   ============================================================ */
+.enem-info{ margin-top:1rem; }
+.enem-det{ border:1px solid var(--border); border-radius:14px; background:var(--bg-soft); padding:1rem; }
+.enem-det summary{ font-weight:700; color:var(--indigo-800); cursor:pointer; padding:.4rem .2rem; }
+.enem-det ul{ margin:.8rem 0 0; padding-left:.2rem; display:grid; gap:.45rem; }
+.enem-det li{ position:relative; padding-left:1.3rem; font-size:.95rem; color:var(--body); }
+.enem-det li::before{ content:'✓'; position:absolute; left:0; color:var(--violet-600); font-weight:800; }
+
+.enem-rub{ margin-top:1.2rem; }
+.enem-rub-title{ color:var(--heading); font-size:1.15rem; }
+.enem-rub-sub{ color:var(--text-muted); font-size:.9rem; margin:.2rem 0 .6rem; }
+.enem-comp{ border:1px solid var(--glass-border); border-radius:16px; padding:.8rem 1rem .4rem; margin-top:.7rem; background:var(--card); }
+.enem-comp legend{ font-weight:800; color:var(--indigo-800); font-size:1rem; padding:0 .4rem; }
+.enem-ic{ font-size:1.2rem; margin-right:.3rem; }
+.enem-desc{ color:var(--text-muted); font-size:.88rem; margin:.4rem 0 .3rem; }
+.enem-levels{ display:grid; gap:.5rem; grid-template-columns:1fr 1fr; }
+@media (max-width:760px){ .enem-levels{ grid-template-columns:1fr; } }
+.enem-opt{ position:relative; cursor:pointer; }
+.enem-opt input{ position:absolute; opacity:0; pointer-events:none; }
+.enem-btn{ display:block; border:2px solid var(--border); border-radius:12px; background:var(--bg); padding:.6rem .8rem; transition:.15s; }
+.enem-btn b{ color:var(--indigo-800); }
+.enem-btn small{ display:block; color:var(--text-muted); line-height:1.45; font-size:.82rem; margin-top:.25rem; }
+.enem-opt:hover .enem-btn{ border-color:var(--violet-500); }
+.enem-opt.sel .enem-btn{ border-color:var(--violet-500); background:linear-gradient(160deg,#e7f2dc,#fdf2d0); box-shadow:0 6px 16px rgba(201,151,28,.18); }
+.enem-opt.sel .enem-btn b{ color:var(--violet-600); }
+.enem-opt.zero .enem-btn{ border-style:dashed; }
+.enem-opt.sel.zero .enem-btn{ border-color:#dc2626; background:#fdecea; }
+html[data-theme="dark"] .enem-opt.sel .enem-btn{ background:rgba(217,166,33,.18); }
+html[data-theme="dark"] .enem-opt.sel.zero .enem-btn{ background:#3a1010; }
+
+.enem-actions{ margin-top:.8rem; display:flex; gap:.6rem; flex-wrap:wrap; }
+.enem-out{ margin-top:1.2rem; }
+.enem-warn{ padding:.8rem 1rem; border-radius:12px; background:rgba(245,158,11,.14); border:1px solid rgba(245,158,11,.4); color:var(--body); }
+.enem-out-card{ border-top:2px dashed var(--border); padding-top:1rem; }
+.enem-top{ display:grid; grid-template-columns:220px 1fr; gap:1rem; align-items:center; }
+@media (max-width:640px){ .enem-top{ grid-template-columns:1fr; } }
+.enem-score{ text-align:center; }
+.enem-score .enem-num{ font-size:clamp(2.4rem,6vw,3.4rem); font-weight:900; color:var(--indigo-800); line-height:1; }
+.enem-score .enem-num small{ font-size:.55em; color:var(--text-muted); }
+.enem-pct{ color:var(--text-muted); font-size:.9rem; margin-top:.2rem; }
+.enem-band .enem-b-chip{ display:inline-block; background:var(--grad); color:#fff; font-weight:800; padding:.35rem .9rem; border-radius:999px; font-size:.95rem; }
+.enem-band p{ color:var(--body); margin:.4rem 0 0; font-size:.95rem; }
+.enem-table{ width:100%; border-collapse:collapse; margin:.7rem 0 0; }
+.enem-table th{ background:var(--bg-soft); color:var(--heading); }
+.enem-table th, .enem-table td{ padding:.6rem .8rem; border:1px solid var(--border); text-align:left; }
+.enem-table td.enem-pts{ background:var(--bg-soft); font-weight:700; color:var(--indigo-800); }
+.enem-table td.enem-val{ font-weight:800; text-align:center; }
+.enem-com{ margin-top:1rem; }
+.enem-com h4{ color:var(--indigo-800); margin-bottom:.3rem; }
+.enem-com ul{ display:grid; gap:.45rem; margin:.5rem 0 .2rem; }
+.enem-com li{ padding-left:1.2rem; position:relative; line-height:1.6; }
+.enem-com li::before{ content:'→'; position:absolute; left:0; color:var(--violet-600); font-weight:800; }
+.enem-prompt-wrap{ margin-top:1rem; }
+.enem-prompt-wrap h4{ color:var(--indigo-800); }
+.enem-pre{ background:var(--bg-soft); border:1px solid var(--border); border-radius:12px; padding:.9rem 1rem; white-space:pre-wrap; font-size:.8rem; line-height:1.5; max-height:320px; overflow:auto; color:var(--body); }
+@media print {
+  .enem-comp legend, .enem-comp b { color:#062b1b; }
+  .enem-out-card{ page-break-inside:avoid; }
+  .enem-com{ page-break-inside:avoid; }
+}
