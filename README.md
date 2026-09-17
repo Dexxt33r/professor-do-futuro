@@ -20,6 +20,7 @@ Da Educação Infantil ao Ensino Médio, com foco em Educação Especial (AEE) e
 | `_PROMPTS_100P_KAIO.md` | Banco "100% prontos" — sem edição, copie e envie (16 prompts completos) |
 | `iniciar-site.bat` | Servidor local: sobe o site em `http://localhost:8000` e abre o navegador |
 | `site/` | Site do curso (HTML/CSS/JS, 100% offline, sem dependências externas) |
+| `vendas/` | **Site de vendas** (repositório próprio, embutido e ignorado por este): página de vendas, página B2B para escolas, termos, privacidade, checkout Mercado Pago e material de prospecção em `vendas/prospeccao/` |
 
 ## 🌐 O site
 
@@ -51,9 +52,11 @@ as credenciais para cada pessoa — **não existe cadastro público**.
   ```
   A chave `service_role` fica em Project Settings > API e **só o administrador usa**.
 
-Conta de demonstração (criar com o comando acima, se ainda não existir no projeto):
-- E-mail: `klzinnmta202010@gmail.com`
-- Senha: `147192Kaio@`
+> **Nunca versionar credenciais.** Nenhum e-mail ou senha de conta (nem de teste,
+> nem de demonstração) deve ser escrito neste README ou em qualquer arquivo do
+> repositório. Crie cada conta rodando o `criar_conta.js` localmente, com a
+> `service_role` vinda de variável de ambiente — a chave nunca entra no código
+> nem no histórico do git.
 
 > **Importante:** o `auth.js` depende do Supabase estar configurado (`supabase.js`).
 > Enquanto as credenciais não forem preenchidas, o login exibe aviso e não funciona.
