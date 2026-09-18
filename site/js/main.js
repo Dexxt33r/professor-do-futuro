@@ -8,7 +8,8 @@
   var COURSE = {
     name: 'Professor do Futuro',
     tag: 'Criação de Slides com IA, Inclusão e Gestão da Sala de Aula Digital',
-    slogan: 'Diminua sua carga horária'
+    slogan: 'Diminua sua carga horária',
+    supportEmail: 'kaiosantosss938@gmail.com'
   };
 
   // Bordão global — selo discreto fixo no canto (TODAS as páginas)
@@ -212,7 +213,10 @@
             '<li><a href="leitura.html">📖 Leitura & Estudo</a></li>' +
           '</ul></div>' +
         '</div>' +
-        '<div class="foot-bottom">© ' + new Date().getFullYear() + ' Professor do Futuro — Feito para educadores ♥</div>' +
+        '<div class="foot-bottom">© ' + new Date().getFullYear() + ' Professor do Futuro — Feito para educadores ♥<br>' +
+        '<a href="mailto:' + COURSE.supportEmail + '" data-support-link>Suporte</a> · ' +
+        '<a href="https://professor-do-futuro-vendas.vercel.app/termos.html" target="_blank" rel="noopener">Termos de uso</a> · ' +
+        '<a href="https://professor-do-futuro-vendas.vercel.app/privacidade.html" target="_blank" rel="noopener">Privacidade</a></div>' +
       '</div>';
   }
 

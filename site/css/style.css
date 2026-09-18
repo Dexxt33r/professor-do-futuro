@@ -8,8 +8,8 @@
   --indigo-900: #062b1b;
   --indigo-800: #0b7a5e;
   --indigo-700: #0f9d72;
-  --violet-600: #c9971c;
-  --violet-500: #d9a621;
+  --violet-600: #8a6a10;
+  --violet-500: #a3801a;
   --accent: #f59e0b;
   --accent-soft: #fcd34d;
   --pink: #ec4899;
@@ -20,7 +20,7 @@
   --border: #e6efdc;
   --zebra: #f7f8ef;
   --text: #0f2a1e;
-  --text-muted: #7a876b;
+  --text-muted: #5c6850;
   --heading: var(--indigo-900);
   --body: #2f4436;
   --nav-bg: rgba(255,255,255,.85);
@@ -48,12 +48,21 @@ html[data-theme="dark"] {
   --body: #e2e6c9;
   --nav-bg: rgba(9,28,19,.82);
   --white: #ffffff;
+  /* No escuro, o dourado escuro do tema claro perde contraste sobre fundo
+     escuro — aqui ele volta para o tom mais claro (6.5:1 sobre --bg). */
+  --violet-600: #c9971c;
+  --violet-500: #d9a621;
   --shadow: 0 10px 30px rgba(0,0,0,.4);
   --shadow-lg: 0 24px 60px rgba(0,0,0,.55);
   color-scheme: dark;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* O atributo hidden é ignorado por qualquer classe que declare display
+   (ex.: .btn com inline-flex). Sem esta regra, elementos escondidos pelo
+   JS aparecem vazios na tela. */
+[hidden] { display: none !important; }
 
 html { scroll-behavior: smooth; font-size: 18px; }
 
