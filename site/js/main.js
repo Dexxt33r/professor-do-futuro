@@ -189,6 +189,134 @@
     els.forEach(function(el){ io.observe(el); });
   }
 
+  /* ---------- Painel de progresso (página inicial) ----------
+     Mesmo princípio do site de vendas: nada de inventar dados. O progresso
+     é real, vem do que o próprio aluno marcou como concluído (localStorage),
+     e a saudação usa o primeiro nome da conta logada. */
+  var MODULOS = [
+    { id:'modulo1', n:1, ic:'🎨', label:'Slides com IA' },
+    { id:'modulo2', n:2, ic:'♿', label:'Inclusão e AEE' },
+    { id:'modulo3', n:3, ic:'🤖', label:'IA na prática escolar' },
+    { id:'modulo4', n:4, ic:'🎯', label:'Gestão da sala' },
+    { id:'modulo5', n:5, ic:'💰', label:'Educação Financeira' },
+    { id:'modulo6', n:6, ic:'🔬', label:'Nanotecnologia' }
+  ];
+
+  function lerConcluidos(){
+    try{ return JSON.parse(localStorage.getItem('pdf-concluidos') || '[]') || []; }
+    catch(e){ return []; }
+  }
+  function salvarConcluidos(arr){
+    try{ localStorage.setItem('pdf-concluidos', JSON.stringify(arr)); }catch(e){}
+  }
+
+  function dashHTML(nome){
+    var feitos = lerConcluidos();
+    var total = MODULOS.length;
+    var qtd = MODULOS.filter(function(m){ return feitos.indexOf(m.id) !== -1; }).length;
+    var pct = Math.round((qtd / total) * 100);
+    var boas = feitos.length ? 'Que bom te ver de novo' : 'Bem-vindo';
+
+    var nomeHtml = nome ? ', <b>' + window.Auth.escapeHtml(nome) + '</b>' : '';
+
+    var linha;
+    if(qtd === 0){
+      linha = 'Você ainda não marcou nenhum módulo como concluído. Comece pelo Módulo 1 — em 15 minutos você sai com um material pronto.';
+    } else if(qtd >= total){
+      linha = '<b>Você concluiu todos os 6 módulos. 🎉</b> Agora é aplicar: revisite os prompts, use o Laboratório e adapte para as suas turmas.';
+    } else {
+      var prox = MODULOS.filter(function(m){ return feitos.indexOf(m.id) === -1; })[0];
+      linha = 'Você concluiu <b>' + qtd + ' de ' + total + '</b> módulos. Próximo: <b>Módulo ' + prox.n + ' · ' + prox.label + '</b>.';
+    }
+
+    var ult = (function(){
+      try{
+        var m = localStorage.getItem('pdf-modulo');
+        return (m && /^modulo\d+$/.test(m)) ? m : '';
+      }catch(e){ return ''; }
+    })();
+    var continuar = ult ? 'modulos.html#' + ult : 'modulos.html#modulo1';
+    var continuarLabel = ult ? '▶ Continuar de onde parei' : '▶ Começar pelo Módulo 1';
+
+    var chips = MODULOS.map(function(m){
+      var ok = feitos.indexOf(m.id) !== -1;
+      return '<a class="dash-chip' + (ok ? ' ok' : '') + '" href="modulos.html#' + m.id + '">' +
+        '<span class="dc-ic">' + (ok ? '✔' : m.ic) + '</span>' + m.label + '</a>';
+    }).join('');
+
+    return '' +
+      '<section class="home-dash" id="homeDash">' +
+        '<div class="container">' +
+          '<div class="dash-card">' +
+            '<div class="dash-head">' +
+              '<div><span class="dash-ola">' + boas + nomeHtml + '</span>' +
+              '<p class="dash-linha">' + linha + '</p></div>' +
+              '<div class="dash-pct"><strong>' + pct + '%</strong><span>do curso</span></div>' +
+            '</div>' +
+            '<div class="dash-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"><span style="width:' + pct + '%"></span></div>' +
+            '<div class="dash-chips">' + chips + '</div>' +
+            '<div class="dash-actions">' +
+              '<a href="' + continuar + '" class="btn btn-primary">' + continuarLabel + '</a>' +
+              '<a href="prompts.html" class="btn btn-outline">⚡ Prompts prontos</a>' +
+              '<a href="ferramentas.html" class="btn btn-outline">🧪 Laboratório</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</section>';
+  }
+
+  function renderHomeProgress(){
+    if(currentPage() !== 'index.html') return;
+    var hero = document.querySelector('section.hero');
+    if(!hero || document.getElementById('homeDash')) return;
+    var wrap = document.createElement('div');
+    wrap.innerHTML = dashHTML('');
+    var dash = wrap.firstChild;
+    hero.parentNode.insertBefore(dash, hero.nextSibling);
+    // Preenche o nome quando a sessão responder (sem bloquear a página)
+    window.Auth.ready(function(){
+      Auth.getUser().then(function(u){
+        var d = document.getElementById('homeDash');
+        if(!d || !u) return;
+        var n = String(u.name || '').trim().split(' ')[0];
+        if(n){ d.querySelector('.dash-ola').innerHTML = 'Que bom te ver de novo, <b>' + window.Auth.escapeHtml(n) + '</b>'; }
+      });
+    });
+    // Se o aluno marcar módulo em OUTRA aba, o painel se atualiza sozinho
+    window.addEventListener('storage', function(e){
+      if(e.key === 'pdf-concluidos'){
+        var d = document.getElementById('homeDash');
+        if(d){ d.outerHTML = dashHTML(''); }
+      }
+    });
+  }
+
+  /* Botão "marcar como concluído" em cada módulo (modulos.html) */
+  function injectModuleButtons(){
+    if(currentPage() !== 'modulos.html') return;
+    MODULOS.forEach(function(m){
+      var panel = document.getElementById(m.id);
+      if(!panel || panel.querySelector('.mod-done-btn')) return;
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'mod-done-btn';
+      var pintar = function(){
+        var ok = lerConcluidos().indexOf(m.id) !== -1;
+        btn.classList.toggle('done', ok);
+        btn.innerHTML = ok ? '✔ Módulo ' + m.n + ' concluído — toque para desmarcar' : '☐ Marcar Módulo ' + m.n + ' como concluído';
+      };
+      pintar();
+      btn.addEventListener('click', function(){
+        var arr = lerConcluidos();
+        var i = arr.indexOf(m.id);
+        if(i === -1){ arr.push(m.id); } else { arr.splice(i, 1); }
+        salvarConcluidos(arr);
+        pintar();
+      });
+      panel.insertBefore(btn, panel.firstChild);
+    });
+  }
+
   function renderFooter(){
     var foot = document.getElementById('siteFooter');
     if(!foot) return;
@@ -309,6 +437,8 @@
     trackModule();
     initReveal();
     addTopBtn();
+    renderHomeProgress();
+    injectModuleButtons();
   });
 
   window.COURSE = COURSE;
