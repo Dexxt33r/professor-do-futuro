@@ -9,7 +9,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Banco de Prompts — Professor do Futuro">
   <meta property="og:locale" content="pt_BR">
-  <meta name="description" content="Banco de prompts prontos para copiar e usar com IA, organizado por tema e por ferramenta (Gamma, Gemini, Canva, Tome, PowerPoint, ChatGPT, Claude) e por série. 58 prompts para a realidade do professor brasileiro.">
+  <meta name="description" content="Banco de prompts prontos para copiar e usar com IA, organizado por tema e por ferramenta (Gamma, Gemini, Canva, SlidesAI, PowerPoint, ChatGPT, Claude) e por série. 58 prompts para a realidade do professor brasileiro.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <style>
@@ -39,7 +39,7 @@
         <div class="ph-txt">
           <div class="crumbs"><a href="index.html">Início</a> › Prompts</div>
           <h1>⚡ Banco de prompts prontos</h1>
-          <p style="max-width:none">Cole em qualquer IA (ChatGPT, Claude, Gemini, Gamma, Canva, Tome ou PowerPoint), substitua as <code style="background:rgba(255,255,255,.2);padding:.1rem .4rem;border-radius:6px">[CAIXAS]</code> e pronto — é só copiar. Cada prompt é <b>organizado por ferramenta</b> e por tema do curso, com versões prontas para slides <b>interativos em sala com atividade para 6º, 7º, 8º, 9º, Anos Finais e Ensino Médio</b>.</p>
+          <p style="max-width:none">Cole em qualquer IA (ChatGPT, Claude, Gemini, Gamma, Canva, SlidesAI ou PowerPoint), substitua as <code style="background:rgba(255,255,255,.2);padding:.1rem .4rem;border-radius:6px">[CAIXAS]</code> e pronto — é só copiar. Cada prompt é <b>organizado por ferramenta</b> e por tema do curso, com versões prontas para slides <b>interativos em sala com atividade para 6º, 7º, 8º, 9º, Anos Finais e Ensino Médio</b>.</p>
         </div>
         <div class="ph-img"><img src="img/banner-prompts.svg" alt="Ilustração: prompt sendo digitado e resposta instantânea da IA" width="300" height="200"></div>
       </div>
@@ -53,7 +53,7 @@
         <h2>📖 Como usar este banco de prompts</h2>
         <p>Um bom prompt é um pedido claro e específico. Os prompts aqui já foram escritos e testados — você só precisa preencher as lacunas e adaptar ao seu contexto. O passo a passo é simples:</p>
         <ul>
-          <li><b>1 · Escolha o tema e a ferramenta:</b> primeiro filtre por <b>🎯 ferramenta/site</b> (Gamma, Gemini, Canva, Tome, PowerPoint ou ChatGPT/Claude) e depois por categoria do curso — 🎨 Slides, ♿ Inclusão, 🤖 Ética, 🎯 Gestão ou ⚡ 100% Prontos.</li>
+          <li><b>1 · Escolha o tema e a ferramenta:</b> primeiro filtre por <b>🎯 ferramenta/site</b> (Gamma, Gemini, Canva, SlidesAI, Google Slides ou ChatGPT/Claude) e depois por categoria do curso — 🎨 Slides, ♿ Inclusão, 🤖 Ética, 🎯 Gestão ou ⚡ 100% Prontos.</li>
           <li><b>2 · Copie o prompt:</b> clique no botão <b>Copiar</b> do prompt escolhido.</li>
           <li><b>3 · Substitua as [CAIXAS]:</b> troque [TEMA], [SEGMENTO], [IDADE] etc. pelos dados da sua aula. Quanto mais específico, melhor o resultado.</li>
           <li><b>4 · Cole na IA e refine:</b> envie para o ChatGPT, Claude, Gamma ou Canva. Se a resposta vier genérica, peça ajustes: "simplifique", "coloque 1 exemplo do cotidiano", "use linguagem de aluno de 10 anos".</li>
@@ -81,9 +81,9 @@
             <span class="chip">Ver prompts de Canva ↓</span>
           </div>
           <div class="lab-card">
-            <div class="lab-ic li-amber">📚</div><h3>Tome</h3>
-            <p>Ótimo para contar histórias e storytelling, com visual rico e narrativa.</p>
-            <span class="chip">Ver prompts de Tome ↓</span>
+            <div class="lab-ic li-amber">📑</div><h3>SlidesAI</h3>
+            <p>Gera slides a partir de um texto colado, direto no Google Slides — a alternativa atual ao Tome, que saiu do mercado.</p>
+            <span class="chip">Ver prompts de SlidesAI ↓</span>
           </div>
           <div class="lab-card">
             <div class="lab-ic li-violet">💬</div><h3>ChatGPT / Claude</h3>
@@ -134,17 +134,17 @@
     { f:'gamma',       label:'🤖 Gamma' },
     { f:'gemini',      label:'✨ Gemini' },
     { f:'canva',       label:'🎨 Canva' },
-    { f:'tome',        label:'📚 Tome' },
+    { f:'slidesai',     label:'📑 SlidesAI' },
     { f:'powerpoint',  label:'📥 PowerPoint/Google' },
     { f:'chatgpt',     label:'💬 ChatGPT' },
     { f:'claude',      label:'🟣 Claude' },
     { f:'interativo',  label:'🎖️ Interativo em sala' }
   ];
-  var toolBadge = { gamma:'badge-blue', gemini:'badge-green', canva:'badge-pink', tome:'badge-amber', powerpoint:'badge-violet', chatgpt:'badge-green', claude:'badge-violet', interativo:'badge-violet' };
+  var toolBadge = { gamma:'badge-blue', gemini:'badge-green', canva:'badge-pink', slidesai:'badge-amber', powerpoint:'badge-violet', chatgpt:'badge-green', claude:'badge-violet', interativo:'badge-violet' };
 
   /* Link direto de cada IA/ferramenta — aparece em cada prompt */
-  var AI_NAME = { gamma:'Gamma', gemini:'Gemini', canva:'Canva', tome:'Tome', powerpoint:'Google Slides', chatgpt:'ChatGPT', claude:'Claude', interativo:'Laboratório' };
-  var AI_LINK = { gamma:'https://gamma.app', gemini:'https://gemini.google.com', canva:'https://www.canva.com', tome:'https://tome.app', powerpoint:'https://slides.google.com', chatgpt:'https://chatgpt.com', claude:'https://claude.ai', interativo:'ferramentas.html' };
+  var AI_NAME = { gamma:'Gamma', gemini:'Gemini', canva:'Canva', slidesai:'SlidesAI', powerpoint:'Google Slides', chatgpt:'ChatGPT', claude:'Claude', interativo:'Laboratório' };
+  var AI_LINK = { gamma:'https://gamma.app', gemini:'https://gemini.google.com', canva:'https://www.canva.com', slidesai:'https://www.slidesai.io', powerpoint:'https://slides.google.com', chatgpt:'https://chatgpt.com', claude:'https://claude.ai', interativo:'ferramentas.html' };
   // Instrument de identificação automática da ferramenta quando não informada no prompt
   function toolOf(p){
     if(p.tool) return p.tool;
@@ -152,7 +152,7 @@
     if(/Gamma/i.test(t)) return 'gamma';
     if(/Gemini/i.test(t)) return 'gemini';
     if(/\bCanva\b|Design/i.test(t)) return 'canva';
-    if(/Tome/i.test(t)) return 'tome';
+    if(/SlidesAI|Narrativa|Storytelling/i.test(t)) return 'slidesai';
     if(/PowerPoint|Roteiro para PowerPoint|Google Slides/i.test(t)) return 'powerpoint';
     if(/ChatGPT|Claude/i.test(t)) return 'chatgpt';
     return 'all';
@@ -172,7 +172,7 @@
       code:`Crie uma apresentação sobre [TEMA] com [N] slides para alunos do [SEGMENTO]. Estilo leve, com muitos ícones e pouco texto. Inclua: definição, 3 pontos importantes, 1 exemplo cotidiano e um desafio para reflexão ao final. Use cores [CORES].` },
     { cat:'slides', title:'Canva — Design Mágico',
       code:`Slides sobre "Reciclagem" para o 5º ano, divertido e ilustrado, com etapas de coleta, cores vivas e imagens de crianças reciclando.` },
-    { cat:'slides', title:'Tome — storytelling',
+    { cat:'slides', title:'Narrativa e storytelling em slides (SlidesAI)',
       code:`Transforme este texto [cole aqui] em uma apresentação de 8 slides com narrativa: gancho, contexto, dados, exemplo real, atividade e conclusão.` },
     { cat:'slides', title:'Prompt geral (qualquer aula)',
       code:`Atue como design instrucional. Monte [N] slides para [segmento] sobre [TEMA]. Todo slide segue: 1 título de impacto, texto de no máx 3 linhas, 1 sugestão de imagem/ícone. Inclua 1 atividade interativa no slide final. Linguagem acolhedora e acessível.` },

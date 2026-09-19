@@ -151,7 +151,7 @@
   /* ---------- TELA INICIAL DE MODULOS (curso) ---------- */
   var MOD_START = {
     intro:{ icon:'🎬', color:'dark',  desc:'Boas-vindas, o que você vai aprender e como aproveitar a formação.' },
-    '1':  { icon:'🎨', color:'blue',  desc:'Crie apresentações completas em minutos com Gamma, Canva, Tome e ChatGPT.' },
+    '1':  { icon:'🎨', color:'blue',  desc:'Crie apresentações completas em minutos com Gamma, Canva, Google Slides/Gemini e ChatGPT.' },
     '2':  { icon:'♿', color:'pink',   desc:'Adapte qualquer material para TEA, TDAH e inclusão real com CAA e Easy Read.' },
     '3':  { icon:'🤖', color:'green', desc:'IA como tutora de estudos, ética escolar e avaliações à prova de colagem.' },
     '4':  { icon:'🎯', color:'amber', desc:'Dinâmicas, storytelling, combinados e estratégias para turmas difíceis.' },
@@ -180,7 +180,7 @@
 
     var g = card('mods-all', { color:'dark', big:'▶', title:'Assistir do início ao fim',
                  num: total+' slides', tag:'Apresentação completa' },
-      'Todos os módulos em sequência: introdução, os 4 módulos do conteúdo e encerramento.', ' data-mod="all"');
+      'Todos os módulos em sequência: introdução, os 6 módulos do conteúdo e encerramento.', ' data-mod="all"');
 
     Object.keys(MOD_START).forEach(function(mk){
       var d = MOD_START[mk], m = window.MODULES[mk];

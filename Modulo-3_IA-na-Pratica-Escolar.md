@@ -63,7 +63,7 @@ pessoal, opinião, pequenas imperfeições).
 - **Citações inventadas** (a IA pode alucinar fontes falsas!).
 - Respostas rápidas demais e idênticas às da ferramenta.
 
-### Como funcionam os detectores (CopyLeaks, GPTZero) e suas LIMITAÇÕES
+### Como funcionam os detectores (Copyleaks, GPTZero) e suas LIMITAÇÕES
 - Medem **perplexidade** e **burstiness**: quão provável/previsível é o texto.
 - Textos formais ou de **não nativos** (ou com muita dúvida) podem ser acusados por engano → **falsos positivos**.
 - **NÃO são prova oficial.** Não use sozinho para punir.

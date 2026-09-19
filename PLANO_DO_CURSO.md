@@ -10,7 +10,7 @@ Capacitar educadores a **produzir materiais didáticos com Inteligência Artific
 
 ## 📚 Objetivos Específicos
 
-1. Criar apresentações profissionais em minutos usando **Gamma, Canva (Design Mágico), Tome, ChatGPT e Claude**.
+1. Criar apresentações profissionais em minutos usando **Gamma, Canva (Design Mágico), Google Slides + Gemini, ChatGPT e Claude**.
 2. Adaptar slides por faixa etária: **Infantil/Anos Iniciais** (visual, lúdico) e **Anos Finais/EM** (dinâmico, dados, gamificação).
 3. Aplicar princípios de **Comunicação Alternativa e Aumentativa (CAA)**, pictogramas e **Easy Read** para alunos com deficiência.
 4. Reduzir **sobrecarga sensorial** em materiais para TEA e TDAH.
@@ -35,7 +35,7 @@ Capacitar educadores a **produzir materiais didáticos com Inteligência Artific
 
 ## ⏱️ Carga horária sugerida
 
-- **Formato extensivo:** 24h (6 encontros de 4h) — Módulos 1 a 4 (1 semana por módulo).
+- **Formato extensivo:** 24h (6 encontros de 4h) — **Módulos 1 a 6** (1 módulo por encontro).
 - **Formato intensivo:** 12h (4 encontros de 3h) — um módulo por encontro.
 - **Autoestudo:** +4h com banco de prompts e atividades práticas.
 
@@ -48,9 +48,10 @@ Capacitar educadores a **produzir materiais didáticos com Inteligência Artific
 
 ## 🛠️ Ferramentas necessárias
 
-- **IA:** ChatGPT (gratuito), Claude, Gamma App, Tome.
+- **IA:** ChatGPT (gratuito), Claude, Gemini (Google), Gamma App.
+- **Verificado em:** setembro de 2026 — o **Tome saiu do mercado de apresentações** e foi substituído por **Google Slides + Gemini**, **SlidesAI** e **Beautiful.ai**. Confirme a ferramenta antes de ensinar.
 - **Design:** Canva (função "Design Mágico"), PowerPoint/Google Slides.
-- **Detectores de IA:** CopyLeaks, GPTZero (para o Módulo 3).
+- **Detectores de IA:** Copyleaks, GPTZero (para o Módulo 3) — sinalizam suspeita, nunca são prova.
 - **Acessórios:** computador ou celular com internet; ideal ter Canva Pro grátis para professor (quando disponível).
 
 ## ✅ Critérios de Avaliação (do professor-cursista)
@@ -59,6 +60,7 @@ Capacitar educadores a **produzir materiais didáticos com Inteligência Artific
 2. **1 atividade de inclusão** aplicando CAA ou redução de sobrecarga sensorial.
 3. **1 avaliação à prova de IA** (rubrica + defesa oral) elaborada.
 4. Registro de caso de **gestão de comportamento** usando dinâmicas do Módulo 4.
+5. Entrega dos **temas transversais**: 1 atividade de **Educação Financeira** (Módulo 5) e 1 de **Nanotecnologia** (Módulo 6) — ou um plano interdisciplinar que una os dois.
 
 ---
 

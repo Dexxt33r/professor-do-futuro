@@ -1,7 +1,7 @@
 # ⚡ PROMPTS 100% PRONTOS PARA USO — Banco do Kaio
 
 > Nenhuma edição necessária: **copie, cole e envie**. Cada prompt já vem com tema, público e formato definidos.
-> Use com **ChatGPT, Claude, Gemini, Gamma App, Tome** (ou qualquer IA generativa).
+> Use com **ChatGPT, Claude, Gemini, Gamma App, SlidesAI** (ou qualquer IA generativa). O antigo Tome saiu do mercado de apresentações — veja alternativas no Módulo 1.
 > Eu (Kaio) tenho total entendimento de tecnologia — os prompts abaixo são técnicos, mas diretos, para gerar resultados de alto nível.
 
 ---

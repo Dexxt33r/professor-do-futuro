@@ -48,20 +48,26 @@ Slides sobre "Reciclagem" para o 5º ano, divertido e ilustrado, com etapas de c
 
 ---
 
-### 1.1.3 Tome (tome.app)
+### 1.1.3 Alternativas atuais para slides com IA (verificado em setembro/2026)
 
-Ferramenta de IA que cria apresentações com **riqueza visual** e até elementos de **storytelling** (contar uma história). Boa para narrativas, microaulas e projetos.
+> ⚠️ **Atenção:** o **Tome** (`tome.app`), indicado em muitos tutoriais antigos, **saiu do mercado de apresentações com IA** (a empresa migrou para outro segmento). Se você encontrar vídeos ou tutoriais ensinando o Tome para slides, ignore essa parte.
 
-**Passo a passo:**
-1. Em `tome.app`, clique em **"Create with AI"**.
-2. Cole um prompt ou um **texto-base** (a própria apostila pode virar slides).
-3. Escolha formato e tema visual.
-4. Use os cartões para **adicionar vídeo ou imagem**.
+**a) Google Slides + Gemini (a mais "à prova de futuro")**
+1. Peça o roteiro ao ChatGPT/Claude/Gemini (prompt abaixo) e cole na apresentação do Google Slides.
+2. No Google Workspace com Gemini, dá para pedir os slides direto dentro da apresentação.
 
-**Prompt:**
+**b) SlidesAI (extensão do Google Slides)** — gera slides a partir de um texto colado; plano gratuito limitado.
+
+**c) Beautiful.ai** — templates inteligentes que se ajustam sozinhos; teste gratuito e plano pago.
+
+**d) PowerPoint + Copilot** — se a escola já usa Microsoft 365, o Copilot monta o esqueleto dentro do PowerPoint. Sem Copilot, o fluxo manual resolve: ChatGPT/Claude cria o roteiro → você cola no PowerPoint.
+
+**Prompt de roteiro (vale para todas as ferramentas acima):**
 ```
 Transforme este texto [cole aqui] em uma apresentação de 8 slides com narrativa: gancho, contexto, dados, exemplo real, atividade e conclusão.
 ```
+
+> 🗓️ **Ferramentas de IA mudam rápido.** Este módulo foi verificado em **setembro de 2026**: teste a ferramenta na conta gratuita antes de ensinar e confirme se continua ativa.
 
 ---
 
@@ -90,7 +96,7 @@ Use linguagem simples e acolhedora.
 |----------------------|------------------|---------|
 | Preciso de slides AGORA, sem tempo | **Gamma** | Geração em texto → slides em 1–2 min |
 | Quero visual bonito e edição manual | **Canva + Design Mágico** | Controle total do layout |
-| Quero contar uma história / narrativa | **Tome** | Storytelling nativo |
+| Quero contar uma história / narrativa | **Gamma** (ou ChatGPT + Google Slides) | Narrativa em cartões — o Tome saiu do mercado |
 | Precisa de roteiro + conteúdo correto | **ChatGPT/Claude** | Roteiro, revisão, simplificação |
 | Sem internet / na sala de aula | **PowerPoint offline** | Gera com base no roteiro do ChatGPT |
 
@@ -185,7 +191,7 @@ Inclua 1 atividade interativa no slide final. Linguagem acolhedora e acessível.
 ---
 
 ## ✅ Checklist do Módulo 1
-- [ ] Testei pelo menos 2 ferramentas (Gamma + Canva ou Tome).
+- [ ] Testei pelo menos 2 ferramentas (Gamma + Canva, ou ChatGPT + Google Slides).
 - [ ] Criei 1 apresentação com IA em menos de 15 min.
 - [ ] Adaptei um tema para a **educação infantil** (visual + poucas palavras).
 - [ ] Adaptei um tema para **anos finais/EM** (dados + quiz).

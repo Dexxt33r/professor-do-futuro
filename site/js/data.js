@@ -53,7 +53,7 @@ window.SLIDES = [
   { id: 5, mod: '1', color: 'blue', title: 'Ferramentas práticas', type: 'list',
     body: ['Gamma App — texto vira apresentação em 1–2 min',
            'Canva Design Mágico — descrição vira slides prontos',
-           'Tome — storytelling e riqueza visual',
+           'Google Slides + Gemini — roteiro da IA direto na apresentação',
            'ChatGPT/Claude — roteiro, texto e revisão'] },
 
   { id: 6, mod: '1', color: 'blue', title: 'Prompt base para Gamma', type: 'prompt',
@@ -62,7 +62,7 @@ window.SLIDES = [
   { id: 7, mod: '1', color: 'blue', title: 'Prompt para Canva (Design Mágico)', type: 'prompt',
     body: 'Slides sobre "Reciclagem" para o 5º ano, divertido e ilustrado, com etapas de coleta, cores vivas e imagens de crianças reciclando.' },
 
-  { id: 8, mod: '1', color: 'blue', title: 'Prompt para Tome', type: 'prompt',
+  { id: 8, mod: '1', color: 'blue', title: 'Prompt de narrativa (Gamma ou Slides)', type: 'prompt',
     body: 'Transforme este texto [cole aqui] em uma apresentação de 8 slides com narrativa: gancho, contexto, dados, exemplo real, atividade e conclusão.' },
 
   { id: 9, mod: '1', color: 'blue', title: 'Roteiro com ChatGPT/Claude', type: 'prompt',
@@ -72,7 +72,7 @@ window.SLIDES = [
     body: { head: ['Situação', 'Ferramenta ideal', 'Por quê'],
             rows: [['Slides AGORA, sem tempo', 'Gamma', 'Texto → slides em 1–2 min'],
                    ['Visual bonito e edição manual', 'Canva + Design Mágico', 'Controle total do layout'],
-                   ['Contar uma história / narrativa', 'Tome', 'Storytelling nativo'],
+                   ['Contar uma história / narrativa', 'Gamma ou ChatGPT + Slides', 'Narrativa em cartões — o Tome saiu do mercado'],
                    ['Roteiro + conteúdo correto', 'ChatGPT/Claude', 'Roteiro, revisão, simplificação'],
                    ['Sem internet na sala', 'PowerPoint offline', 'Monta com base no roteiro']] } },
 
@@ -98,7 +98,7 @@ window.SLIDES = [
     body: 'Crie slides para o [9º ano/Ensino Médio] sobre [TEMA]. Inclua: 1 infográfico, 1 gráfico com dados reais, 1 pergunta-problema no início, 1 mini-quiz de 3 perguntas com resposta certa, e 1 desafio de aplicação real. Estilo moderno, cores [X], sem poluição visual, fontes legíveis.' },
 
   { id: 15, mod: '1', color: 'blue', title: 'Checklist · Módulo 1', type: 'checklist',
-    body: ['Testei pelo menos 2 ferramentas (Gamma + Canva ou Tome)',
+    body: ['Testei pelo menos 2 ferramentas (Gamma + Canva, ou ChatGPT + Google Slides)',
            'Criei 1 apresentação com IA em menos de 15 min',
            'Adaptei um tema para a educação infantil (visual + poucas palavras)',
            'Adaptei um tema para anos finais/EM (dados + quiz)',
@@ -122,7 +122,7 @@ window.SLIDES = [
     body: { intro: 'Nem toda aula exige a ferramenta mais completa. O segredo é casar o tempo disponível com o objetivo, para não perder horas montando o material.',
             pontos: ['3 minutos → ChatGPT/Claude: peça só o roteiro e o texto, sem slides.',
                      '10 minutos → Gamma ou Canva Design Mágico: gere a apresentação e ajuste poucas coisas.',
-                     '20+ minutos → Tome: quando o foco é storytelling e impacto visual.',
+                     '20+ minutos → Gamma (ou ChatGPT + Google Slides): quando o foco é narrativa e impacto visual.',
                      'Ferramenta alguma substitui sua revisão: sempre confira fatos e datas antes de projetar.'],
             dica: 'Monte um "cardápio de ferramentas": tempo curto = texto; tempo médio = slides prontos; tempo sobrando = narrativa.' } },
 
@@ -294,7 +294,7 @@ window.SLIDES = [
            'Respostas rápidas demais e idênticas às da ferramenta'] },
 
   { id: 37, mod: '3', color: 'green', title: 'Detectores de IA: como funcionam', type: 'list',
-    body: ['CopyLeaks e GPTZero medem perplexidade e burstiness (o quão previsível é o texto)',
+    body: ['Copyleaks e GPTZero medem perplexidade e burstiness (o quão previsível é o texto)',
            'Textos formais ou de não nativos podem gerar FALSOS POSITIVOS',
            'NÃO são prova oficial — não use sozinhos para punir',
            'O detector sinaliza suspeita; a conversa e os rascunhos confirmam'] },
@@ -337,7 +337,7 @@ window.SLIDES = [
             dica: 'Dê aos alunos o "contrato da tutora": a IA explica e pergunta; ela nunca faz o trabalho no lugar de vocês.' } },
 
   { id: 70, mod: '3', color: 'green', title: '📖 Leitura — o que são os detectores de IA (e seus limites)', type: 'leitura',
-    body: { intro: 'Ferramentas como CopyLeaks e GPTZero tentam identificar texto gerado por IA, mas não são infalíveis. Entender isso evita acusações injustas.',
+    body: { intro: 'Ferramentas como Copyleaks e GPTZero tentam identificar texto gerado por IA, mas não são infalíveis. Entender isso evita acusações injustas.',
             pontos: ['Detectores usam padrões e pontuação para estimar, não "certeza".',
                      'Falsos positivos: texto escrito por humano (especialmente não-nativo ou técnico) pode ser marcado como IA.',
                      'Eles erram com textos curtos e com texto editado.',

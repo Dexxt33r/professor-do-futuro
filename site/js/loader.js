@@ -60,7 +60,7 @@
         '<div class="pdf-loader-name"><em>Professor</em> do Futuro</div>' +
         '<div class="pdf-loader-sub">Slides · IA · Inclusão · Gestão</div>' +
         '<div class="pdf-loader-bar"><span></span></div>' +
-        '<div class="pdf-loader-msg">Carregando a plataforma…</div>' +
+        '<div class="pdf-loader-msg" id="pdfLoaderMsg">Carregando a plataforma…</div>' +
       '</div>';
     (document.body || document.documentElement).appendChild(root);
     return root;

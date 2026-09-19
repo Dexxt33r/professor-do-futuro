@@ -10,7 +10,7 @@ Da Educação Infantil ao Ensino Médio, com foco em Educação Especial (AEE) e
 | Arquivo | Conteúdo |
 |---------|----------|
 | `PLANO_DO_CURSO.md` | Plano geral: objetivos, carga horária, público-alvo, ferramentas e avaliação |
-| `Modulo-1_Slides-com-IA.md` | Módulo 1 — Gamma, Canva, Tome, ChatGPT/Claude e adaptação por faixa etária |
+| `Modulo-1_Slides-com-IA.md` | Módulo 1 — Gamma, Canva, Google Slides/Gemini, ChatGPT/Claude e adaptação por faixa etária |
 | `Modulo-2_Inclusao-e-AEE.md` | Módulo 2 — CAA, pictogramas, Easy Read, TEA/TDAH e acessibilidade universal |
 | `Modulo-3_IA-na-Pratica-Escolar.md` | Módulo 3 — IA como tutora, ética, detectores e avaliações à prova de IA |
 | `Modulo-4_Gestao-de-Sala-de-Aula.md` | Módulo 4 — engajamento, 3 níveis na mesma turma e combinados |
@@ -19,7 +19,7 @@ Da Educação Infantil ao Ensino Médio, com foco em Educação Especial (AEE) e
 | `_PROMPTS_PRONTOS.md` | Banco de prompts para copiar e colar (29 prompts, organizados por módulo) |
 | `_PROMPTS_100P_KAIO.md` | Banco "100% prontos" — sem edição, copie e envie (16 prompts completos) |
 | `iniciar-site.bat` | Servidor local: sobe o site em `http://localhost:8000` e abre o navegador |
-| `site/` | Site do curso (HTML/CSS/JS, 100% offline, sem dependências externas) |
+| `site/` | Site do curso (HTML/CSS/JS puro, sem build e sem CDN — o SDK do Supabase é local; o login exige internet) |
 | `vendas/` | **Site de vendas** (repositório próprio, embutido e ignorado por este): página de vendas, página B2B para escolas, termos, privacidade, checkout Mercado Pago e material de prospecção em `vendas/prospeccao/` |
 
 ## 🌐 O site
@@ -29,10 +29,13 @@ ou sirva a pasta com qualquer servidor estático). Páginas:
 
 - **`index.html`** — home com hero, módulos e CTA
 - **`curso.html`** — estrutura completa do curso
-- **`modulos.html`** — conteúdo detalhado dos 4 módulos + checklist geral (`#checklists`)
-- **`ferramentas.html`** — Laboratório do Professor: semáforo da sala, gerador de plano de aula e quiz jogável (offline)
-- **`prompts.html`** — banco de 49 prompts com filtro por categoria e botão copiar
-- **`slides.html`** — apresentação interativa com 60 slides + **2 decks extras**: Educação Financeira e Nanotecnologia
+- **`modulos.html`** — conteúdo detalhado dos 6 módulos + checklist geral (`#checklists`)
+- **`ferramentas.html`** — Laboratório do Professor com 11 ferramentas que rodam no navegador (sem IA externa): Corretor de Redação ENEM (chave oficial do Inep, 0–1000), semáforo da sala, gerador de plano de aula, quiz em sala, cronômetro, sorteador de grupos, rubrica à prova de IA, checklist de acessibilidade, combinados da turma, simplificador de texto e gerador de atividade. Quiz, checklist, combinados e nomes ficam salvos no `localStorage`
+- **`leitura.html`** — biblioteca de leitura e estudo com a trilha do curso
+- **`prompts.html`** — banco de 58 prompts com filtro por categoria e botão copiar
+- **`slides.html`** — biblioteca com **82 slides do curso** + **10 coleções temáticas (119 slides)**, incluindo Educação Financeira e Nanotecnologia
+
+> 🗓️ **Verificado em setembro de 2026:** o **Tome saiu do mercado de apresentações** e foi substituído por **Google Slides + Gemini**, **SlidesAI** e **Beautiful.ai** nos materiais do curso. Ferramentas de IA mudam rápido — confira antes de cada turma.
 
 ### Apresentação (slides.html)
 - Clique em um card para abrir o modo apresentação
@@ -69,10 +72,16 @@ site/
 ├── modulos.html
 ├── prompts.html
 ├── slides.html
+├── leitura.html
+├── ferramentas.html
+├── login.html / register.html
 ├── css/style.css        → tema global
 └── js/
-    ├── data.js          → deck da apresentação (60 slides) + metadados dos módulos
+    ├── data.js          → deck do curso (82 slides) + metadados dos módulos
+    ├── decks.js         → 10 coleções temáticas (119 slides)
     ├── present.js       → motor de apresentação
+    ├── enemcorrector.js → Corretor de Redação ENEM (chave oficial 0–1000)
+    ├── auth.js / guard.js / loader.js / supabase.js → login e acesso
     └── main.js          → nav/footer, botões copiar, animações
 ```
 

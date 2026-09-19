@@ -1,6 +1,6 @@
 # ⚡ BANCO DE PROMPTS PRONTOS — Copiar e Usar
 
-> Cole um prompt abaixo em **qualquer IA** (ChatGPT, Claude, Gamma, Canva ou Tome) e substitua o que estiver entre `[CHAVES]`. Organizado por módulo. E abordagem prática para a realidade do professor brasileiro.
+> Cole um prompt abaixo em **qualquer IA** (ChatGPT, Claude, Gemini, Gamma, Canva, SlidesAI ou Google Slides) e substitua o que estiver entre `[CHAVES]`. Organizado por módulo. E abordagem prática para a realidade do professor brasileiro.
 
 ---
 

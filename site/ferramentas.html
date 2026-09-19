@@ -9,7 +9,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Laboratório do Professor — Professor do Futuro">
   <meta property="og:locale" content="pt_BR">
-  <meta name="description" content="Ferramentas práticas do Professor do Futuro: semáforo da sala, gerador de plano de aula, quiz jogável, cronômetro, sorteador de grupos, rubrica, checklist de acessibilidade, cartaz de combinados, simplificador de texto e gerador de atividade — tudo offline.">
+  <meta name="description" content="Ferramentas práticas do Professor do Futuro: semáforo da sala, gerador de plano de aula, quiz jogável, cronômetro, sorteador de grupos, rubrica, checklist de acessibilidade, cartaz de combinados, simplificador de texto, gerador de atividade e Corretor de Redação ENEM (chave oficial do Inep, 0–1000) — tudo rodando no seu navegador">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/loader.js"></script>
@@ -26,8 +26,7 @@
         <div class="ph-txt">
           <div class="crumbs"><a href="index.html">Início</a> › Laboratório</div>
           <h1>🧪 Laboratório do Professor</h1>
-          <p>Ferramentas prontas para usar em sala — sem cadastro, sem internet e sem depender de IA externa. Monte, gere e projete. Você encontra o semáforo da sala, o gerador de plano de aula, o quiz em sala, o cronômetro, o sorteador de grupos, a rubrica, o checklist de acessibilidade — <b>e as novidades</b>: cartaz de <b>Combinados da Turma</b>, <b>Corretor de Redação ENEM</b> (escala oficial 0–20), <b>Simplificador de Texto</b> em língua fácil e o gerador de <b>Atividade Rápida</b>. Cada ferramenta nasce de uma técnica ensinada nos módulos do curso.</p>
-        </div>
+          <p>Ferramentas prontas para usar em sala — <b>sem depender de nenhuma IA externa</b>: tudo roda no seu navegador e os seus dados ficam salvos no próprio dispositivo. Monte, gere e projete. Você encontra o semáforo da sala, o gerador de plano de aula, o quiz em sala, o cronômetro, o sorteador de grupos, a rubrica, o checklist de acessibilidade — <b>e as novidades</b>: cartaz de <b>Combinados da Turma</b>, <b>Corretor de Redação ENEM</b> (chave oficial do Inep, 0–1000), <b>Simplificador de Texto</b> em língua fácil e o gerador de <b>Atividade Rápida</b>. Cada ferramenta nasce de uma técnica ensinada nos módulos do curso.</p>
         <div class="ph-img"><img src="img/banner-lab.svg" alt="Ilustração: painel de controles com frasco de experimento" width="300" height="200"></div>
       </div>
     </div>
@@ -41,7 +40,7 @@
         <a class="lab-card reveal" href="#enem">
           <div class="lab-ic li-gold">📝</div>
           <h3>Corretor de Redação ENEM</h3>
-          <p>Corrija como a banca oficial: texto dissertativo-argumentativo e carta, 5 competências (C1–C5) com níveis de 0 a 4 e nota 0–20 automática. Gera comentário formativo para o aluno e prompt de IA.</p>
+          <p>Corrija com a chave oficial do Inep: um texto dissertativo-argumentativo, 5 competências (C1–C5) em níveis de 0 a 200 pontos e nota 0–1000 automática. Gera comentário formativo para o aluno e prompt de IA — com conversão opcional para a escala escolar 0–20 (adaptada, não oficial).</p>
           <span class="chip">Corrigir agora →</span>
         </a>
         <a class="lab-card reveal" href="#semaforo">
@@ -111,18 +110,20 @@
         <!-- ============ CORRETOR DE REDAÇÃO ENEM ============ -->
         <div class="tbox reveal" id="enem">
           <h2>📝 Corretor de Redação ENEM</h2>
-          <p>Corrija redações <b>exatamente como a banca oficial do ENEM</b> (chaves de correção do INEP): o texto vale <b>0 a 20 pontos</b> e é avaliado em <b>5 competências</b> (C1–C5), cada uma com <b>4 níveis</b> de desempenho (de 0 a 4 pontos). A prova de redação pede <b>dois textos</b> produzidos a partir do mesmo tema — o <b>texto dissertativo-argumentativo</b> e a <b>carta</b> — e ambos são corrigidos com esta mesma chave.</p>
-          <p><b>Como usar:</b> cole o tema e a redação do aluno, escolha o tipo de texto, marque <b>um nível por competência</b> na rúbrica e clique em calcular. A ferramenta soma a nota 0–20 automaticamente, monta um <b>comentário formativo pronto para devolver</b> ao aluno e gera um <b>prompt de IA</b> que faz a análise no estilo da banca. Tudo funciona offline, sem cadastro.</p>
-
+          <p>Corrija redações seguindo a <b>chave oficial do Inep</b> (Matriz de Referência + Cartilha do Participante 2026): o participante escreve <b>um texto dissertativo-argumentativo</b>, de até 30 linhas, e a nota vai de <b>0 a 1000 pontos</b> — <b>5 competências</b> (C1–C5), cada uma valendo <b>0, 40, 80, 120, 160 ou 200 pontos</b>.</p>
+          <p><b>Como usar:</b> cole o tema e a redação do aluno, marque <b>um nível por competência</b> na rúbrica e clique em calcular. A ferramenta soma a nota oficial (0–1000), avisa quando o texto está fora do formato exigido pelo exame (número de linhas) e monta um <b>comentário formativo pronto para devolver</b> ao aluno, além de um <b>prompt de IA</b> que faz a análise no estilo da banca. Se quiser, marque a opção de <b>conversão para a escala escolar 0–20</b> — sempre rotulada como adaptação pedagógica, e não como escala oficial.</p>
           <div class="enem-info">
             <details class="enem-det" open>
-              <summary>🎯 Como o ENEM corrige? (a chave oficial)</summary>
+              <summary>🎯 Como o ENEM corrige? (chave oficial)</summary>
               <ul>
-                <li><b>Escala 0–20:</b> resultado da soma das 5 competências, cada uma de 0 a 4 (NV4=4 · NV3=3 · NV2=2 · NV1=1 · Zero=0).</li>
-                <li><b>Corretor duplo:</b> cada texto é corrigido por 2 corretores; em caso de grande discrepância, entra um terceiro corretor e, se necessário, até uma banca.</li>
-                <li><b>Dois textos:</b> o <b>texto dissertativo-argumentativo</b> (defesa de um ponto de vista com argumentos e proposta de intervenção) e a <b>carta</b> (dirigida a um destinatário específico, com apresentação, desenvolvimento e feição).</li>
-                <li><b>Ideias valorizadas:</b> respeito aos direitos humanos, sustentabilidade ambiental, cidadania e justiça social.</li>
+                <li><b>Um texto:</b> o participante escreve <b>um texto dissertativo-argumentativo</b> em prosa, de até <b>30 linhas</b>, com tese, argumentos e proposta de intervenção que respeite os direitos humanos.</li>
+                <li><b>Escala 0–1000:</b> soma das 5 competências, cada uma valendo <b>0, 40, 80, 120, 160 ou 200 pontos</b> (níveis 0 a 5).</li>
+                <li><b>Correção dupla:</b> cada texto é corrigido por <b>2 avaliadores</b> e a nota final é a média. Há <b>terceira correção</b> quando a diferença passa de <b>100 pontos</b> no total ou de <b>80 pontos</b> em uma competência; se a divergência continuar, uma <b>banca com 3 avaliadores</b> define a nota.</li>
+                <li><b>Nota zero:</b> fuga total ao tema, texto fora do tipo dissertativo-argumentativo, redação com até <b>7 linhas</b> (10 no Braille), cópia dos textos motivadores, ilegibilidade ou impropérios.</li>
+                <li><b>Tangenciamento:</b> abordagem parcial do tema limita a <b>C2 a 40 pontos</b>.</li>
+                <li><b>Proposta de intervenção (C5):</b> precisa dos cinco elementos — agente, ação, meio/modo, finalidade e detalhamento — e deve respeitar os direitos humanos.</li>
               </ul>
+              <p style="color:var(--text-muted);font-size:.85rem;margin:.7rem 0 0">Síntese da Matriz de Referência e da <i>Cartilha do Participante</i> (Inep, 2026). O Inep estuda um novo modelo de redação para 2028 (produções escritas por área), ainda em discussão — <b>nada muda no Enem 2026</b>.</p>
             </details>
           </div>
 
@@ -133,35 +134,28 @@
                 <input type="text" id="enemAluno" placeholder="Nome do aluno">
               </div>
               <div>
-                <label for="enemTipo">Texto a corrigir</label>
-                <select id="enemTipo">
-                  <option value="argumentativo">Texto dissertativo-argumentativo</option>
-                  <option value="carta">Carta</option>
-                </select>
+                <label for="enemTema">Tema da redação *</label>
+                <input type="text" id="enemTema" placeholder="Ex.: Desafios para a valorização de comunidades tradicionais" required>
               </div>
             </div>
             <div>
-              <label for="enemTema">Tema da redação (conforme a pauta) *</label>
-              <input type="text" id="enemTema" placeholder="Ex.: A importância do voto jovem na democracia" required>
-            </div>
-            <div id="enemDestWrap" style="display:none">
-              <label for="enemDest">Destinatário da carta *</label>
-              <input type="text" id="enemDest" placeholder="Ex.: Ao prefeito(a) da sua cidade">
-            </div>
-            <div>
               <label for="enemTexto">Redação do aluno *</label>
-              <textarea id="enemTexto" rows="10" placeholder="Cole aqui a redação completa (texto argumentativo ou carta)..." required></textarea>
+              <textarea id="enemTexto" rows="10" placeholder="Cole aqui a redação completa (texto dissertativo-argumentativo)..." required></textarea>
             </div>
+            <label style="display:flex;gap:.5rem;align-items:flex-start;margin:.2rem 0">
+              <input type="checkbox" id="enemEscala20">
+              <span><b>Mostrar também a nota na escala escolar 0–20</b><br><small>Conversão pedagógica (nota oficial ÷ 50) para uso interno na escola. <b>Não é a escala oficial do Enem.</b></small></span>
+            </label>
           </form>
 
           <!-- Rúbrica oficial C1–C5 (renderizada por js/enemcorrector.js) -->
           <div class="enem-rub no-print" id="enemRub"></div>
 
           <div class="enem-actions no-print">
-            <button class="btn btn-primary" id="enemCalc">🧮 Calcular nota (0–20)</button>
+            <button class="btn btn-primary" id="enemCalc">🧮 Calcular nota (0–1000)</button>
           </div>
 
-          <div class="enem-out" id="enemOut"></div>
+          <div class="enem-out" id="enemOut" aria-live="polite"></div>
         </div>
 
         <!-- ============ SEMÁFORO ============ -->
@@ -305,7 +299,7 @@
               </div>
             </div>
             <blockquote>💡 Sem a lista em mãos? Digite alguns nomes de exemplo para testar antes de usar na sala.</blockquote>
-            <div id="sorOut"></div>
+            <div id="sorOut" aria-live="polite"></div>
           </div>
         </div>
 
@@ -333,7 +327,7 @@
               <textarea id="rubTarefa" rows="2" placeholder="Ex.: apresentar em 5 min uma solução para o problema X"></textarea>
             </label>
             <button class="btn btn-primary" id="rubGerar" style="justify-self:start">⚡ Gerar rubrica</button>
-            <div class="rub-out" id="rubOut"></div>
+            <div class="rub-out" id="rubOut" aria-live="polite"></div>
           </div>
         </div>
 
@@ -341,7 +335,7 @@
           <h2>♿ Checklist de Acessibilidade do Material</h2>
           <p>Percorra esta lista conferindo cada item do seu slide, texto ou atividade. Quanto mais itens marcados, mais acessível fica o material — para todos os alunos, incluindo TEA, TDAH e deficiência intelectual.</p>
           <div class="chk-progress"><div class="fill" id="aceFill"></div></div>
-          <p style="margin-bottom:.6rem">Você marcou <b class="ace-count" id="aceCount">0</b> de <span id="aceTotal">0</span> itens.</p>
+          <p style="margin-bottom:.6rem" aria-live="polite">Você marcou <b class="ace-count" id="aceCount">0</b> de <span id="aceTotal">0</span> itens.</p>
           <div id="aceList"></div>
           <button class="btn btn-outline" id="aceReset" style="margin-top:.4rem">↺ Limpar tudo</button>
         </div>
@@ -357,24 +351,26 @@
             <label class="ace-item"><input type="checkbox" checked><span><b>Errar faz parte</b><br><small>Aqui ninguém ri do erro do outro.</small></span></label>
             <label class="ace-item"><input type="checkbox"><span><b>Entregar no prazo combinado</b><br><small>Se não der, avisar antes.</small></span></label>
           </div>
+          <label class="sr-only" for="cbxExtra">Combinado extra da turma</label>
           <input type="text" id="cbxExtra" placeholder="Combinado extra (opcional) — ex.: comida só no lanche" style="margin-bottom:.6rem">
           <div style="display:flex;gap:.6rem;flex-wrap:wrap">
             <button class="btn btn-primary" id="cbxGerar">✨ Gerar cartaz</button>
             <button class="btn btn-outline" id="cbxPrint" disabled>🖨️ Imprimir</button>
           </div>
-          <div id="cbxOut" style="margin-top:1rem"></div>
+          <div id="cbxOut" style="margin-top:1rem" aria-live="polite"></div>
         </div>
 
         <!-- ============ SIMPLIFICADOR DE TEXTO ============ -->
         <div class="tbox reveal" id="simplificar">
           <h2>🔎 Simplificador de Texto (Língua Fácil)</h2>
-          <p>Cole um texto difícil (do livro, de um artigo, de um edital). A ferramenta aplica regras de <b>língua fácil (Easy Read)</b> localmente: quebra em frases curtas, troca palavras difíceis por simples e numera as ideias.</p>
+          <p>Cole um texto difícil (do livro, de um artigo, de um edital). A ferramenta faz um <b>primeiro tratamento offline</b>: quebra em frases curtas, troca palavras difíceis por simples e numera as ideias. Ela <b>não reescreve o texto por inteiro</b> — use o resultado como rascunho e conclua com o prompt de língua fácil (Easy Read) do Módulo 2, que pede imagem de apoio, uma ideia por linha e validação do professor do AEE antes de aplicar com alunos que precisam de leitura fácil.</p></p>
+          <label class="sr-only" for="simpIn">Texto que será simplificado</label>
           <textarea id="simpIn" rows="5" placeholder="Cole aqui o texto que você quer simplificar..."></textarea>
           <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem">
             <button class="btn btn-primary" id="simpBtn">✨ Simplificar</button>
             <button class="btn btn-outline" id="simpCopy" disabled>📋 Copiar versão fácil</button>
           </div>
-          <div id="simpOut" style="margin-top:1rem"></div>
+          <div id="simpOut" style="margin-top:1rem" aria-live="polite"></div>
         </div>
 
         <!-- ============ ATIVIDADE RÁPIDA ============ -->
@@ -382,6 +378,7 @@
           <h2>🧩 Gerador de Atividade Rápida</h2>
           <p>Digite o tema, escolha o segmento e o tipo de atividade. A ferramenta monta uma atividade pronta com instruções passo a passo, desafio extra e critérios de correção — tudo offline, na hora.</p>
           <form id="atvForm" style="display:grid;gap:.6rem">
+            <label class="sr-only" for="atvTema">Tema da atividade</label>
             <input type="text" id="atvTema" placeholder="Tema da atividade — ex.: frações, ciclo da água, revolução industrial" required>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
               <select id="atvSeg">
@@ -399,7 +396,7 @@
             </div>
             <button class="btn btn-primary" type="submit">✨ Gerar atividade</button>
           </form>
-          <div id="atvOut" style="margin-top:1rem"></div>
+          <div id="atvOut" style="margin-top:1rem" aria-live="polite"></div>
         </div>
 
       </div>
@@ -412,7 +409,7 @@
           <li><b>Terça:</b> monte o <b>Quiz em Sala</b> com as perguntas do plano e projete na quarta como revisão.</li>
           <li><b>Quinta e sexta:</b> use o <b>Semáforo da Sala</b> durante as atividades práticas e feche a semana pactuando 1 combinado positivo com a turma.</li>
         </ul>
-        <blockquote>💡 Todas as ferramentas funcionam offline e salvam nada em servidor: seus dados ficam só no seu navegador. Pode projetar sem medo.</blockquote>
+        <blockquote>💡 As ferramentas rodam no seu navegador e <b>não enviam nada para nenhum servidor</b>: quiz, checklist, combinados, nomes do sorteador e textos ficam salvos <b>no próprio dispositivo</b> (armazenamento local do navegador) e continuam aí quando você voltar. Se quiser apagar, use o botão de limpar de cada ferramenta ou limpe os dados do site no navegador.</blockquote></blockquote>
       </div>
 
       <div class="pagination reveal">
@@ -453,6 +450,15 @@
     function $(id){ return document.getElementById(id); }
     function esc(s){
       return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    /* Armazenamento local: os dados do professor ficam no proprio navegador */
+    function lsGet(k, def){
+      try{ var v = localStorage.getItem(k); return (v === null || v === undefined) ? def : JSON.parse(v); }
+      catch(e){ return def; }
+    }
+    function lsSet(k, v){
+      try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){}
     }
 
     /* ---------- 1. SEMÁFORO DA SALA ---------- */
@@ -498,6 +504,10 @@
     document.querySelector('.semaf-box').appendChild(fbtn);
     if($('semafFullClose')) $('semafFullClose').addEventListener('click', toggleSemafFull);
     document.addEventListener('keydown', function(e){
+      // Não sequestra a digitação: ignora atalhos quando o foco está em campo de texto.
+      var t = e.target;
+      if(t && (t.tagName==='INPUT' || t.tagName==='TEXTAREA' || t.tagName==='SELECT' || t.isContentEditable)) return;
+      if(e.ctrlKey || e.metaKey || e.altKey) return;
       if(e.key==='1') setSemaf('g');
       else if(e.key==='2') setSemaf('y');
       else if(e.key==='3') setSemaf('r');
@@ -665,29 +675,31 @@
     if($('pPrint')) $('pPrint').addEventListener('click', function(){ window.print(); });
 
     /* ---------- 3. QUIZ EM SALA ---------- */
-    var perguntas = [];
+    var perguntas = lsGet('pdf.lab.quiz', []);
     var qIdx = 0, qPts = 0, qCerta = 0, qBonus = 0, qTotal = 0, qBloqueado = false;
 
     function renderQList(){
       var box = $('qlist');
+      lsSet('pdf.lab.quiz', perguntas);
       if(!box) return;
       if(!perguntas.length){
         box.innerHTML = '<p style="color:var(--text-muted);font-size:.9rem">Nenhuma pergunta ainda — clique em "➕ Adicionar pergunta".</p>';
         $('qHint').textContent = 'Nenhuma pergunta ainda — adicione pelo menos 1.';
+        lsSet('pdf.lab.quiz', perguntas);
         return;
       }
       box.innerHTML = perguntas.map(function(q, i){
         return '<div class="qitem" data-i="' + i + '">' +
           '<div class="q-head"><span class="q-num">Pergunta ' + (i+1) + (q.bonus ? ' ⭐ bônus' : '') + '</span>' +
           '<button class="q-del" type="button" data-i="' + i + '" title="Remover">✕</button></div>' +
-          '<input type="text" class="q-txt" data-i="' + i + '" value="' + esc(q.texto) + '" placeholder="Digite a pergunta...">' +
+          '<input type="text" class="q-txt" data-i="' + i + '" value="' + esc(q.texto) + '" placeholder="Digite a pergunta..." aria-label="Pergunta ' + (i + 1) + '">' +
           '<div class="qalts-edit">' +
             [0,1,2].map(function(j){
               return '<div class="alt"><span class="lbl">' + String.fromCharCode(65+j) + '</span>' +
-                '<input type="text" class="q-alt" data-i="' + i + '" data-j="' + j + '" value="' + esc(q.alts[j]) + '" placeholder="Alternativa ' + String.fromCharCode(65+j) + '"></div>';
+                '<input type="text" class="q-alt" data-i="' + i + '" data-j="' + j + '" value="' + esc(q.alts[j]) + '" placeholder="Alternativa ' + String.fromCharCode(65+j) + '" aria-label="Alternativa ' + String.fromCharCode(65+j) + '"></div>';
             }).join('') +
           '</div>' +
-          '<div class="q-certa">Correta: <select class="q-certa-sel" data-i="' + i + '">' +
+          '<div class="q-certa">Correta: <select class="q-certa-sel" data-i="' + i + '" aria-label="Alternativa correta da pergunta ' + (i + 1) + '">' +
             [0,1,2].map(function(j){ return '<option value="' + j + '"' + (q.certa===j?' selected':'') + '>A</option>'; }).join('').replace(/<option value="1"/,'<option value="1">B'.replace('1">B','')).replace(/<option value="2"/,'<option value="2">C') +
           '</select>' +
           '<label style="display:flex;align-items:center;gap:.3rem;margin:0"><input type="checkbox" class="q-bonus" data-i="' + i + '"' + (q.bonus?' checked':'') + '> vale +2 (bônus)</label></div>' +
@@ -700,18 +712,19 @@
         for(var k=0;k<opts.length;k++) opts[k].textContent = String.fromCharCode(65+k);
       });
       box.querySelectorAll('.q-txt').forEach(function(inp){
-        inp.addEventListener('input', function(){ perguntas[parseInt(inp.getAttribute('data-i'),10)].texto = inp.value; });
+        inp.addEventListener('input', function(){ perguntas[parseInt(inp.getAttribute('data-i'),10)].texto = inp.value; lsSet('pdf.lab.quiz', perguntas); });
       });
       box.querySelectorAll('.q-alt').forEach(function(inp){
         inp.addEventListener('input', function(){
           perguntas[parseInt(inp.getAttribute('data-i'),10)].alts[parseInt(inp.getAttribute('data-j'),10)] = inp.value;
+          lsSet('pdf.lab.quiz', perguntas);
         });
       });
       box.querySelectorAll('.q-certa-sel').forEach(function(sel){
-        sel.addEventListener('change', function(){ perguntas[parseInt(sel.getAttribute('data-i'),10)].certa = parseInt(sel.value,10); });
+        sel.addEventListener('change', function(){ perguntas[parseInt(sel.getAttribute('data-i'),10)].certa = parseInt(sel.value,10); lsSet('pdf.lab.quiz', perguntas); });
       });
       box.querySelectorAll('.q-bonus').forEach(function(chk){
-        chk.addEventListener('change', function(){ perguntas[parseInt(chk.getAttribute('data-i'),10)].bonus = chk.checked; });
+        chk.addEventListener('change', function(){ perguntas[parseInt(chk.getAttribute('data-i'),10)].bonus = chk.checked; lsSet('pdf.lab.quiz', perguntas); });
       });
       box.querySelectorAll('.q-del').forEach(function(btn){
         btn.addEventListener('click', function(){
@@ -722,6 +735,7 @@
     }
     function addQ(){
       perguntas.push({ texto:'', alts:['','',''], certa:0, bonus:false });
+      lsSet('pdf.lab.quiz', perguntas);
       renderQList();
       var items = document.querySelectorAll('.qitem');
       var last = items[items.length-1];
@@ -833,6 +847,15 @@
     function $(id){ return document.getElementById(id); }
     function esc(s){ return String(s).replace(/[&<>"']/g, function(c){
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+    /* Armazenamento local: os dados do professor ficam no proprio navegador */
+    function lsGet(k, def){
+      try{ var v = localStorage.getItem(k); return (v === null || v === undefined) ? def : JSON.parse(v); }
+      catch(e){ return def; }
+    }
+    function lsSet(k, v){
+      try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){}
+    }
     function shuffle(a){ a = a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 
     /* ==================== CRONÔMETRO ==================== */
@@ -919,6 +942,14 @@
     if($('sorGrupos')){ $('sorGrupos').addEventListener('click', sorRenderGroups); }
     if($('sorOrdem')){ $('sorOrdem').addEventListener('click', sorRenderOrdem); }
 
+    /* Persistencia da lista de nomes */
+    (function sorPersist(){
+      var ta = $('sorNomes'); if(!ta) return;
+      var salvo = lsGet('pdf.lab.sorteador', '');
+      if(salvo && !ta.value) ta.value = salvo;
+      ta.addEventListener('input', function(){ lsSet('pdf.lab.sorteador', ta.value); });
+    })();
+
     /* ==================== RUBRICA ==================== */
     var RUB_CRIT = {
       oral: ['Domínio do conteúdo', 'Clareza e organização da fala', 'Uso de recursos e materiais', 'Postura e interação com a turma'],
@@ -986,7 +1017,9 @@
       $('aceCount').textContent = marc;
       $('aceTotal').textContent = total;
       $('aceFill').style.width = (total? marc/total*100 : 0) + '%';
+      lsSet('pdf.lab.ace', aceCbx.filter(function(i){ return i.ck.checked; }).map(function(i){ return i.ck.id; }));
     }
+    var aceSalvos = lsGet('pdf.lab.ace', []);
     function aceBuild(){
       aceCbx = [];
       var list = $('aceList'); if(!list) return;
@@ -1003,6 +1036,7 @@
       list.querySelectorAll('.ace-item').forEach(function(el){
         var ck = el.querySelector('input');
         aceCbx.push({ item:el, ck:ck });
+        if(aceSalvos.indexOf(ck.id) > -1){ ck.checked = true; el.classList.add('checked'); }
         ck.addEventListener('change', function(){
           el.classList.toggle('checked', ck.checked);
           aceUpdate();
@@ -1019,6 +1053,22 @@
     }
 
     /* ==================== COMBINADOS DA TURMA ==================== */
+    var cbxList = $('cbxList');
+    function cbxSave(){
+      if(!cbxList) return;
+      var on = [];
+      cbxList.querySelectorAll('label').forEach(function(l, i){ if(l.querySelector('input').checked) on.push(i); });
+      lsSet('pdf.lab.cbx', { on:on, extra: ($('cbxExtra') ? $('cbxExtra').value : '') });
+    }
+    (function cbxRestore(){
+      if(!cbxList) return;
+      var salvo = lsGet('pdf.lab.cbx', null); if(!salvo) return;
+      cbxList.querySelectorAll('label').forEach(function(l, i){
+        var ck = l.querySelector('input');
+        if(ck) ck.checked = (salvo.on || []).indexOf(i) > -1;
+      });
+      if($('cbxExtra') && salvo.extra) $('cbxExtra').value = salvo.extra;
+    })();
     if($('cbxGerar')){
       $('cbxGerar').addEventListener('click', function(){
         var itens = [];
@@ -1037,6 +1087,8 @@
         $('cbxPrint').disabled = false;
       });
       $('cbxPrint').addEventListener('click', function(){ window.print(); });
+      if(cbxList) cbxList.addEventListener('change', cbxSave);
+      if($('cbxExtra')) $('cbxExtra').addEventListener('input', cbxSave);
     }
 
     /* ==================== SIMPLIFICADOR DE TEXTO ==================== */
