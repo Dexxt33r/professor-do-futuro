@@ -9,7 +9,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Laboratório do Professor — Professor do Futuro">
   <meta property="og:locale" content="pt_BR">
-  <meta name="description" content="Ferramentas práticas do Professor do Futuro: semáforo da sala, gerador de plano de aula, quiz jogável, cronômetro, sorteador de grupos, rubrica, checklist de acessibilidade, cartaz de combinados, simplificador de texto, gerador de atividade e Corretor de Redação ENEM (chave oficial do Inep, 0–1000) — tudo rodando no seu navegador">
+  <meta name="description" content="Ferramentas práticas do Professor do Futuro: Gerador de Atividade Pronta com IA gratuita (folha A4 para imprimir, adaptada para TDAH/TEA), semáforo da sala, gerador de plano de aula, quiz jogável, cronômetro, sorteador de grupos, rubrica, checklist de acessibilidade, cartaz de combinados, simplificador de texto, gerador de atividade e Corretor de Redação ENEM (chave oficial do Inep, 0–1000) — quase tudo rodando no seu navegador">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/loader.js"></script>
@@ -26,7 +26,7 @@
         <div class="ph-txt">
           <div class="crumbs"><a href="index.html">Início</a> › Laboratório</div>
           <h1>🧪 Laboratório do Professor</h1>
-          <p>Ferramentas prontas para usar em sala — <b>sem depender de nenhuma IA externa</b>: tudo roda no seu navegador e os seus dados ficam salvos no próprio dispositivo. Monte, gere e projete. Você encontra o semáforo da sala, o gerador de plano de aula, o quiz em sala, o cronômetro, o sorteador de grupos, a rubrica, o checklist de acessibilidade — <b>e as novidades</b>: cartaz de <b>Combinados da Turma</b>, <b>Corretor de Redação ENEM</b> (chave oficial do Inep, 0–1000), <b>Simplificador de Texto</b> em língua fácil e o gerador de <b>Atividade Rápida</b>. Cada ferramenta nasce de uma técnica ensinada nos módulos do curso.</p>
+          <p>Ferramentas prontas para usar em sala — e as suas favoritas continuam rodando <b>no seu navegador, sem IA externa</b>: semáforo da sala, gerador de plano de aula, quiz em sala, cronômetro, sorteador de grupos, rubrica, checklist de acessibilidade, combinados da turma, simplificador de texto e atividade rápida. Você encontra também o <b>Corretor de Redação ENEM</b> (chave oficial do Inep, 0–1000) e a novidade: o <b>Gerador de Atividade Pronta</b> com IA gratuita, que escreve o texto e as questões e entrega a <b>folha A4 pronta para imprimir</b> — com adaptação para TDAH/TEA. Cada ferramenta nasce de uma técnica ensinada nos módulos do curso.</p>
         <div class="ph-img"><img src="img/banner-lab.svg" alt="Ilustração: painel de controles com frasco de experimento" width="300" height="200"></div>
       </div>
     </div>
@@ -37,6 +37,12 @@
 
       <!-- Índice das ferramentas -->
       <div class="lab-grid" style="margin-bottom:2.6rem">
+        <a class="lab-card reveal" href="#gerar">
+          <div class="lab-ic li-violet">🤖</div>
+          <h3>Gerar Atividade Pronta (IA)</h3>
+          <p>Escolha disciplina, ano/série, tema e tipo de atividade e receba a folha A4 inteira: texto explicativo, questões, caça-palavras, gabarito do professor e adaptações para TDAH/TEA, pronta para imprimir ou salvar em PDF. Usa IA <b>gratuita</b> no servidor; sem internet (ou sem chave), a folha sai em modo offline.</p>
+          <span class="chip">Gerar agora →</span>
+        </a>
         <a class="lab-card reveal" href="#enem">
           <div class="lab-ic li-gold">📝</div>
           <h3>Corretor de Redação ENEM</h3>
@@ -373,6 +379,78 @@
           <div id="simpOut" style="margin-top:1rem" aria-live="polite"></div>
         </div>
 
+        <!-- ============ GERAR ATIVIDADE PRONTA (IA GRATUITA) ============ -->
+        <div class="tbox reveal" id="gerar">
+          <h2>🤖 Gerar Atividade Pronta (folha A4 com IA gratuita)</h2>
+          <p>Preencha <b>disciplina, ano/série, tema e tipo de atividade</b> e clique em gerar: a ferramenta escreve o <b>texto explicativo</b> na linguagem da turma, monta as <b>questões</b>, gera o <b>caça-palavras</b>, escreve o <b>gabarito do professor</b> e entrega tudo numa <b>folha A4 pronta para imprimir ou salvar em PDF</b> — com pictogramas, linhas de resposta e uma segunda página só sua, com o gabarito.</p>
+          <p><b>Diferencial de inclusão:</b> marque <b>“Adaptada para TDAH/Autismo (TEA)”</b> e a folha sai com um comando por questão, pictograma em cada item, sequência fixa e espaço de escrita maior; marque <b>“Com imagens e espaçamento amplo”</b> e a fonte, os pictogramas e as linhas de resposta aumentam para quem precisa. As duas opções podem ser usadas juntas.</p>
+          <p><b>IA gratuita, chave no servidor:</b> a geração roda numa <i>Edge Function</i> do Supabase que guarda a chave gratuita (Google Gemini, Groq ou OpenRouter) — nada de chave no navegador. Se você não tiver chave configurada ou estiver sem internet, a ferramenta monta a folha em <b>modo offline</b> (roteiro de estudo + caça-palavras) e avisa na tela. Em qualquer modo, <b>revise o conteúdo antes de aplicar</b>: IA erra fatos e datas.</p>
+
+          <form class="tform no-print" id="gerarForm">
+            <div class="trow">
+              <div>
+                <label for="gDisciplina">Disciplina / matéria</label>
+                <input type="text" id="gDisciplina" list="gDisciplinas" placeholder="Ex.: História, Matemática, Ciências" autocomplete="off">
+                <datalist id="gDisciplinas"></datalist>
+              </div>
+              <div>
+                <label for="gAno">Ano / série</label>
+                <select id="gAno"></select>
+              </div>
+            </div>
+            <div>
+              <label for="gTema">Tema principal da aula *</label>
+              <input type="text" id="gTema" placeholder="Ex.: Revolução Francesa, Frações, Fotossíntese" required>
+            </div>
+            <div class="trow">
+              <div>
+                <label for="gTipo">Tipo de atividade</label>
+                <select id="gTipo"></select>
+              </div>
+              <div>
+                <label for="gQtd">Quantidade de questões</label>
+                <input type="number" id="gQtd" min="3" max="20" value="8">
+              </div>
+            </div>
+            <div>
+              <label for="gObs">Observações (opcional)</label>
+              <textarea id="gObs" placeholder="Ex.: turma com 3 alunos com TDAH, já trabalhamos o vocabulário, usar exemplos do bairro, prova em 2 aulas..."></textarea>
+            </div>
+            <div style="display:grid;gap:.6rem">
+              <label class="lab-check" for="gTdah">
+                <input type="checkbox" id="gTdah">
+                <span>Adaptada para TDAH/Autismo (TEA)
+                  <small>Uma instrução por vez, pictograma em cada questão, comandos curtos e em negrito, espaço de escrita ampliado.</small>
+                </span>
+              </label>
+              <label class="lab-check" for="gVisual">
+                <input type="checkbox" id="gVisual">
+                <span>Com imagens e espaçamento amplo
+                  <small>Pictogramas em todas as questões, fonte maior, mais espaço entre itens e linhas de resposta mais largas.</small>
+                </span>
+              </label>
+              <label class="lab-check" for="gGabarito">
+                <input type="checkbox" id="gGabarito" checked>
+                <span>Incluir a folha do professor (gabarito + adaptações)
+                  <small>Uma folha extra, para não entregar ao aluno.</small>
+                </span>
+              </label>
+              <label class="lab-check" for="gUsarIA">
+                <input type="checkbox" id="gUsarIA" checked>
+                <span>Usar IA nesta geração (recomendado)
+                  <small>Desmarcado, a folha é montada no modo offline, sem sair do navegador.</small>
+                </span>
+              </label>
+            </div>
+            <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+              <button type="submit" class="btn btn-primary" id="gBtn">✨ Gerar Atividade Pronta</button>
+              <button type="button" class="btn btn-outline" id="folhaLimpar">🧹 Limpar preferências</button>
+            </div>
+            <p class="lab-status" id="gStatus" aria-live="polite"></p>
+          </form>
+        </div>
+
+
         <!-- ============ ATIVIDADE RÁPIDA ============ -->
         <div class="tbox reveal" id="atividade">
           <h2>🧩 Gerador de Atividade Rápida</h2>
@@ -405,11 +483,12 @@
         <h2>🗓️ Sugestões de uso na semana</h2>
         <p>As principais ferramentas foram pensadas para funcionarem juntas. Um exemplo de roteiro semanal usando 4 delas:</p>
         <ul>
+          <li><b>Sexta (ou na véspera):</b> abra o <b>Gerador de Atividade Pronta</b>, informe disciplina, ano, tema e tipo de atividade, marque as adaptações que a turma precisa e imprima a folha — ela já sai em A4, com gabarito do professor e caça-palavras. Leve as folhas prontas no dia.</li>
           <li><b>Segunda:</b> gere o plano de aula da semana com o <b>Gerador de Plano</b> e transforme o roteiro de slides em apresentação no Gamma ou Canva.</li>
           <li><b>Terça:</b> monte o <b>Quiz em Sala</b> com as perguntas do plano e projete na quarta como revisão.</li>
           <li><b>Quinta e sexta:</b> use o <b>Semáforo da Sala</b> durante as atividades práticas e feche a semana pactuando 1 combinado positivo com a turma.</li>
         </ul>
-        <blockquote>💡 As ferramentas rodam no seu navegador e <b>não enviam nada para nenhum servidor</b>: quiz, checklist, combinados, nomes do sorteador e textos ficam salvos <b>no próprio dispositivo</b> (armazenamento local do navegador) e continuam aí quando você voltar. Se quiser apagar, use o botão de limpar de cada ferramenta ou limpe os dados do site no navegador.</blockquote></blockquote>
+        <blockquote>💡 As ferramentas <b>rodam no seu navegador</b> e só usam o servidor quando <b>você clica em gerar</b> no <b>Gerador de Atividade Pronta</b>: nesse caso, os dados do formulário (disciplina, ano, tema, tipo e observações) são enviados à nossa função no Supabase para a IA gratuita escrever a atividade — <b>não envie nome de aluno nem dado pessoal</b> nesse campo. Todo o resto (quiz, checklist, combinados, nomes do sorteador, textos e a folha no modo offline) fica salvo <b>no próprio dispositivo</b> (armazenamento local do navegador) e continua aí quando você voltar. Se quiser apagar, use o botão de limpar de cada ferramenta ou limpe os dados do site no navegador.</blockquote>
       </div>
 
       <div class="pagination reveal">
@@ -437,6 +516,20 @@
       </div>
     </div>
     <div class="qprog"><div class="fill" id="qFill" style="width:0%"></div></div>
+  </div>
+
+  <!-- Folha A4 do Gerador de Atividade (pré-visualização + imprimir/salvar em PDF) -->
+  <div id="folhaOverlay" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Pré-visualização da folha A4">
+    <div id="folhaBarra" class="no-print">
+      <span class="fb-tt">🖨️ Folha A4</span>
+      <span class="fb-txt" id="folhaSub">Revise o conteúdo. Na janela de impressão, escolha "Salvar como PDF" para guardar o arquivo.</span>
+      <button class="btn btn-outline" id="folhaCopiar" disabled>📋 Copiar em texto</button>
+      <button class="btn btn-primary" id="folhaImprimir" disabled>🖨️ Imprimir / Salvar em PDF</button>
+      <button class="btn btn-outline" id="folhaFechar">✕ Fechar</button>
+    </div>
+    <div id="folhaArea">
+      <div id="folhaPainel"></div>
+    </div>
   </div>
 
   <footer id="siteFooter"></footer>
@@ -1193,6 +1286,7 @@
   </script>
 
 <script src="js/enemcorrector.js"></script>
+<script src="js/atividade.js"></script>
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
