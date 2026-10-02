@@ -158,7 +158,7 @@
           <div class="enem-rub no-print" id="enemRub"></div>
 
           <div class="enem-actions no-print">
-            <button class="btn btn-primary" id="enemCalc">🧮 Calcular nota (0–1000)</button>
+            <button class="btn btn-primary" id="enemCalc">🧮 Calcular nota (0–1000)</button><button class="btn btn-outline" id="enemIA" type="button">🤖 Corrigir com IA</button><p class="lab-status" id="enemStatus" aria-live="polite"></p>
           </div>
 
           <div class="enem-out" id="enemOut" aria-live="polite"></div>
@@ -197,7 +197,7 @@
           <h2>📋 Gerador de Plano de Aula</h2>
           <p>Preencha o tema e receba um plano completo — inspirado no "prompt-mestre" do curso. <b>Funciona offline</b>: use o resultado como está ou cole o texto gerado em qualquer IA para aprofundar.</p>
           <p><b>O que ele entrega:</b> roteiro com tempos de aula (de 50 minutos a uma oficina de 4h), roteiro de slides pronto para colar no Gamma/Canva/PowerPoint, o mesmo conteúdo em 3 níveis de dificuldade para a mesma turma, dinâmicas de engajamento, quiz com gabarito e uma sugestão de inclusão ajustada ao segmento escolhido. Marque um foco extra (inclusão, gestão de comportamento ou avaliação à prova de IA) e o plano ganha uma seção dedicada a esse tema.</p>
-          <p><b>Dica:</b> depois de gerar, clique em <b>Copiar texto</b> e cole o resultado no ChatGPT ou no Claude pedindo os slides prontos — você terá o plano e o material em poucos minutos.</p>
+          <label class="lab-check" for="p-ia"><input type="checkbox" id="p-ia" checked><span>Usar IA nesta geração (recomendado)<small>Desmarcado, o plano é montado no modo offline, sem sair do navegador.</small></span></label><p><b>Dica:</b> depois de gerar, clique em <b>Copiar texto</b> e cole o resultado no ChatGPT ou no Claude pedindo os slides prontos — você terá o plano e o material em poucos minutos.</p>
 
           <form class="tform no-print" id="planoForm">
             <div>
@@ -247,13 +247,13 @@
               <textarea id="p-obs" placeholder="ex.: turma com 2 alunos com TDAH, sala sem projetor, ciclo da água já trabalhado..."></textarea>
             </div>
             <div style="display:flex;gap:.8rem;flex-wrap:wrap">
-              <button type="submit" class="btn btn-primary">⚡ Gerar plano</button>
+              <button type="submit" class="btn btn-primary" id="pGerar">⚡ Gerar plano</button>
               <button type="button" class="btn btn-outline" id="pCopy" disabled>📋 Copiar texto</button>
               <button type="button" class="btn btn-outline" id="pPrint" disabled>🖨️ Imprimir</button>
             </div>
           </form>
 
-          <div class="plano-out" id="planoOut" aria-live="polite"></div>
+          <p class="lab-status" id="pStatus" aria-live="polite"></p><div class="plano-out" id="planoOut" aria-live="polite"></div>
         </div>
 
         <!-- ============ QUIZ EM SALA ============ -->
@@ -266,9 +266,9 @@
           <div class="no-print">
             <div id="qlist" class="qlist"></div>
             <div style="display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
-              <button class="btn btn-outline" id="qAdd">➕ Adicionar pergunta</button>
+              <button class="btn btn-outline" id="qAdd">➕ Adicionar pergunta</button><button class="btn btn-outline" id="qGerarIA" type="button">🤖 Gerar perguntas com IA</button>
               <button class="btn btn-primary" id="qStart">▶ Iniciar quiz</button>
-              <span style="color:var(--text-muted);font-size:.85rem" id="qHint">Nenhuma pergunta ainda — adicione pelo menos 1.</span>
+              <span class="lab-status" id="qStatus" aria-live="polite"></span><span style="color:var(--text-muted);font-size:.85rem" id="qHint">Nenhuma pergunta ainda — adicione pelo menos 1.</span>
             </div>
           </div>
         </div>
@@ -332,7 +332,7 @@
             <label>Descreva a tarefa (opcional)
               <textarea id="rubTarefa" rows="2" placeholder="Ex.: apresentar em 5 min uma solução para o problema X"></textarea>
             </label>
-            <button class="btn btn-primary" id="rubGerar" style="justify-self:start">⚡ Gerar rubrica</button>
+            <button class="btn btn-primary" id="rubGerar" style="justify-self:start">⚡ Gerar rubrica com IA</button><p class="lab-status" id="rubStatus" aria-live="polite"></p>
             <div class="rub-out" id="rubOut" aria-live="polite"></div>
           </div>
         </div>
@@ -373,7 +373,7 @@
           <label class="sr-only" for="simpIn">Texto que será simplificado</label>
           <textarea id="simpIn" rows="5" placeholder="Cole aqui o texto que você quer simplificar..."></textarea>
           <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem">
-            <button class="btn btn-primary" id="simpBtn">✨ Simplificar</button>
+            <button class="btn btn-primary" id="simpBtn">✨ Simplificar com IA</button><p class="lab-status" id="simpStatus" aria-live="polite"></p>
             <button class="btn btn-outline" id="simpCopy" disabled>📋 Copiar versão fácil</button>
           </div>
           <div id="simpOut" style="margin-top:1rem" aria-live="polite"></div>
@@ -453,7 +453,7 @@
 
         <!-- ============ ATIVIDADE RÁPIDA ============ -->
         <div class="tbox reveal" id="atividade">
-          <h2>🧩 Gerador de Atividade Rápida</h2>
+          <h2>🧩 Gerador de Atividade Rápida (offline)</h2>
           <p>Digite o tema, escolha o segmento e o tipo de atividade. A ferramenta monta uma atividade pronta com instruções passo a passo, desafio extra e critérios de correção — tudo offline, na hora.</p>
           <form id="atvForm" style="display:grid;gap:.6rem">
             <label class="sr-only" for="atvTema">Tema da atividade</label>
@@ -1285,10 +1285,10 @@
   })();
   </script>
 
-<script src="js/enemcorrector.js"></script>
+<script src="js/ia.js"></script><script src="js/lab-ia.js"></script><script src="js/enemcorrector.js"></script>
 <script src="js/atividade.js"></script>
   <script src="js/supabase.js"></script>
   <script src="js/auth.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/ia.js"></script><script src="js/tutor.js"></script><script src="js/main.js"></script>
 </body>
 </html>

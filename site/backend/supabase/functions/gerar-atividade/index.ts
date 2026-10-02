@@ -11,12 +11,14 @@
 //   apikey: <publishable/anon key>
 //   { disciplina, ano, tema, tipo, quantidade, adaptaTdahTea,
 //     adaptaVisual, incluirGabarito, observacoes }
-// → { ok:true, atividade:{...}, provedor:'gemini'|'groq'|'openrouter', modelo:'...' }
+// → { ok:true, atividade:{...}, provedor:'groq'|'gemini'|'openrouter', modelo:'...' }
 // → { ok:false, erro:'...', erros:[...] }  (o site cai no modo offline)
 //
-// PROVEDORES GRATUITOS (cadeia de fallback, na ordem):
-//   1) Google Gemini  → secret GEMINI_API_KEY     (free tier, sem cartão)
-//   2) Groq           → secret GROQ_API_KEY       (plano Free)
+// PROVEDORES GRATUITOS (cadeia de fallback, na ordem — ETAPA 2):
+//   1) Groq           → secret GROQ_API_KEY       (plano Free) ← PRINCIPAL
+//      modelo principal: GROQ_MODELO=openai/gpt-oss-120b (padrão)
+//      modelo rápido:    GROQ_MODELO_RAPIDO=openai/gpt-oss-20b
+//   2) Google Gemini  → secret GEMINI_API_KEY     (free tier, sem cartão)
 //   3) OpenRouter     → secret OPENROUTER_API_KEY (modelos ":free")
 // Basta configurar UMA delas. Veja site/backend/README.md.
 // ============================================================
@@ -34,6 +36,7 @@ const GEMINI_KEY = Deno.env.get('GEMINI_API_KEY') || '';
 const GEMINI_MODELO = Deno.env.get('GEMINI_MODELO') || 'gemini-2.5-flash';
 const GROQ_KEY = Deno.env.get('GROQ_API_KEY') || '';
 const GROQ_MODELO = Deno.env.get('GROQ_MODELO') || 'openai/gpt-oss-120b';
+const GROQ_MODELO_RAPIDO = Deno.env.get('GROQ_MODELO_RAPIDO') || 'openai/gpt-oss-20b';
 const OPENROUTER_KEY = Deno.env.get('OPENROUTER_API_KEY') || '';
 const OPENROUTER_MODELO = Deno.env.get('OPENROUTER_MODELO') || 'openrouter/free';
 
@@ -121,7 +124,9 @@ async function chamarGemini(prompt: string, modelo: string): Promise<string> {
 }
 
 // Groq (plano Free) — API compatível com o padrão OpenAI.
-async function chamarGroq(prompt: string): Promise<string> {
+// ETAPA 2: Groq é o PROVEDOR PRINCIPAL (era fallback). Tenta o modelo
+// principal e, se falhar, o modelo rápido antes de passar adiante.
+async function chamarGroq(prompt: string, modelo: string): Promise<string> {
   const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -129,7 +134,7 @@ async function chamarGroq(prompt: string): Promise<string> {
       Authorization: 'Bearer ' + GROQ_KEY,
     },
     body: JSON.stringify({
-      model: GROQ_MODELO,
+      model: modelo,
       messages: [
         { role: 'system', content: SISTEMA },
         { role: 'user', content: prompt },
@@ -143,7 +148,7 @@ async function chamarGroq(prompt: string): Promise<string> {
   const dados = await r.json().catch(() => null) as any;
   if (!r.ok) {
     const msg = (dados && dados.error && dados.error.message) || ('HTTP ' + r.status);
-    throw new Error('Groq [' + GROQ_MODELO + ']: ' + msg);
+    throw new Error('Groq [' + modelo + ']: ' + msg);
   }
   const texto = dados && dados.choices && dados.choices[0] && dados.choices[0].message &&
     dados.choices[0].message.content;
@@ -184,10 +189,21 @@ async function chamarOpenRouter(prompt: string): Promise<string> {
   return texto;
 }
 
-/* ---------------- 3) cadeia de fallback ---------------- */
+/* ---------------- 3) cadeia de fallback (ETAPA 2: Groq primeiro) ---------------- */
 async function gerarComIA(prompt: string): Promise<{ texto: string; provedor: string; modelo: string }> {
   const erros: string[] = [];
 
+  // 1) Groq PRIMEIRO: modelo principal (raciocínio/estruturação),
+  //    depois modelo rápido (correções instantâneas) — ETAPA 2.
+  if (GROQ_KEY) {
+    const modelosGroq = [GROQ_MODELO];
+    if (GROQ_MODELO_RAPIDO !== GROQ_MODELO) modelosGroq.push(GROQ_MODELO_RAPIDO);
+    for (const m of modelosGroq) {
+      try {
+        return { texto: await chamarGroq(prompt, m), provedor: 'groq', modelo: m };
+      } catch (err) { erros.push(String((err as Error).message || err)); }
+    }
+  }
   if (GEMINI_KEY) {
     const modelos = [GEMINI_MODELO];
     if (GEMINI_MODELO !== 'gemini-2.5-flash-lite') modelos.push('gemini-2.5-flash-lite');
@@ -202,11 +218,6 @@ async function gerarComIA(prompt: string): Promise<{ texto: string; provedor: st
         if (!/not found|not supported|does not exist|404/i.test(msg)) break;
       }
     }
-  }
-  if (GROQ_KEY) {
-    try {
-      return { texto: await chamarGroq(prompt), provedor: 'groq', modelo: GROQ_MODELO };
-    } catch (err) { erros.push(String((err as Error).message || err)); }
   }
   if (OPENROUTER_KEY) {
     try {
