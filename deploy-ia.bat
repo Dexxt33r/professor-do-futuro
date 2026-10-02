@@ -32,7 +32,7 @@ if not exist "supabase\functions" (
 )
 
 if "%~1"=="" (
-  set "FNS=tutor-chat gerar-atividade gerar-plano gerar-quiz gerar-rubrica simplificar-texto corrigir-redacao"
+  set "FNS=tutor-chat gerar-atividade gerar-plano gerar-quiz gerar-slides gerar-rubrica simplificar-texto corrigir-redacao"
 ) else (
   set "FNS=%*"
 )

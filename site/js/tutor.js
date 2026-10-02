@@ -301,4 +301,21 @@
   }
   if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', montar); }
   else { montar(); }
+
+  // API pública do Tutor — permite perguntar a partir de outras telas (ex.: slides).
+  var API = {
+    abrir: function(){ var f = document.getElementById('tutorFab'); if(f) f.click(); },
+    perguntar: function(texto){
+      var f = document.getElementById('tutorFab');
+      var painel = document.getElementById('tutorPainel');
+      if(f && painel && !painel.classList.contains('open')) f.click();
+      var inp = document.getElementById('tutorInput');
+      var form = document.getElementById('tutorForm');
+      if(inp && form){
+        inp.value = String(texto || '');
+        if(form.requestSubmit) form.requestSubmit(); else form.dispatchEvent(new Event('submit', { cancelable:true }));
+      }
+    }
+  };
+  if(typeof window !== 'undefined') window.Tutor = API;
 })();

@@ -1,4 +1,9 @@
 // Parte 2: provedores (Groq principal → rápido, Gemini, OpenRouter).
+import {
+  GEMINI_KEY, GEMINI_MODELO,
+  GROQ_KEY, GROQ_MODELO, GROQ_MODELO_RAPIDO,
+  OPENROUTER_KEY, OPENROUTER_MODELO, SITE_URL,
+} from './ia.ts';
 
 async function chamarGroq(prompt: string, sistema: string, modelo: string): Promise<string> {
   const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {

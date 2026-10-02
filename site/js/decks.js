@@ -333,6 +333,97 @@ window.DECKS = [
       { type:'checklist', color:'blue', title:'Checklist · Nanotecnologia', body:['Trabalhei o significado de NANO e a escala / ordem de grandeza','Mostrei por que nanopartículas mudam de propriedade','Diferenciei nanociência (estudar) de nanotecnologia (fazer)','Dei exemplos do cotidiano, não só de laboratório','Discuti riscos à saúde e regulamentação','Trabalhei a interdisciplinaridade (química, física, ética)'] }
     ] },
 
+/* ================== DECK 11 · FINANÇAS 2 ================== */
+  { id:'d11', label:'ENEM', icon:'💰', color:'green', pill:'pill-green',
+    title:'Educação Financeira · Bloco 2 — Crédito, Juros e Projeto de Vida', slides:[
+
+      { type:'section', color:'green', title:'Crédito, juros e escolhas', body:'Como transformar consumo, crédito e investimento em aula de matemática, cidadania e projeto de vida — 9 slides práticos' },
+
+      { type:'list', color:'green', title:'De onde partimos', body:['O Bloco 1 tratou do orçamento da família e das escolhas do dia a dia','Agora vamos ao que decide o futuro: crédito, juros compostos e investimento','A meta não é formar investidores — é formar quem decide com consciência'] },
+
+      { type:'table', color:'green', title:'Juros simples x compostos', body:{ head:['Aspecto','Juros simples','Juros compostos'],
+        rows:[['Cálculo','só sobre o valor inicial','juros sobre juros'],
+             ['Crescimento','linear','exponencial'],
+             ['Onde aparece','contas curtas','cartão, empréstimo, dívida'],
+             ['Mensagem ao aluno','previsível','a bola de neve']] } },
+
+      { type:'list', color:'green', title:'A armadilha do cartão', body:['Pagar o mínimo vira dívida quase impagável: juros altíssimos ao ano','Parcelar sem ver o total não é desconto: é adiamento','Regra de ouro: se não cabe no mês, não cabe no orçamento','O crédito é ferramenta — não extensão da renda'] },
+
+      { type:'list', color:'green', title:'Roteiro de aula em 4 etapas', body:['1. Diagnóstico: quem já viu crédito ser usado na família?','2. Simulação: R$ 1.000 em 12x com juros — quanto se paga no fim?','3. Comparação: à vista x parcelado x valor investido','4. Devolutiva: 1 decisão que vou rever este mês'] },
+
+      { type:'table', color:'green', title:'Três perfis de consumidor', body:{ head:['Perfil','Comportamento','Foco da aula'],
+        rows:[['Impulsivo','compra por emoção','autocontrole e planejamento'],
+             ['Parcelador','divide tudo','custo total e juros'],
+             ['Planejador','poupa e pesquisa','investir e realizar metas']] } },
+
+      { type:'prompt', color:'green', title:'Prompt — simulação com juros', body:'Crie uma atividade para o Ensino Médio sobre juros compostos com um caso real: um celular de [VALOR] em 12 parcelas com juros de [TAXA] ao mês. Peça o cálculo do total pago, a diferença em relação ao preço à vista e uma reflexão sobre a decisão. Inclua gabarito.' },
+
+      { type:'list', color:'green', title:'Projeto de vida em números', body:['Peça um objetivo real (viagem, curso, celular) com valor e prazo','Calcule quanto guardar por mês para chegar lá','Compare: poupar antes x financiar depois','Termine com um cartaz de metas da turma'] },
+
+      { type:'checklist', color:'green', title:'Checklist · Finanças 2', body:['Diferenciei juros simples de compostos com exemplo real','Mostrei o custo total do parcelamento','Trabalhei a diferença entre crédito e renda','Conectei dinheiro com projeto de vida','Fechei com uma decisão prática para a semana'] }
+    ] },
+
+/* ================== DECK 12 · NANO 2 ================== */
+  { id:'d12', label:'ENEM', icon:'🔬', color:'blue', pill:'pill-blue',
+    title:'Nanotecnologia · Bloco 2 — Aplicações, Riscos e Carreiras', slides:[
+
+      { type:'section', color:'blue', title:'Da escala nano à vida real', body:'Onde a nanotecnologia já está — e como levar isso para a sala sem virar ficção científica — 9 slides' },
+
+      { type:'list', color:'blue', title:'Recapitulando rápido', body:['Nano é o bilionésimo do metro; 1 nanômetro é 1 milímetro dividido por 1 milhão','Nanopartículas têm mais superfície e mudam de comportamento','Nanociência estuda; nanotecnologia aplica'] },
+
+      { type:'table', color:'blue', title:'Aplicações por área', body:{ head:['Área','Aplicação','Exemplo cotidiano'],
+        rows:[['Saúde','remédio que age no alvo','tratamento com menos efeito colateral'],
+             ['Energia','painéis e baterias','células solares mais eficientes'],
+             ['Materiais','revestimentos inteligentes','tecido que não mancha'],
+             ['Ambiente','filtros e limpeza','purificação de água']] } },
+
+      { type:'list', color:'blue', title:'Estudo de caso: Rita', body:['Rita descobriu que talco e fuligem estão em escalas diferentes','Aprendemos a estimar ordens de grandeza com potências de 10','Agora vamos investigar quais materiais são nanoparticulados e por quê'] },
+
+      { type:'list', color:'blue', title:'Como investigar em sala', body:['Compare amido, açúcar, talco e fuligem e estime a menor partícula','Use régua, lupa e o celular para registrar e comparar texturas','Conclua: menor partícula, maior área de contato, novas propriedades','Relacione sempre a observação com a escala'] },
+
+      { type:'list', color:'blue', title:'Riscos e regulação', body:['Partículas pequenas podem atravessar barreiras do corpo','Efeitos de longo prazo ainda estão em estudo','Falta regulamentação específica em muitos países','O aluno precisa de posicionamento crítico, não só entusiasmo'] },
+
+      { type:'prompt', color:'blue', title:'Prompt — debate ético', body:'Prepare um debate sobre nanomedicina para o Ensino Médio: benefícios no tratamento do câncer, riscos, quem tem acesso e como regular. Divida em 3 grupos (defensores, críticos e reguladores) e entregue argumentos iniciais e perguntas para o debate.' },
+
+      { type:'table', color:'blue', title:'Carreiras que já existem', body:{ head:['Carreira','O que faz','Base escolar'],
+        rows:[['Nanomateriais','desenvolve novos materiais','química e física'],
+             ['Nanomedicina','aplica a nanotecnologia na saúde','biologia e química'],
+             ['Microeletrônica','chips e sensores','física e matemática'],
+             ['Nanotecnologia ambiental','trata água e resíduos','química e geografia']] } },
+
+      { type:'checklist', color:'blue', title:'Checklist · Nano 2', body:['Trabalhei aplicações reais, não só laboratório','Discuti riscos, ética e regulação','Conectei a nanotecnologia com profissões','Usei potências de 10 para estimar escalas','Fechei com uma investigação ou debate'] }
+    ] },
+
+/* ================== DECK 13 · AVALIAÇÃO COM IA ================== */
+  { id:'d13', label:'AVALIAÇÃO', icon:'📝', color:'amber', pill:'pill-amber',
+    title:'Avaliar na Era da IA — do Suspeito ao Diálogo', slides:[
+
+      { type:'section', color:'amber', title:'Avaliar hoje é diferente', body:'Como avaliar a aprendizagem quando a IA escreve bem — sem virar "detetive" nem ignorar o problema — 9 slides práticos' },
+
+      { type:'list', color:'amber', title:'O ponto de partida', body:['A IA gera textos bons, mas não garante aprendizagem','Detectores erram e geram acusações injustas','A resposta não é proibir: é mudar a evidência pedida'] },
+
+      { type:'list', color:'amber', title:'Do suspeito ao diálogo', body:['Troque a pergunta "foi a IA?" por "o que você aprendeu?"','Peça uma explicação oral curta e um exemplo próprio','Valorize a revisão feita pelo aluno','Registre o processo, não só o produto final'] },
+
+      { type:'table', color:'amber', title:'Evidências que a IA não resolve', body:{ head:['Evidência','Por que funciona','Como registrar'],
+        rows:[['Defesa oral','exige compreensão real','2 a 3 min + perguntas'],
+             ['Exemplo próprio','conecta à vida do aluno','escrito ou falado'],
+             ['Registro do processo','mostra o caminho','rascunhos e versões'],
+             ['Aplicação nova','transfere o aprendizado','problema inédito']] } },
+
+      { type:'list', color:'amber', title:'Feedback que ensina', body:['Específico: aponte o ponto exato, não diga só "está bom"','Acolhedor: comece pelo que funcionou','Acionável: 1 próximo passo claro','Curto: o aluno lê e quer melhorar'] },
+
+      { type:'prompt', color:'amber', title:'Prompt — rubrica de defesa oral', body:'Crie uma rubrica de 4 níveis (insuficiente a excelente) para avaliar uma defesa oral de 3 minutos sobre [TEMA], considerando domínio do conteúdo, clareza, exemplo próprio e reflexão crítica. Inclua descritores curtos para cada nível.' },
+
+      { type:'list', color:'amber', title:'Combinados de turma sobre IA', body:['Construa COM os alunos: quando pode usar, quando não pode','Torne obrigatório citar o uso da IA como se cita uma fonte','Combine que a explicação final é sempre do aluno','Revise os combinados a cada bimestre'] },
+
+      { type:'table', color:'amber', title:'Três formatos de avaliação', body:{ head:['Formato','O que mede','Uso de IA'],
+        rows:[['Prova com consulta','aplicação e raciocínio','permitida e citada'],
+             ['Projeto autoral','processo e criação','apoio declarado'],
+             ['Defesa oral','compreensão e argumento','não substitui']] } },
+
+      { type:'checklist', color:'amber', title:'Checklist · Avaliar com IA', body:['Substituí o "suspeitômetro" por evidências de aprendizagem','Planejei 1 defesa oral curta','Dei feedback específico e acionável','Construí combinados de IA com a turma','Registrei o processo, não só o resultado final'] }
+    ] },
+
 /*INSERT*/
 ];
 
@@ -349,9 +440,12 @@ window.DECKS = [
     'd7':'Feedback específico e acolhedor que mostra o caminho de melhoria e valoriza o esforço.',
     'd8':'Sinais de burnout, rotina de proteção e rede de apoio para o professor cuidar de quem cuida.',
     'd9':'Bloco 1 da educação financeira no EM: orçamento da família, vida social e bens pessoais, com situações reais, prompts e checklist.',
-    'd10':'Nanotecnologia no EM: escala nano, propriedades de nanopartículas, aplicações do cotidiano, riscos e ética — baseado na história de Rita.'
+    'd10':'Nanotecnologia no EM: escala nano, propriedades de nanopartículas, aplicações do cotidiano, riscos e ética — baseado na história de Rita.',
+    'd11':'Educação Financeira no EM (Bloco 2): juros simples e compostos, armadilha do cartão, perfis de consumidor, simulação de crédito e projeto de vida em números.',
+    'd12':'Nanotecnologia (Bloco 2): aplicações por área (saúde, energia, materiais, ambiente), riscos e regulação, carreiras que já existem e um debate ético.',
+    'd13':'Avaliar na era da IA: do "suspeitômetro" às evidências de aprendizagem, feedback que ensina, combinados de turma e uma rubrica de defesa oral.'
   };
-  var TAG = { d1:'Gestão', d2:'Gestão', d3:'Bem-estar', d4:'Comunicação', d5:'Gestão', d6:'Engajamento', d7:'Avaliação', d8:'Bem-estar', d9:'Tema BNCC', d10:'Tema BNCC' };
+  var TAG = { d1:'Gestão', d2:'Gestão', d3:'Bem-estar', d4:'Comunicação', d5:'Gestão', d6:'Engajamento', d7:'Avaliação', d8:'Bem-estar', d9:'Tema BNCC', d10:'Tema BNCC', d11:'Tema BNCC', d12:'Tema BNCC', d13:'Avaliação' };
   (window.DECKS||[]).forEach(function(d){
     d.tag = d.tag || TAG[d.id] || 'Tema';
     d.desc = d.desc || DESC[d.id] || 'Coleção de slides sobre ' + d.title;

@@ -112,7 +112,7 @@
     els.head.innerHTML = '<div class="lib-head">' +
       '<div>' +
         '<h2 style="color:var(--indigo-900);margin-bottom:.4rem">🎞️ Biblioteca de apresentações</h2>' +
-        '<p style="margin-bottom:.6rem;color:var(--text-muted);line-height:1.6">Escolha um tema para abrir os slides. O <b>curso</b> tem os '+ window.SLIDES.length +' slides completos; os <b>temas adicionais</b> são coleções rápidas sobre gestão e sala de aula (clique num card para ver os slides deste tema). Navegue com as setas <kbd>←</kbd> <kbd>→</kbd> e use <kbd>F</kbd> para tela cheia.</p>' +
+        '<p style="margin-bottom:.6rem;color:var(--text-muted);line-height:1.6">Escolha um tema para abrir os slides. O <b>curso</b> tem os '+ window.SLIDES.length +' slides completos; os <b>temas adicionais</b> são coleções rápidas sobre gestão e sala de aula (clique num card para ver os slides deste tema) — ou crie a sua com o botão <b>✨ Gerar com IA</b>. Navegue com as setas <kbd>←</kbd> <kbd>→</kbd> e use <kbd>F</kbd> para tela cheia.</p>' +
       '</div>' +
       '<div class="lib-img"><img src="img/cat-biblioteca.svg" alt="Ilustração de projeção de slides em sala" width="400" height="300"></div>' +
     '</div>';
@@ -353,6 +353,29 @@ if(s.type==='leitura'){
     if(!document.fullscreenElement){ document.documentElement.requestFullscreen().catch(function(){}); }
     else { document.exitFullscreen(); }
   }
+
+  // API pública — usada por slides-ia.js (apresentações geradas por IA)
+  window.Present = {
+    openLibrary: openLibrary,
+    openTheme: openTheme,
+    refreshLibrary: function(){ if(state.view==='library') renderLibrary(); },
+    addDeck: function(deck){
+      if(!deck || !deck.id) return;
+      window.DECKS = window.DECKS || [];
+      var i = -1;
+      window.DECKS.forEach(function(d, k){ if(d.id === deck.id) i = k; });
+      if(i >= 0){ window.DECKS[i] = deck; } else { window.DECKS.push(deck); }
+      window.MODULES[deck.id] = { label: deck.label || 'IA', name: deck.title, pill: deck.pill || 'pill-green' };
+      if(state.view === 'library') renderLibrary();
+    },
+    removeDeck: function(id){
+      window.DECKS = (window.DECKS || []).filter(function(d){ return d.id !== id; });
+      if(state.deckKey === id) openLibrary();
+      else if(state.view === 'library') renderLibrary();
+    },
+    currentSlide: function(){ return state.viewerOpen ? state.filter[state.idx] : null; },
+    isViewerOpen: function(){ return state.viewerOpen; }
+  };
 
   document.addEventListener('DOMContentLoaded', init);
 })();

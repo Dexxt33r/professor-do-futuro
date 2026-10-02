@@ -8,13 +8,13 @@ const SUPABASE_ANON = Deno.env.get('SUPABASE_ANON_KEY') ||
   Deno.env.get('SUPABASE_PUBLISHABLE_KEY') ||
   Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
 
-const GEMINI_KEY = Deno.env.get('GEMINI_API_KEY') || '';
-const GEMINI_MODELO = Deno.env.get('GEMINI_MODELO') || 'gemini-2.5-flash';
-const GROQ_KEY = Deno.env.get('GROQ_API_KEY') || '';
-const GROQ_MODELO = Deno.env.get('GROQ_MODELO') || 'openai/gpt-oss-120b';
-const GROQ_MODELO_RAPIDO = Deno.env.get('GROQ_MODELO_RAPIDO') || 'openai/gpt-oss-20b';
-const OPENROUTER_KEY = Deno.env.get('OPENROUTER_API_KEY') || '';
-const OPENROUTER_MODELO = Deno.env.get('OPENROUTER_MODELO') || 'openrouter/free';
+export const GEMINI_KEY = Deno.env.get('GEMINI_API_KEY') || '';
+export const GEMINI_MODELO = Deno.env.get('GEMINI_MODELO') || 'gemini-2.5-flash';
+export const GROQ_KEY = Deno.env.get('GROQ_API_KEY') || '';
+export const GROQ_MODELO = Deno.env.get('GROQ_MODELO') || 'openai/gpt-oss-120b';
+export const GROQ_MODELO_RAPIDO = Deno.env.get('GROQ_MODELO_RAPIDO') || 'openai/gpt-oss-20b';
+export const OPENROUTER_KEY = Deno.env.get('OPENROUTER_API_KEY') || '';
+export const OPENROUTER_MODELO = Deno.env.get('OPENROUTER_MODELO') || 'openrouter/free';
 
 export const SITE_URL =
   Deno.env.get('SITE_URL') || 'https://professor-do-futuro-brown.vercel.app';
@@ -51,3 +51,8 @@ export async function usuarioAutenticado(req: Request): Promise<boolean> {
     return false;
   }
 }
+
+// Reexporta provedores + normalizadores para que cada função possa importar
+// TUDO de '../_shared/ia.ts' (mantém os imports das funções existentes válidos).
+export { gerarComIA } from './ia-provedores.ts';
+export { limparJson, txt, listaStrings, clampInt } from './normalizar.ts';
