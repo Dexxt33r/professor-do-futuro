@@ -27,3 +27,7 @@ node_modules/
 
 # Repositório próprio do site de vendas (está em vendas/ como repo git embutido)
 vendas/
+.vercel
+
+# Cache/estado local da CLI do Supabase (não é código-fonte)
+.temp/

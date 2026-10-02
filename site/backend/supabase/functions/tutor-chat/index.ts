@@ -12,17 +12,30 @@ const GROQ_MODELO = Deno.env.get('GROQ_MODELO') || 'openai/gpt-oss-120b';
 const GROQ_MODELO_RAPIDO = Deno.env.get('GROQ_MODELO_RAPIDO') || 'openai/gpt-oss-20b';
 
 const SISTEMA = [
-  'Você é o Tutor do Professor do Futuro: mentor brasileiro, acolhedor e DIRETO,',
-  'especialista em didática, inclusão (AEE/TEA/TDAH) e IA na escola.',
-  'Conhece o Laboratório: Atividade A4, Plano de Aula, Quiz, Rubrica, Simplificador, ENEM (apoio).',
-  'REGRAS DURAS:',
-  '1) Responda EXATAMENTE o que foi pedido — cite o tema do professor na resposta.',
-  '2) Prático: 1 resposta direta + 1 ação imediata + 1 ferramenta do site.',
-  '3) Curto (até 150 palavras); detalhado SÓ se pedirem.',
-  '4) Pediu atividade/plano/quiz? ENTREGUE o conteúdo pronto, não só diga onde clicar.',
-  '5) Sem dado pessoal. ENEM oficial é da banca (você dá APOIO).',
-  'FORMATO: TEXTO simples. Na última linha escreva "|||" + 3 sugestões curtas com " | ".',
-].join(' ');
+  'Você é o Tutor do Professor do Futuro: um mentor brasileiro, acolhedor e OBJETIVO,',
+  'especialista em didática, BNCC, inclusão (AEE, TEA, TDAH, altas habilidades) e uso de IA na escola.',
+  '',
+  'O site onde você está integrado tem:',
+  '- Curso em 6 módulos: 1) Slides com IA, 2) Inclusão e AEE, 3) IA na Prática Escolar,',
+  '  4) Gestão de Sala de Aula, 5) Educação Financeira, 6) Nanotecnologia.',
+  '- Biblioteca de slides (slides.html) e mais de 58 prompts prontos (prompts.html).',
+  '- Laboratório (ferramentas.html): Gerar Atividade Pronta (#gerar), Plano de Aula com IA (#plano),',
+  '  Quiz com IA (#quiz), Rubrica (#rubrica), Simplificador de texto (#simplificador) e apoio ao ENEM (#enem).',
+  '',
+  'COMO RESPONDER:',
+  '1) Responda EXATAMENTE o que foi pedido e cite o tema/turma que o professor mencionou.',
+  '2) Estrutura: resposta direta → passo a passo curto → ferramenta do site que ajuda.',
+  '3) Se pedirem atividade, plano, quiz, rubrica, adaptação ou explicação: ENTREGUE o conteúdo PRONTO e completo,',
+  '   não apenas diga onde clicar. Use tópicos com "-" e **negrito** para destacar.',
+  '4) Tamanho: 120 a 200 palavras em geral; detalhe mais só se o professor pedir.',
+  '5) Português do Brasil, linguagem simples e prática, sem jargão.',
+  '6) Nunca invente leis, datas ou números oficiais; se não tiver certeza, oriente a conferir a BNCC/currículo.',
+  '7) Não peça nem use dados pessoais de alunos.',
+  '8) ENEM: você dá APOIO — a correção oficial é da banca.',
+  '',
+  'FORMATO DE SAÍDA: texto em markdown simples (parágrafos curtos, listas com "-", **negrito**).',
+  'Na ÚLTIMA linha escreva "|||" seguido de 3 sugestões curtas de próximo passo, separadas por " | ".',
+].join('\n');
 
 async function chatGroq(mensagens: unknown[], modelo: string, maxTokens: number): Promise<string> {
   const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -48,7 +61,7 @@ serve(async (req: Request) => {
     if (mensagem.length < 2) return json({ ok: false, erro: 'Escreva sua dúvida.' }, 400);
     // Login opcional: logado tem contexto; deslogado usa modo demonstração.
     const logado = await usuarioAutenticado(req);
-    const hist = Array.isArray(c?.historico) ? c.historico.slice(-8) : [];
+    const hist = Array.isArray(c?.historico) ? c.historico.slice(-10) : [];
     const msgs: unknown[] = [{ role: 'system', content: SISTEMA }];
     for (const h of hist) {
       if (h && typeof h === 'object') {
@@ -65,7 +78,7 @@ serve(async (req: Request) => {
     let modelo = GROQ_MODELO;
     for (const m of [GROQ_MODELO, GROQ_MODELO_RAPIDO]) {
       try {
-        texto = await chatGroq(msgs, m, 1000);
+        texto = await chatGroq(msgs, m, 1400);
         modelo = m;
         if (texto.trim().length >= 10) break;
       } catch (_) { /* tenta o próximo */ }
@@ -73,15 +86,15 @@ serve(async (req: Request) => {
     // Reparo: retry pedindo a resposta direta ao tema.
     if (texto.trim().length < 10) {
       texto = await chatGroq(
-        [...msgs, { role: 'user', content: 'Responda de forma direta ao meu pedido, em até 150 palavras, citando o tema que pedi.' }],
-        GROQ_MODELO, 1000,
+        [...msgs, { role: 'user', content: 'Responda de forma direta ao meu pedido, em até 180 palavras, citando o tema que pedi e usando tópicos com "-".' }],
+        GROQ_MODELO, 1400,
       );
       modelo = GROQ_MODELO;
     }
 
     // Separa "resposta ||| sug1 | sug2 | sug3" com tolerância total.
     const corte = texto.lastIndexOf('|||');
-    const resposta = (corte >= 0 ? texto.slice(0, corte) : texto).trim().slice(0, 1500);
+    const resposta = (corte >= 0 ? texto.slice(0, corte) : texto).trim().slice(0, 2200);
     const sugs = (corte >= 0 ? texto.slice(corte + 3) : '').split('|').map((s) => s.trim()).filter(Boolean).slice(0, 3);
     return json({
       ok: true,

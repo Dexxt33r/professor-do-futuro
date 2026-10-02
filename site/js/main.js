@@ -400,9 +400,9 @@
     b.setAttribute('aria-label','Voltar ao topo');
     b.innerHTML = '↑';
     b.style.cssText =
-      'position:fixed;right:1.2rem;bottom:1.2rem;z-index:150;width:46px;height:46px;' +
+      'position:fixed;right:5.4rem;bottom:1.5rem;z-index:150;width:46px;height:46px;' +
       'border:none;border-radius:50%;cursor:pointer;font-size:1.3rem;color:#fff;' +
-      'background:linear-gradient(135deg,#0b7a5e,#c9971c);box-shadow:0 10px 25px rgba(6,43,27,.35);' +
+      'background:var(--grad,linear-gradient(135deg,#0d3a23,#0f9d72 55%,#c9971c));box-shadow:0 10px 25px rgba(6,43,27,.35);' +
       'opacity:0;visibility:hidden;transform:translateY(10px);transition:.3s;';
     b.onclick = function(){ window.scrollTo({ top:0, behavior:'smooth' }); };
     document.body.appendChild(b);

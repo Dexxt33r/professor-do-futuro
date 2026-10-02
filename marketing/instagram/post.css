@@ -1,0 +1,159 @@
+/* ============================================================
+   PROFESSOR DO FUTURO — ARTES PARA INSTAGRAM
+   Feed 1080x1080 · Stories 1080x1920
+   Paleta do site: verde profundo + dourado + vidro fosco
+   ============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: #04180f; }
+body {
+  font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root {
+  --gold: #f5c542;
+  --gold-deep: #c9971c;
+  --gold-soft: #f7d98c;
+  --green-950: #04180f;
+  --green-900: #062b1b;
+  --green-700: #0f9d72;
+  --cream: #eef3e4;
+}
+
+.post {
+  position: relative;
+  width: 1080px;
+  height: 1080px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 58px 66px 58px;
+  color: #fff;
+  background:
+    radial-gradient(760px 560px at 88% 106%, rgba(245,158,11,.42), transparent 62%),
+    radial-gradient(700px 540px at 4% -8%, rgba(15,157,114,.45), transparent 60%),
+    linear-gradient(158deg, #04180f 0%, #062b1b 48%, #0a4030 100%);
+}
+
+/* malha técnica sutil */
+.post::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(circle at 50% 42%, #000 25%, transparent 76%);
+  mask-image: radial-gradient(circle at 50% 42%, #000 25%, transparent 76%);
+  opacity: .55;
+}
+
+/* moldura dourada */
+.post::after {
+  content: '';
+  position: absolute; inset: 26px;
+  border: 2px solid rgba(245,197,66,.34);
+  border-radius: 30px;
+  pointer-events: none;
+}
+
+.post > * { position: relative; z-index: 2; }
+
+/* ---------- Marca ---------- */
+.brand {
+  display: flex; align-items: center; gap: 14px;
+  font-weight: 800; font-size: 21px;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold-soft);
+}
+.brand .ic {
+  width: 46px; height: 46px; border-radius: 14px;
+  background: linear-gradient(135deg, #0d3a23, #0f9d72 55%, #c9971c);
+  display: grid; place-items: center; font-size: 25px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.4);
+}
+.brand em { font-style: normal; color: rgba(255,255,255,.55); font-weight: 600; }
+
+/* ---------- Selo / kicker ---------- */
+.kicker {
+  display: inline-flex; align-self: flex-start; align-items: center; gap: 10px;
+  padding: 11px 24px; border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(247,217,140,.5);
+  color: var(--gold-soft);
+  font-size: 19px; font-weight: 800;
+  letter-spacing: .16em; text-transform: uppercase;
+}
+
+/* ---------- Título ---------- */
+h1 {
+  font-family: 'Segoe UI Black', 'Segoe UI', Arial, sans-serif;
+  font-size: 64px;
+  line-height: 1.02;
+  letter-spacing: -.5px;
+  text-transform: uppercase;
+  text-shadow: 0 10px 30px rgba(0,0,0,.45);
+  max-width: 960px;
+}
+h1 .hl {
+  background: linear-gradient(180deg, #ffeab0 0%, #f0b429 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+
+.sub {
+  font-size: 25px; line-height: 1.36;
+  color: #c9e2d5; max-width: 900px; font-weight: 500;
+}
+.sub b { color: #fff; font-weight: 700; }
+
+/* ---------- Palavras-chave ---------- */
+.points { display: flex; gap: 16px; }
+.points span {
+  flex: 1;
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 18px; border-radius: 16px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  font-size: 19px; font-weight: 600; color: #eaf5ee;
+  backdrop-filter: blur(8px);
+}
+.points span::before {
+  content: '✓';
+  flex: none;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, #f7d98c, #e0a417);
+  color: #062b1b; font-size: 18px; font-weight: 900;
+  display: grid; place-items: center;
+}
+
+/* ---------- Palco (ilustração central) ---------- */
+.stage {
+  flex: 1;
+  display: grid; place-items: center;
+  position: relative;
+  min-height: 0;
+}
+
+/* ---------- CTA ---------- */
+.cta {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px;
+}
+.cta .pill {
+  background: linear-gradient(135deg, #ffe08a, #e0a417);
+  color: #062b1b;
+  font-family: 'Segoe UI Black', 'Segoe UI', Arial, sans-serif;
+  font-size: 33px; letter-spacing: .04em; text-transform: uppercase;
+  padding: 16px 46px; border-radius: 999px;
+  box-shadow: 0 18px 40px rgba(224,164,23,.45);
+  white-space: nowrap;
+}
+.cta .url {
+  text-align: right;
+  font-size: 21px; line-height: 1.35;
+  color: #b9d2c5; letter-spacing: .04em;
+}
+.cta .url b { display: block; color: var(--gold-soft); font-size: 23px; }
