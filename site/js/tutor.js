@@ -90,7 +90,10 @@
       '.tutor-id{flex:1;min-width:0;line-height:1.2;}',
       '.tutor-id b{display:block;font-size:.98rem;}',
       '.tutor-id small{font-size:.72rem;opacity:.92;}',
-      '.tutor-top-actions{display:flex;gap:.25rem;}',
+      '.tutor-top-actions{display:flex;gap:.25rem;align-items:center;}',
+      '.tutor-top-actions a{display:grid;place-items:center;text-decoration:none;color:#fff;width:2rem;height:2rem;border-radius:50%;',
+      'background:rgba(255,255,255,.16);font-size:.9rem;line-height:1;transition:.2s;}',
+      '.tutor-top-actions a:hover{background:rgba(255,255,255,.32);}',
       '.tutor-top-actions button{border:none;background:rgba(255,255,255,.16);color:#fff;width:2rem;height:2rem;border-radius:50%;',
       'cursor:pointer;font-size:.9rem;line-height:1;transition:.2s;}',
       '.tutor-top-actions button:hover{background:rgba(255,255,255,.32);}',
@@ -157,6 +160,7 @@
         '<span class="tutor-avatar" aria-hidden="true">🤖</span>' +
         '<div class="tutor-id"><b>Tutor do Professor</b><small>IA do Laboratório · responde na hora</small></div>' +
         '<div class="tutor-top-actions">' +
+          '<a href="perguntas.html" title="Abrir chat completo" aria-label="Abrir chat completo">💬</a>' +
           '<button type="button" id="tutorClear" title="Limpar conversa" aria-label="Limpar conversa">🧹</button>' +
           '<button type="button" id="tutorClose" title="Fechar" aria-label="Fechar chat">✕</button>' +
         '</div>' +

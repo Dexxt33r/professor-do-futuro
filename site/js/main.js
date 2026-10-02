@@ -29,6 +29,7 @@
     { href:'curso.html', label:'O Curso' },
     { href:'prompts.html', label:'Prompts' },
     { href:'slides.html', label:'Biblioteca' },
+    { href:'perguntas.html', label:'Perguntas' },
     { href:'ferramentas.html', label:'Laboratório' }
   ];
 
@@ -136,6 +137,7 @@
         { href:'slides.html', ic:'🎞️', label:'Biblioteca de Slides' }
       ]},
       { label:'Recursos', links:[
+        { href:'perguntas.html', ic:'💬', label:'Perguntas & IA' },
         { href:'prompts.html', ic:'⚡', label:'Prompts' },
         { href:'leitura.html', ic:'📖', label:'Leitura' },
         { href:'ferramentas.html', ic:'🧪', label:'Lab & Ferramentas' }
@@ -333,6 +335,7 @@
             '<li><a href="prompts.html">Banco de Prompts</a></li>' +
             '<li><a href="slides.html">Biblioteca de apresentações</a></li>' +
             '<li><a href="leitura.html">Biblioteca de Leitura</a></li>' +
+            '<li><a href="perguntas.html">💬 Perguntas & Assistente IA</a></li>' +
           '</ul></div>' +
           '<div><h4>Recursos</h4><ul class="foot-links">' +
             '<li><a href="curso.html#avaliacao">Avaliação</a></li>' +
