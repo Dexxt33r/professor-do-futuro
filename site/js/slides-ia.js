@@ -9,8 +9,11 @@
    ============================================================ */
 (function(){
   'use strict';
+  // Apresentações geradas por IA ficam SOMENTE no navegador deste professor
+  // (localStorage) — nunca entram na biblioteca compartilhada do site.
+  // Limite de gerações guardadas: para criar uma nova, é preciso apagar uma.
   var KEY = 'pdf.slides.ia';
-  var MAX = 12;
+  var LIMITE = 5;
 
   function IA(){ return window.LabIA || null; }
   function $(id){ return document.getElementById(id); }
@@ -26,7 +29,7 @@
     catch(e){ return []; }
   }
   function salvarTodos(arr){
-    try{ localStorage.setItem(KEY, JSON.stringify(arr.slice(-MAX))); }catch(e){}
+    try{ localStorage.setItem(KEY, JSON.stringify(arr.slice(-LIMITE))); }catch(e){}
   }
   function registrar(deck){
     if(!deck || !deck.id) return;
@@ -39,7 +42,10 @@
   }
 
   // Restaura as apresentações salvas ANTES de o present.js montar a biblioteca.
-  carregar().forEach(registrar);
+  // Se houver mais que o limite (versões antigas guardavam até 12), mantém só as 5 mais recentes.
+  var iniciais = carregar();
+  if(iniciais.length > LIMITE){ salvarTodos(iniciais); iniciais = carregar(); }
+  iniciais.forEach(registrar);
 
   /* ---------- estilos ---------- */
   function montarEstilos(){
@@ -78,12 +84,22 @@
       'border-radius:999px;padding:.6rem 1.1rem;font-weight:700;cursor:pointer;font-family:inherit;font-size:.9rem;}',
       '.iam-status{font-size:.85rem;color:var(--text-muted);min-height:1.3em;flex:1;min-width:12rem;}',
       '.iam-saved{margin-top:1rem;border-top:1px solid var(--border);padding-top:.9rem;}',
-      '.iam-saved h4{font-size:.86rem;color:var(--heading);margin-bottom:.5rem;}',
-      '.iam-item{display:flex;align-items:center;gap:.6rem;padding:.5rem .7rem;border:1px solid var(--border);',
+      '.iam-saved h4{font-size:.86rem;color:var(--heading);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;}',
+      '.iam-count{font-weight:600;font-size:.74rem;color:var(--text-muted);border:1px solid var(--border);',
+      'border-radius:999px;padding:.1rem .55rem;}',
+      '.iam-count.full{color:#b91c1c;border-color:rgba(220,38,38,.5);}',
+      '.iam-item{display:flex;align-items:center;gap:.55rem;padding:.5rem .6rem;border:1px solid var(--border);',
       'border-radius:12px;margin-bottom:.45rem;background:var(--bg-soft);}',
       '.iam-item b{flex:1;font-size:.86rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}',
       '.iam-item span{font-size:.74rem;color:var(--text-muted);white-space:nowrap;}',
-      '.iam-item button{border:none;background:transparent;cursor:pointer;font-size:1rem;line-height:1;}',
+      '.iam-icon{border:none;background:transparent;cursor:pointer;font-size:1rem;line-height:1;padding:.15rem .3rem;}',
+      '.iam-del{display:inline-flex;align-items:center;gap:.25rem;border:1px solid rgba(220,38,38,.45);background:transparent;',
+      'color:#b91c1c;cursor:pointer;font-family:inherit;font-size:.75rem;font-weight:700;border-radius:999px;padding:.2rem .6rem;}',
+      '.iam-del:hover{background:rgba(220,38,38,.1);}',
+      'html[data-theme="dark"] .iam-del{color:#fca5a5;border-color:rgba(252,165,165,.5);}',
+      '.iam-limit{display:none;font-size:.8rem;color:#b91c1c;margin-top:.5rem;line-height:1.45;}',
+      '.iam-limit.show{display:block;}',
+      'html[data-theme="dark"] .iam-limit{color:#fca5a5;}',
       '@media(max-width:560px){.iam-row{grid-template-columns:1fr;}}'
     ].join('');
     document.head.appendChild(css);
@@ -132,7 +148,12 @@
             '<button type="button" class="iam-ghost" id="iamCancel">Cancelar</button>' +
             '<span class="iam-status" id="iamStatus"></span>' +
           '</div>' +
-          '<div class="iam-saved"><h4>📁 Minhas apresentações com IA</h4><div id="iamSaved"></div></div>' +
+          '<div class="iam-saved">' +
+            '<h4>📁 Minhas apresentações com IA <span class="iam-count" id="iamCount"></span></h4>' +
+            '<p class="iam-hint" style="margin:0 0 .6rem">🔒 Ficam só neste navegador (só você vê). Limite de ' + LIMITE + ' apresentações.</p>' +
+            '<div id="iamSaved"></div>' +
+            '<p class="iam-limit" id="iamLimit"></p>' +
+          '</div>' +
         '</div>' +
       '</div>';
     document.body.appendChild(ov);
@@ -158,14 +179,23 @@
   function renderSalvos(){
     var box = $('iamSaved'); if(!box) return;
     var arr = carregar();
-    if(!arr.length){ box.innerHTML = '<span class="iam-hint">Nenhuma ainda. Gere a primeira acima 👆</span>'; return; }
+    var cnt = $('iamCount');
+    if(cnt){
+      cnt.textContent = arr.length + '/' + LIMITE;
+      cnt.className = 'iam-count' + (arr.length >= LIMITE ? ' full' : '');
+    }
+    if(!arr.length){
+      box.innerHTML = '<span class="iam-hint">Nenhuma ainda. Gere a primeira acima 👆</span>';
+      atualizarLimite(0);
+      return;
+    }
     box.innerHTML = arr.slice().reverse().map(function(d){
       var n = (d.slides || []).length;
       return '<div class="iam-item" data-id="' + esc(d.id) + '">' +
         '<b title="' + esc(d.titulo) + '">' + esc(d.titulo) + '</b>' +
         '<span>' + n + ' slides</span>' +
-        '<button type="button" class="iam-open" title="Abrir" aria-label="Abrir">▶</button>' +
-        '<button type="button" class="iam-del" title="Remover" aria-label="Remover">🗑</button>' +
+        '<button type="button" class="iam-open iam-icon" title="Abrir" aria-label="Abrir apresentação">▶</button>' +
+        '<button type="button" class="iam-del" title="Apagar esta apresentação" aria-label="Apagar apresentação">🗑 Apagar</button>' +
       '</div>';
     }).join('');
     Array.prototype.forEach.call(box.querySelectorAll('.iam-item'), function(row){
@@ -174,10 +204,31 @@
       if(op) op.addEventListener('click', function(){ fechar(); if(window.Present) window.Present.openTheme(id); });
       if(dl) dl.addEventListener('click', function(){ remover(id); });
     });
+    atualizarLimite(arr.length);
+  }
+
+  // Trava a geração quando o professor chegou ao limite: precisa apagar uma.
+  function atualizarLimite(total){
+    var aviso = $('iamLimit'), btn = $('iamGo');
+    var cheio = total >= LIMITE;
+    if(aviso){
+      aviso.className = 'iam-limit' + (cheio ? ' show' : '');
+      aviso.innerHTML = cheio
+        ? '⚠️ Limite de ' + LIMITE + ' apresentações atingido. <b>Apague uma</b> na lista acima (🗑 Apagar) para poder gerar outra.'
+        : '';
+    }
+    if(btn){
+      btn.disabled = cheio;
+      btn.title = cheio ? 'Apague uma apresentação para gerar outra' : '';
+    }
   }
 
   function remover(id){
-    salvarTodos(carregar().filter(function(d){ return d.id !== id; }));
+    var arr = carregar();
+    var alvo = arr.filter(function(d){ return d.id === id; })[0];
+    var titulo = (alvo && alvo.titulo) ? alvo.titulo : 'esta apresentação';
+    if(!confirm('Apagar "' + titulo + '"? Isso libera espaço para gerar outra.')) return;
+    salvarTodos(arr.filter(function(d){ return d.id !== id; }));
     if(window.Present) window.Present.removeDeck(id);
     renderSalvos();
   }
@@ -187,6 +238,12 @@
     var temaEl = $('iamTema');
     var tema = (temaEl && temaEl.value || '').trim();
     if(tema.length < 3){ status('Escreva o tema da apresentação.', ERRO); if(temaEl) temaEl.focus(); return; }
+    // Limite de gerações: precisa apagar uma antiga para criar outra.
+    if(carregar().length >= LIMITE){
+      status('Limite de ' + LIMITE + ' apresentações atingido. Apague uma na lista abaixo (🗑 Apagar) para gerar outra.', ERRO);
+      atualizarLimite(LIMITE);
+      return;
+    }
     var a = IA();
     if(!a){ status('A IA ainda está carregando. Tente de novo em 1 segundo.'); return; }
     var corpo = {
