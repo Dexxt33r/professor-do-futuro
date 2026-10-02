@@ -1,13 +1,9 @@
 // ============================================================
 // PROFESSOR DO FUTURO — tutor-chat (Edge Function / Deno)
-// ETAPA 4. POST { mensagem, historico?, contexto? }
-// → { ok:true, resposta, sugestoes[], provedor, modelo }
-// Chat pedagógico: responde dúvidas do professor, sugere
-// atividades e guia o uso do Laboratório. TEXTO livre (não JSON),
-// com guardrails: sem dados pessoais, sem promessas de nota
-// oficial, sempre com revisão humana.
-// ============================================================
-
+// POST { mensagem, historico?, contexto? } → { resposta, sugestoes[] }
+// CORREÇÃO: gpt-oss-20b quebra com response_format json (400) →
+// tutor usa TEXTO livre + parsing tolerante ("||| sug1 | sug2").
+// Principal (120b) primeiro; rápido só como reserva + 1 retry.
 import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { json, textoLimpo, usuarioAutenticado, CORS_HEADERS } from '../_shared/ia.ts';
 
@@ -16,31 +12,24 @@ const GROQ_MODELO = Deno.env.get('GROQ_MODELO') || 'openai/gpt-oss-120b';
 const GROQ_MODELO_RAPIDO = Deno.env.get('GROQ_MODELO_RAPIDO') || 'openai/gpt-oss-20b';
 
 const SISTEMA = [
-  'Você é o Tutor do Professor do Futuro: um mentor brasileiro, acolhedor e direto,',
-  'especialista em didática, inclusão (AEE/TEA/TDAH) e uso de IA na escola.',
-  'Você conversa DENTRO do site do curso e conhece as ferramentas do Laboratório:',
-  'Gerar Atividade Pronta (folha A4), Plano de Aula, Quiz em Sala, Rubrica à Prova de IA,',
-  'Simplificador de Texto, Atividade Rápida, Corretor ENEM (apoio), Semáforo, Cronômetro, Sorteador.',
-  'REGRAS:',
-  '1) Responda em português, curto (máx 120 palavras) salvo se pedirem detalhe.',
-  '2) Dê 1 ação prática imediata + 1 ferramenta do site para usar.',
-  '3) Nunca peça nem repita nome de aluno, escola ou dado pessoal.',
-  '4) Correção ENEM oficial é da banca — você dá APOIO.',
-  '5) Se pedirem conteúdo sensível/perigoso, recuse com gentileza e sugira alternativa pedagógica.',
-  '6) Responda SEMPRE em JSON: {"resposta":"...","sugestoes":["chip1","chip2","chip3"]}.',
+  'Você é o Tutor do Professor do Futuro: mentor brasileiro, acolhedor e DIRETO,',
+  'especialista em didática, inclusão (AEE/TEA/TDAH) e IA na escola.',
+  'Conhece o Laboratório: Atividade A4, Plano de Aula, Quiz, Rubrica, Simplificador, ENEM (apoio).',
+  'REGRAS DURAS:',
+  '1) Responda EXATAMENTE o que foi pedido — cite o tema do professor na resposta.',
+  '2) Prático: 1 resposta direta + 1 ação imediata + 1 ferramenta do site.',
+  '3) Curto (até 150 palavras); detalhado SÓ se pedirem.',
+  '4) Pediu atividade/plano/quiz? ENTREGUE o conteúdo pronto, não só diga onde clicar.',
+  '5) Sem dado pessoal. ENEM oficial é da banca (você dá APOIO).',
+  'FORMATO: TEXTO simples. Na última linha escreva "|||" + 3 sugestões curtas com " | ".',
 ].join(' ');
 
-async function chatGroq(mensagens: unknown[], modelo: string): Promise<string> {
+async function chatGroq(mensagens: unknown[], modelo: string, maxTokens: number): Promise<string> {
   const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + GROQ_KEY },
-    body: JSON.stringify({
-      model: modelo,
-      messages: mensagens,
-      response_format: { type: 'json_object' },
-      temperature: 0.7,
-      max_tokens: 800,
-    }),
+    // SEM response_format: gpt-oss quebra o JSON (400 json_validate_failed).
+    body: JSON.stringify({ model: modelo, messages: mensagens, temperature: 0.6, max_tokens: maxTokens }),
   });
   const dados = await r.json().catch(() => null) as any;
   if (!r.ok) throw new Error('Groq [' + modelo + ']: ' + ((dados?.error?.message) || ('HTTP ' + r.status)));
@@ -59,7 +48,7 @@ serve(async (req: Request) => {
     if (mensagem.length < 2) return json({ ok: false, erro: 'Escreva sua dúvida.' }, 400);
     // Login opcional: logado tem contexto; deslogado usa modo demonstração.
     const logado = await usuarioAutenticado(req);
-    const hist = Array.isArray(c?.historico) ? c.historico.slice(-6) : [];
+    const hist = Array.isArray(c?.historico) ? c.historico.slice(-8) : [];
     const msgs: unknown[] = [{ role: 'system', content: SISTEMA }];
     for (const h of hist) {
       if (h && typeof h === 'object') {
@@ -69,27 +58,35 @@ serve(async (req: Request) => {
       }
     }
     const pagina = textoLimpo(c?.contexto, 120);
-    msgs.push({
-      role: 'user',
-      content: (pagina ? '[O professor está na página: ' + pagina + '] ' : '') + mensagem,
-    });
+    msgs.push({ role: 'user', content: (pagina ? '[Página: ' + pagina + '] ' : '') + mensagem });
+
+    // PRINCIPAL primeiro (fidelidade); rápido só como reserva.
     let texto = '';
-    let modelo = GROQ_MODELO_RAPIDO;
-    try {
-      texto = await chatGroq(msgs, GROQ_MODELO_RAPIDO);
-    } catch (_) {
-      texto = await chatGroq(msgs, GROQ_MODELO);
+    let modelo = GROQ_MODELO;
+    for (const m of [GROQ_MODELO, GROQ_MODELO_RAPIDO]) {
+      try {
+        texto = await chatGroq(msgs, m, 1000);
+        modelo = m;
+        if (texto.trim().length >= 10) break;
+      } catch (_) { /* tenta o próximo */ }
+    }
+    // Reparo: retry pedindo a resposta direta ao tema.
+    if (texto.trim().length < 10) {
+      texto = await chatGroq(
+        [...msgs, { role: 'user', content: 'Responda de forma direta ao meu pedido, em até 150 palavras, citando o tema que pedi.' }],
+        GROQ_MODELO, 1000,
+      );
       modelo = GROQ_MODELO;
     }
-    let j: any = {};
-    try {
-      const ini = texto.indexOf('{');
-      j = JSON.parse(texto.slice(ini, texto.lastIndexOf('}') + 1));
-    } catch (_) { j = { resposta: texto.slice(0, 800) }; }
+
+    // Separa "resposta ||| sug1 | sug2 | sug3" com tolerância total.
+    const corte = texto.lastIndexOf('|||');
+    const resposta = (corte >= 0 ? texto.slice(0, corte) : texto).trim().slice(0, 1500);
+    const sugs = (corte >= 0 ? texto.slice(corte + 3) : '').split('|').map((s) => s.trim()).filter(Boolean).slice(0, 3);
     return json({
       ok: true,
-      resposta: String(j.resposta || 'Posso ajudar com planos, atividades, quiz ou inclusão. O que você precisa?').slice(0, 1500),
-      sugestoes: Array.isArray(j.sugestoes) ? j.sugestoes.slice(0, 3).map(String) : ['Gerar atividade', 'Plano de aula', 'Ideia de quiz'],
+      resposta: resposta || 'Posso ajudar com planos, atividades, quiz ou inclusão. O que você precisa?',
+      sugestoes: sugs.length ? sugs : ['Gerar atividade', 'Plano de aula', 'Ideia de quiz'],
       provedor: 'groq',
       modelo,
       demo: !logado,

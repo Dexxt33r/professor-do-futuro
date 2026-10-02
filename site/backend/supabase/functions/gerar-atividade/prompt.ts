@@ -150,9 +150,8 @@ function promptBase(p: Pedido): string {
   l.push('=== DADOS DA ATIVIDADE ===');
   l.push('- Disciplina/matéria: ' + p.disciplina);
   l.push('- Ano/série: ' + p.ano);
-  l.push('- Tema principal da aula: ' + p.tema);
-  l.push('- Tipo de atividade: ' + tipo.nome);
-  l.push('- Quantidade de questões: ' + quant);
+  l.push('- Tema principal da aula: ' + p.tema + ' → TODAS as questões DEVEM ser especificamente sobre "' + p.tema + '". PROIBIDO questão genérica ("o que você aprendeu sobre...", "explique o tema"). Cada enunciado cita fatos, exemplos ou situações do tema.');
+  l.push('- Tipo de atividade: ' + tipo.nome + ' → exatamente ' + quant + ' questões (nem mais, nem menos).');
   if (p.observacoes && p.observacoes.trim()) {
     l.push('- Observações do professor: ' + p.observacoes.trim());
   }
@@ -163,6 +162,8 @@ function promptBase(p: Pedido): string {
   l.push('- Foco no essencial do tema: fatos corretos, exemplos do cotidiano brasileiro, 1 analogia simples.');
   l.push('- ' + tipo.guia);
   l.push('- Cada questão precisa de um comando claro ("Explique...", "Calcule...", "Marque a alternativa...", "Complete...").');
+  l.push('- PROIBIDO repetir o mesmo enunciado: cada questão aborda UM aspecto diferente do tema (conceito, exemplo, aplicação, comparação).');
+  l.push('- Se for múltipla escolha, escreva 4 alternativas (A–D) REAIS sobre o tema, com 1 correta e distratores plausíveis. Nunca use o tema como única alternativa.');
   l.push('- Nas dissertativas, "linhas_resposta" entre 3 e 6 (é o espaço de escrita no papel). Nas de múltipla escolha, "linhas_resposta" = 0.');
   l.push('- Em "alternativas" use de 3 a 4 opções e informe "correta" com o índice (0 = primeira alternativa). Sem alternativas repetidas e sem negativas ambíguas.');
   l.push('- Cada questão deve ter "resposta_esperada" (em 1 a 3 frases) — é o gabarito do professor — e um "pictograma" (1 emoji que represente a questão).');
@@ -221,8 +222,10 @@ export function montarPrompt(p: Pedido): string {
 export function limparJson(textoBruto: string): unknown {
   if (!textoBruto) throw new Error('Resposta vazia da IA.');
   let t = String(textoBruto).trim();
-  // remove cercas de markdown (```json ... ```)
-  t = t.replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
+  // remove cercas de markdown (```json ... ```), inclusive com texto antes
+  const cerca = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (cerca) t = cerca[1].trim();
+  else t = t.replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
   try { return JSON.parse(t); } catch (_) { /* tenta recortar abaixo */ }
   const ini = t.indexOf('{');
   const fim = t.lastIndexOf('}');
@@ -268,7 +271,7 @@ export function normalizarAtividade(bruto: unknown, p: Pedido): Atividade {
     const n = questoes.length + 1;
     questoes.push({
       numero: n,
-      enunciado: txt(q.enunciado) || ('Questão ' + n + ': escreva com suas palavras o que você aprendeu sobre ' + p.tema + '.'),
+      enunciado: txt(q.enunciado) || txt(q.pergunta) || ('Questão ' + n + ' sobre ' + p.tema + ': responda com suas palavras.'),
       tipo: ehMultipla ? 'multipla_escolha' : (txt(q.tipo) || 'dissertativa'),
       alternativas: ehMultipla ? alts : [],
       correta: (ehMultipla && alts.length) ? correta : null,
