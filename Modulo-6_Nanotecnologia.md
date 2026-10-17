@@ -4,6 +4,20 @@
 
 ---
 
+## 🗓️ Roteiro sugerido do encontro (4h)
+
+| Tempo | Etapa | O que fazer |
+|-------|-------|-------------|
+| 0:00–0:25 | Abertura | A história de Rita + “onde você já ouviu falar de nano?” |
+| 0:25–1:10 | Escala | NANO, potências de 10 e a fita métrica — ponte direta com Matemática |
+| 1:10–1:20 | Pausa | — |
+| 1:20–2:10 | Por que muda | Superfície x volume e as propriedades das nanopartículas |
+| 2:10–3:00 | Prática | Comparar materiais do dia a dia (Exercício 1) |
+| 3:00–3:40 | Aplicações + ética | Do cotidiano aos riscos e à regulamentação (Exercício 2) |
+| 3:40–4:00 | Fechamento | Debate crítico sobre produtos “nano milagrosos” |
+
+---
+
 ## 6.1 O que significa "NANO"
 
 - **Nano** vem do grego e significa **anão** — é um prefixo de escala.
@@ -136,6 +150,37 @@ e pergunta final de conclusão.
 - Recorra a **imagens reais** de microscopia e diagramas com pouquíssimas informações por tela.
 - Para alunos com deficiência intelectual, opte por **uma ideia por frase** e vocabulário simples (Easy Read).
 - Proponha **formas variadas de expressão**: desenho, vídeo, maquete ou explicação oral.
+
+---
+
+## 🏋️ Exercícios práticos do módulo (com gabarito)
+
+**Exercício 1 — Escala e ordem de grandeza (com resolução)**
+- **Tarefa:** faça as conversões abaixo com a turma, usando potências de 10.
+- **Gabarito / resolução:**
+  - Fio de cabelo ≈ **80.000 nm**. Quantos átomos de **0,1 nm** cabem lado a lado? → 80.000 ÷ 0,1 = **800.000 átomos**.
+  - **1 mm = 1.000.000 nm** (10⁶). Quantos vírus de **100 nm** cabem em 1 mm? → 1.000.000 ÷ 100 = **10.000 vírus**.
+  - **1 nm = 10⁻⁹ m**; **1 m = 10⁹ nm**. Confirme a régua: 1 mm = 10⁻³ m → 10⁶ nm. ✔
+  - **Ponte com a Matemática:** cada degrau da escala é **× 10** (ordem de grandeza) — peça que os alunos escrevam a sequência: 1 m → 1 mm → 1 µm → 1 nm.
+
+**Exercício 2 — Dia a dia: o que é nanoparticulado?**
+- **Tarefa:** com a prática de comparar materiais (achocolatado, talco, açúcar, fuligem, amido de milho), preencha a tabela e conclua.
+- **Gabarito / resultado esperado:** a **fuligem** é nanoparticulada e **já existia** antes da nanotecnologia (é produto da queima); materiais como **talco e achocolatado** têm partículas muito pequenas, mas o “nano” de product de marketing é outro nível. **Conclusão-chave:** o que é novo não é a matéria — é **ver, medir e manipular** esse tamanho, e é por isso que a nanociência só cresceu com os microscópios eletrônicos/de força atômica.
+
+**Exercício 3 — Debate crítico de produto “nano”**
+- **Tarefa:** com um anúncio real (ou simulado) de produto “nano milagroso”, prepare um debate.
+- **Gabarito / critérios que a turma precisa levantar:** (1) **prova científica** ou só promessa? (2) **quem lucra** com a alegação? (3) o produto é **regulamentado**? (4) “nano” aqui é **técnico ou só marketing**? (5) **riscos** foram discutidos ou omitidos? Um aluno crítico pergunta **fonte, interesse e evidência** antes de acreditar.
+
+---
+
+## ⚠️ Erros comuns e como evitar
+
+- **“Nano” = seguro e moderno.** Não caia no marketing: muitos produtos usam o termo **sem ser nanotecnologia** de verdade. Ensine a pedir **evidência**.
+- **Tratar escala como “um pouquinho menor”.** 1 nm é **um bilionésimo** de metro — reforce a diferença entre ×10 (acrescentar um zero) e dividir por 10 a cada degrau.
+- **Prometer aplicação milagrosa.** Nanotecnologia tem potencial, mas **pesquisa e regulação ainda avançam** — evite entusiasmo excessivo.
+- **Falar só de laboratório distante.** Comece pelo **cotidiano** (proteção solar, tecido, remédio) para depois ir ao micro.
+- **Deixar a ética “para o fim”.** Risco e regulamentação **atravessam** toda aula — não são um slide de recado.
+- **Esquecer a ponte com a Matemática.** Sem potências de 10 e ordem de grandeza, a escala fica abstrata; amarre sempre (fita métrica, régua, comparações).
 
 ---
 

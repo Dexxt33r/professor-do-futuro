@@ -4,6 +4,20 @@
 
 ---
 
+## 🗓️ Roteiro sugerido do encontro (4h)
+
+| Tempo | Etapa | O que fazer |
+|-------|-------|-------------|
+| 0:00–0:25 | Abertura | Diagnóstico: o que mais falha na sua turma — apatia, conflito ou dispersão? |
+| 0:25–1:10 | O que engaja | Causas de conflito/apatia + dinâmicas de abertura com IA |
+| 1:10–1:20 | Pausa | — |
+| 1:20–2:10 | Personalização | O mesmo tema em 3 níveis na mesma turma (Exercício 1) |
+| 2:10–3:00 | Combinados | Pactuar regras em slides com frases positivas e ícones (Exercício 2) |
+| 3:00–3:40 | Jogos | Simular o “Semáforo da sala” / “Bingo dos combinados” com a turma |
+| 3:40–4:00 | Fechamento | Registrar 1 caso de gestão + revisar o combinado na semana seguinte |
+
+---
+
 ## 4.1 Resolução de Conflitos e Engajamento
 
 ### O que gera conflito/apatia em sala?
@@ -108,6 +122,41 @@ Transforme as 6 regras abaixo em frases POSITIVAS (o que se faz, não o que não
 Crie o jogo "Bingo dos combinados" com 9 regras em cartela 3x3. Para cada regra, 1 ícone.
 Explique como marcar e qual prêmio coletivo da turma (ex: +10min de recreio).
 ```
+
+---
+
+## 🏋️ Exercícios práticos do módulo (com gabarito)
+
+**Exercício 1 — O mesmo tema em 3 níveis**
+- **Tarefa:** escolha 1 tema que você vai dar em breve e gere as 3 versões (use o prompt dos 3 níveis).
+- **Gabarito / exemplo preenchido (Frações):**
+  - *Nível 1:* “O que é metade? Divida esta pizza em 2 partes iguais.” (atividade de recorte)
+  - *Nível 2:* “Some 1/2 + 1/4 desenhando barras de referência.”
+  - *Nível 3:* “Prove que 3/4 > 2/3 sem calcular, usando argumento. Crie uma receita que use 3/4 e 2/3.”
+  - **Verificação:** cada nível deve ter **1 explicação + 2 exercícios + 1 desafio**. Se o Nível 1 tiver mais texto que o Nível 3, simplifique-o.
+
+**Exercício 2 — Combinados em frases positivas**
+- **Tarefa:** com a turma (ou simulando), transforme 6 regras em frases positivas ilustradas e feche um “contrato”.
+- **Gabarito / exemplos de conversão:**
+  - ❌ “Não gritar” → ✅ “Falamos com voz de conversa”
+  - ❌ “Não usar celular” → ✅ “Celular guardado durante a aula”
+  - ❌ “Não copiar” → ✅ “Errar faz parte de aprender”
+  - **Resultado esperado:** 6 frases curtas, cada uma com 1 ícone, prontas para projeção e assinatura/coletiva da turma.
+
+**Exercício 3 — 1 dinâmica de engajamento**
+- **Tarefa:** escolha 1 das dinâmicas (quebra-gelo, quiz ou storytelling) e desenhe como aplicá-la nos primeiros 5 minutos da sua próxima aula.
+- **Gabarito / resultado esperado:** você deve ter (a) **nome** da dinâmica, (b) **1 frase de instrução**, (c) **material = nenhum** (ou muito simples) e (d) a **conexão com o conteúdo** da aula — dinâmica sem amarração com o tema vira só “brincadeira” e perde o propósito.
+
+---
+
+## ⚠️ Erros comuns e como evitar
+
+- **Criar níveis que viram “grupo do fraco”.** Os níveis são **provisórios e mudam**; nunca rotule nem iscole alunos.
+- **Fazer só o Nível 1 para quem tem dificuldade.** Dificuldade pede **apoio**, não conteúdo empobrecido — mantenha o objetivo e reduza a carga.
+- **Combinado imposto.** Se a turma não participou da construção, ela não se sente dona; comece perguntando “o que precisamos combinar?”.
+- **Regra no negativo.** “Não faça X” é mais difícil de lembrar e de cumprir que uma frase positiva e ilustrada.
+- **Prometer prêmio que não dá para cumprir.** Bônus coletivo (ex.: +10 min de recreio) só funciona se for real e constante.
+- **Dinâmica sem amarração com o conteúdo.** Sempre termine ligando o jogo ao que será avaliado — senão é tempo perdido.
 
 ---
 

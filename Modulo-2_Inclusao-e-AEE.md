@@ -4,6 +4,20 @@
 
 ---
 
+## 🗓️ Roteiro sugerido do encontro (4h)
+
+| Tempo | Etapa | O que fazer |
+|-------|-------|-------------|
+| 0:00–0:25 | Abertura | Partir de um caso real: qual material a sua turma não consegue usar hoje? |
+| 0:25–1:10 | Conceitos | CAA, Easy Read e design anti-sobrecarga — sempre com exemplos visuais |
+| 1:10–1:20 | Pausa | — |
+| 1:20–2:10 | Mãos à obra | Reescrever um texto real da disciplina em Easy Read com IA (Exercício 1) |
+| 2:10–3:00 | Rotina visual | Montar quadro de antecipação / rotina em slides (Exercício 2) |
+| 3:00–3:40 | Acessibilidade | Legendas, alto contraste e revisão do material (Exercício 3) |
+| 3:40–4:00 | Fechamento | Checklist + combinar validação com o professor do AEE |
+
+---
+
 ## 2.1 Deficiência Intelectual e Transtornos do Desenvolvimento
 
 ### O que é CAA (Comunicação Alternativa e Aumentativa)?
@@ -199,6 +213,33 @@ Visual limpo, cores suaves. Sem animações automáticas.
 ```
 Dê audiodescrições (máx 2 frases cada) para estes slides: [descreva as 3 imagens].
 ```
+
+---
+
+## 🏋️ Exercícios práticos do módulo (com gabarito)
+
+**Exercício 1 — Texto real em Easy Read**
+- **Tarefa:** pegue 1 parágrafo da sua disciplina (ex.: a definição de fotossíntese, uma regra de jogo, um enunciado) e reescreva em língua fácil com o Prompt 1.
+- **Gabarito / resultado esperado:** frases com **até 6 palavras**, **1 ideia por linha**, palavras do dia a dia (ex.: “A planta pega a luz do sol.”), e **1 imagem que explique cada frase**. Se sobrar uma frase com duas ideias (“A planta pega a luz e faz seu alimento”), quebre em duas.
+
+**Exercício 2 — Quadro de antecipação / rotina em slides**
+- **Tarefa:** monte uma rotina de 6 etapas do seu turno (chegada → fim) usando o prompt de rotina visual.
+- **Gabarito / resultado esperado:** 6 slides, cada um com **1 imagem + 1 frase curta + ícone de progresso**, cores suaves, **sem animação**, e ordem estável (o mesmo layout em todos). Inclua um slide “Falta 1!” e um de “Parabéns 🎉” para dar previsibilidade.
+
+**Exercício 3 — Tornar 1 material acessível**
+- **Tarefa:** aplique o “prompt universal de acessibilidade” a um slide que você já usa e entregue a versão ajustada.
+- **Gabarito / resultado esperado:** (a) **alto contraste** (fundo escuro/texto claro ou o inverso), (b) **sem texto sobreposto** na imagem, (c) fonte **≥ 20–28pt**, (d) **texto alternativo** em pelo menos 1 imagem, (e) 1 frase de apoio em Easy Read. Confira a tabela de cores: **evite vermelho + verde juntos** (daltonismo).
+
+---
+
+## ⚠️ Erros comuns e como evitar
+
+- **Easy Read virado “bebê”.** Língua fácil ≠ infantilizar: use palavras simples, mas trate o aluno com seriedade e mantenha a dignidade do conteúdo.
+- **Pictograma decorativo que não explica.** Cada imagem deve carregar **uma informação**; se ela é só enfeite, está ocupando espaço que distrai.
+- **Sobrecarregar “para ajudar”.** Colocar cor, seta, ícone e animação em tudo **aumenta** a sobrecarga de quem tem TEA/TDAH — menos estímulos é mais.
+- **Inventar necessidade do aluno.** Não presuma o que a pessoa com deficiência precisa: **combine com o professor do AEE / família**.
+- **Esquecer a previsibilidade.** Trocar a posição do título ou o estilo a cada slide quebra a rotina de quem precisa de consistência.
+- **Deixar legendas/audiodescrição para depois.** Se o material já está acessível, não precisa retrabalhar: pense nisso na hora de criar.
 
 ---
 

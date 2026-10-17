@@ -4,6 +4,20 @@
 
 ---
 
+## 🗓️ Roteiro sugerido do encontro (4h)
+
+| Tempo | Etapa | O que fazer |
+|-------|-------|-------------|
+| 0:00–0:20 | Abertura | Diagnóstico rápido: o que cada professor já tentou fazer com IA? |
+| 0:20–1:10 | Ferramentas ao vivo | Gamma e Canva (Design Mágico) demonstrados na tela, com um tema real da turma |
+| 1:10–1:20 | Pausa | — |
+| 1:20–2:10 | Prática guiada | Cada professor gera 1 apresentação da sua disciplina (Exercício 1) |
+| 2:10–3:00 | Adaptação por faixa etária | O mesmo tema em versão Infantil e versão EM (Exercício 2) |
+| 3:00–3:40 | Revisão crítica | Como conferir o que a IA gerou + erros comuns |
+| 3:40–4:00 | Fechamento | Entrega: 1 deck revisado e a ferramenta escolhida para a semana |
+
+---
+
 ## 1.1 Ferramentas Práticas — Passo a Passo
 
 ### 1.1.1 Gamma App (gratuito, o queridinho para slides rápidos)
@@ -187,6 +201,37 @@ Atue como design instrucional. Monte [N] slides para [segmento] sobre [TEMA].
 Todo slide segue: 1 título de impacto, texto de no máx 3 linhas, 1 sugestão de imagem/ícone.
 Inclua 1 atividade interativa no slide final. Linguagem acolhedora e acessível.
 ```
+
+---
+
+## 🏋️ Exercícios práticos do módulo (com gabarito)
+
+**Exercício 1 — Seu primeiro deck em menos de 15 minutos**
+- **Tarefa:** escolha um tema que você vai dar na próxima semana e gere a apresentação completa (Gamma ou Canva), depois revise.
+- **Prazo:** 15 min de geração + 10 min de revisão.
+- **Gabarito / resultado esperado:** um deck com 8–12 slides que tenha (a) um gancho no slide 1, (b) no máximo 3 linhas por slide, (c) 1 ideia visual por slide, (d) 1 atividade no final. Você deve ter trocado **pelo menos 3 textos** gerados pela IA — se nada mudou, o conteúdo ainda é genérico.
+
+**Exercício 2 — O mesmo tema em duas faixas etárias**
+- **Tarefa:** pegue o mesmo tema do Exercício 1 e produza **duas versões**: uma para a Educação Infantil/Anos Iniciais e outra para Anos Finais/EM.
+- **Gabarito / resultado esperado:**
+  - *Versão Infantil:* 1 imagem grande por slide, ≤ 4 palavras, fonte arredondada, 1 pergunta por slide.
+  - *Versão EM:* pelo menos 1 dado/gráfico, 1 infográfico ou linha do tempo, 1 mini-quiz com resposta.
+  - Se as duas versões ficarem parecidas demais, você não adaptou — refaça o prompt pedindo explicitamente as restrições de cada faixa.
+
+**Exercício 3 — Caça ao erro da IA**
+- **Tarefa:** pegue um deck já gerado e marque, em vermelho, tudo que estiver **errado, datado ou genérico**.
+- **Gabarito / tipos de erro que você precisa encontrar:** (1) **fato ou número inventado/alucinado**, (2) **data errada**, (3) **frase que serve para qualquer aula** (genérica demais), (4) **imagem que não combina** com o texto, (5) **excesso de texto** em 1 slide. Se você achar menos de 3, releia com calma — provavelmente há erros escondidos.
+
+---
+
+## ⚠️ Erros comuns e como evitar
+
+- **Achar que o deck está pronto assim que a IA gera.** O primeiro resultado é um *rascunho*: revise conteúdo, dados e imagens antes de levar à sala.
+- **Confiar em números e datas sem checar.** A IA pode **alucinar** fatos (ex.: ano de uma guerra, percentual de uma pesquisa). Confirme em uma fonte confiável.
+- **Cair no “template bonito mas vazio”.** Visual não substitui objetivo de aprendizado: pergunte “o que o aluno sabe fazer no fim desta aula?”.
+- **Colar texto enorme no prompt.** Prefira instruções curtas com restrições claras (nº de slides, faixa etária, tipo de atividade).
+- **Esquecer acessibilidade desde o início.** Contraste, tamanho de fonte e 1 ideia por slide facilitam para todo mundo — conserte no fim dá mais trabalho.
+- **Usar sempre a mesma ferramenta.** Teste ao menos 2 (ex.: Gamma + Canva) antes de decidir qual vira padrão da sua rotina.
 
 ---
 

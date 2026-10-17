@@ -4,6 +4,20 @@
 
 ---
 
+## 🗓️ Roteiro sugerido do encontro (4h)
+
+| Tempo | Etapa | O que fazer |
+|-------|-------|-------------|
+| 0:00–0:25 | Abertura | Debate: “e se a turma inteira entregar o mesmo trabalho feito por IA?” |
+| 0:25–1:10 | Uso saudável | Os 5 usos + a regra de ouro (pedir explicação, não resposta) |
+| 1:10–1:20 | Pausa | — |
+| 1:20–2:10 | Tutora de estudos | Atividade “mapa mental com IA” ao vivo, no computador/celular |
+| 2:10–3:00 | Ética e detecção | Como o detector funciona, limites e falsos positivos |
+| 3:00–3:40 | Avaliação | Desenhar 1 rubrica + 1 defesa oral (Exercícios 1 e 2) |
+| 3:40–4:00 | Fechamento | Redesenhar 1 avaliação real da disciplina à prova de IA |
+
+---
+
 ## 3.1 Ensinando Alunos a Usarem a IA para Estudar
 
 A IA pode ser uma **tutora pessoal**: resumos, mapas mentais, simulados, tirar dúvidas. Mas o aluno precisa **treinar** para usá-la direito (não como "colinha").
@@ -113,6 +127,41 @@ Revise esta atividade: ela exige a opinião real do aluno, comparação de 2 fon
 exemplo da comunidade? Se não, sugira 3 perguntas de defesa oral e 1 mudança para
 aplicar o saber em um problema real. Gere a versão à prova de IA.
 ```
+
+---
+
+## 🏋️ Exercícios práticos do módulo (com gabarito)
+
+**Exercício 1 — Montar 1 rubrica à prova de IA**
+- **Tarefa:** crie uma rubrica de 4 critérios (use o prompt de rubrica) para um trabalho real da sua disciplina.
+- **Gabarito / modelo esperado:**
+```
+| Critério | Excelente (3) | Bom (2) | Precisa melhorar (1) |
+|----------|---------------|---------|----------------------|
+| Pensamento próprio | apresenta ideia que não está no texto-base | faz escolhas próprias | reproduz o que a IA/escola escreveu |
+| Fontes | 2+ fontes reais verificadas | 1 fonte correta | fonte inventada ou nenhuma |
+| Defesa oral | explica e responde perguntas com profundidade | responde o básico | não domina o conteúdo |
+| Aplicação local | usa exemplo da comunidade/realidade do aluno | usa exemplo genérico | sem exemplo |
+```
+
+**Exercício 2 — Redesenhar 1 avaliação com defesa oral**
+- **Tarefa:** pegue uma prova/trabalho que você já aplicou e adicione 1 **defesa oral de 5 perguntas** + 1 **pergunta de aplicação local**.
+- **Gabarito / exemplo:** para o tema “Revolução Industrial”, troque “descreva as consequências” por: *“Cite 2 consequências que você SENTE no seu bairro hoje e defenda sua resposta com 1 fonte.”* As 5 perguntas da defesa devem ir do **fato** (“quando aconteceu?”) até a **opinião fundamentada** (“você acha que ainda acontece? por quê?”).
+
+**Exercício 3 — Conversa de confirmação (sem punir)**
+- **Tarefa:** com o texto de um aluno suspeito, prepare 3 perguntas de defesa oral para confirmar autoria.
+- **Gabarito / resultado esperado:** perguntas que **só quem fez consegue responder**: (1) “por que você escolheu esse tema?”, (2) “explique com suas palavras o trecho X”, (3) “o que foi mais difícil?”. Se o aluno explicar o próprio texto, o uso de IA foi de **apoio, não de substituição** — e isso é aceitável.
+
+---
+
+## ⚠️ Erros comuns e como evitar
+
+- **Usar o detector como prova condenatória.** Ele **sinaliza suspeita**, não julga. Sempre confirme com rascunhos e conversa.
+- **Ignorar falsos positivos.** Texto formal ou de quem não é falante nativo parece “demais IA”. Não puna com base só no número.
+- **Proibir a IA em vez de ensinar a usá-la.** Proibir empurra o aluno para o uso escondido; ensinar uso ético forma autonomia.
+- **Avaliar só o produto final.** Exija **processo** (rascunho, mapa, reescrita) — é o que revela autoria.
+- **Esquecer de citar a ferramenta.** Combine desde o começo: usar IA com transparência é diferente de plagiar.
+- **Não preparar a defesa oral.** Se o professor não tem as perguntas prontas, a defesa vira conversa solta e perde a função de checagem.
 
 ---
 

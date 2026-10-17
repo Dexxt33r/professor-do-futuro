@@ -4,6 +4,20 @@
 
 ---
 
+## 🗓️ Roteiro sugerido do encontro (4h)
+
+| Tempo | Etapa | O que fazer |
+|-------|-------|-------------|
+| 0:00–0:25 | Abertura | Por que finanças é assunto de TODAS as áreas? (partir do cotidiano) |
+| 0:25–1:10 | Conteúdo | Os 3 blocos + profundidade no Bloco 1 (familiar, social, bens pessoais) |
+| 1:10–1:20 | Pausa | — |
+| 1:20–2:10 | Conceitos-chave | Orçamento, renda, fixos x variáveis e poupança — com números reais |
+| 2:10–3:00 | Simulação | Jogo de simulação de orçamento (Exercício 1) |
+| 3:00–3:40 | Metodologia | Situação de Apoio + “Experimente!” (Exercício 2) |
+| 3:40–4:00 | Fechamento | Revisão ética (não expor renda de ninguém) + entrega |
+
+---
+
 ## 5.1 Por que Educação Financeira é obrigação de todas as áreas
 
 Todo jovem consome desde que nasce, mas quase ninguém aprende a **decidir** sobre dinheiro de forma metódica. Educação Financeira nas escolas existe para mudar isso: formar cidadãos que **planejam, consomem com consciência e entendem consequências** — no orçamento da casa, na escolha de um tênis e, mais à frente, no trabalho e na vida.
@@ -117,6 +131,47 @@ mês moradia, transporte, alimentação e lazer. Gere um infográfico com dados 
 - **Linguagem fácil (Easy Read):** frases curtas, uma ideia por linha, vocabulário simples.
 - **Layout acessível:** letras grandes, gráficos visuais, poucas opções por tela, alto contraste.
 - **Empatia e privacidade:** fale de renda e realidade familiar **sem expor ou constranger** nenhum aluno.
+
+---
+
+## 🏋️ Exercícios práticos do módulo (com gabarito)
+
+**Exercício 1 — Simulação de orçamento (com resolução numérica)**
+- **Tarefa:** gere o jogo de simulação (prompt da seção 5.6) e resolva o caso-modelo antes de aplicar com a turma.
+- **Caso-modelo:** renda mensal de **R$ 3.000,00**.
+- **Gabarito / resolução:**
+```
+Tipo           Itens                                               Valor
+Fixos          aluguel R$ 900 + energia R$ 130 + água R$ 70 +      R$ 1.400
+               transporte R$ 300
+Variáveis      mercado R$ 800 + lazer R$ 300                       R$ 1.100
+Total de gastos                                                    R$ 2.500
+Sobra        3.000 − 2.500                                         R$ 500
+Reserva      poupança antes de gastar (10% da renda)               R$ 300
+Disponível                                                     R$ 200
+                                                                  p/ imprevisto
+```
+**Pergunta de decisão:** “se a energia subir de R$ 130 para R$ 200, o que você corta — lazer ou outra coisa? Por quê?” O objetivo é **decidir**, não só somar.
+
+**Exercício 2 — Situação de Apoio + “Experimente!” (preenchido)**
+- **Tarefa:** monte 1 situação partindo da vivência real + 1 ação pequena para casa.
+- **Gabarito / exemplo:** *Situação:* “Luan quer um tênis de R$ 400. Ele recebe R$ 80 por semana ajudando em casa. Em quantas semanas ele junta — e o que precisa abrir mão?” → discute-se desejo x prioridade **antes** de qualquer fórmula. *Experimente:* “Anotar **todos** os gastos da família por 7 dias e trazer 1 pergunta sobre o que mais surpreendeu.”
+- **Verificação:** (a) parte de algo que o aluno vive, (b) a discussão vem **antes** do cálculo, (c) o “Experimente” é pequeno e possível, (d) a avaliação é **formativa** (“o que mudou?”), não uma prova de definições.
+
+**Exercício 3 — 1 pergunta ética de discussão**
+- **Tarefa:** prepare 1 pergunta aberta sobre consumo/pressão do grupo para fechar a aula.
+- **Gabarito / resultado esperado:** pergunta **sem resposta única** e que **não exponha ninguém** — ex.: *“De quem é a culpa quando um grupo inteiro acha que precisa do mesmo tênis: da propaganda, do grupo ou de cada um?”* Regra da roda: falar de **situações**, não de dinheiro de família alheia.
+
+---
+
+## ⚠️ Erros comuns e como evitar
+
+- **Expor a renda de alunos.** Nunca peça recibos, fotos de conta ou valores familiares em público — é **ética e constrangimento**. Trate casos genéricos e fale de decisões, não de carteiras.
+- **Confiar em números da IA sem checar.** A IA pode dar preços/valores **desatualizados ou inventados**. Confirme com dados da sua cidade e do ano corrente.
+- **Começar pela teoria.** Se abrir pela definição de “orçamento”, a turma desliga. Abra pela **história/problema real**.
+- **Confundir poupança com “o que sobrou”.** Poupança se **reserva antes** de gastar (“pague-se primeiro”) — se esperar sobrar, nunca sobra.
+- **Tratar como aula só de Matemática.** É **transversal**: renda e consumo ligam-se a Geografia, Sociologia, Redação e ao projeto de vida.
+- **Avaliar com prova de memorização.** O objetivo é **decidir melhor**, não decorar definição — use observação do “Experimente” e roda de discussão.
 
 ---
 
