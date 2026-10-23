@@ -85,10 +85,17 @@
       bindLogout();
       // Mostra o link "Painel do Dono" apenas se o usuário for admin
       var adminLinks = document.querySelectorAll('[data-admin-only="1"]');
-      adminLinks.forEach(function(el){
-        if(user && user.role === 'admin'){ el.classList.add('visible'); }
-        else { el.classList.remove('visible'); }
-      });
+      adminLinks.forEach(function(el){ el.classList.remove('visible'); });
+      if(!user) return;
+      // Busca o role na tabela profiles (não vem do Auth.getUser())
+      if(window.SUPABASE){
+        window.SUPABASE.from('profiles').select('role').eq('id', user.id).single().then(function(res){
+          var role = (res.data && res.data.role) ? res.data.role : '';
+          if(role === 'admin'){
+            adminLinks.forEach(function(el){ el.classList.add('visible'); });
+          }
+        }).catch(function(){});
+      }
     }
 
     // Preenche o estado da conta de forma assíncrona

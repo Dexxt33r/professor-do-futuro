@@ -38,10 +38,22 @@
       if(btn){ btn.addEventListener('click', function(e){ e.preventDefault(); Auth.logout().then(function(){ window.location.replace('login.html'); }); }); }
       Auth.getUser().then(function(user){
         var area = document.getElementById('adminUserName');
-        var role = document.getElementById('adminUserRole');
+        var roleEl = document.getElementById('adminUserRole');
         if(area){ area.textContent = (user && user.name) ? user.name : (user && user.email) ? user.email : 'Usuário'; }
-        if(role){ role.textContent = (user && user.role) ? user.role.toUpperCase() : '—'; }
-        if(user && user.role !== 'admin'){ alert('Acesso restrito ao dono do site (admin).'); window.location.replace('index.html'); }
+        if(roleEl){ roleEl.textContent = 'Verificando…'; }
+        if(!user){ window.location.replace('login.html'); return; }
+        // Busca o role na tabela profiles (não vem do Auth.getUser())
+        sb.from('profiles').select('role').eq('id', user.id).single().then(function(res){
+          var role = (res.data && res.data.role) ? res.data.role : '';
+          if(roleEl){ roleEl.textContent = role.toUpperCase() || '—'; }
+          if(role !== 'admin'){
+            alert('Acesso restrito ao dono do site (admin).');
+            window.location.replace('index.html');
+          }
+        }).catch(function(){
+          alert('Não foi possível verificar seu perfil. Contate o suporte.');
+          window.location.replace('index.html');
+        });
       });
     },
     _bindForms: function(){
