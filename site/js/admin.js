@@ -5,7 +5,7 @@
   var SUPABASE_ANON = 'sb_publishable_esHmq85Hujm6BZM538L1Cg_igZMdFa_';
   var sb = null;
   var app = { currentTab: 'dashboard', produtos: [], cupons: [], afiliados: [], vendas: [] };
-  window.AdminApp = {
+  window.AdminApp = app;
     init: function(){
       if(!window.supabase || !window.supabase.createClient){ console.error('Supabase SDK não carregado'); return; }
       sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
@@ -20,11 +20,11 @@
       var btn = document.querySelector('[data-tab="' + tab + '"]');
       if(sec){ sec.classList.add('active'); }
       if(btn){ btn.classList.add('active'); }
-      if(tab === 'dashboard'){ app.loadDashboard(); }
-      else if(tab === 'produtos'){ app.loadProdutos(); }
-      else if(tab === 'cupons'){ app.loadCupons(); app._carregarProdutosSelect(); }
-      else if(tab === 'afiliados'){ app.loadAfiliados(); }
-      else if(tab === 'vendas'){ app.loadVendas(); }
+      if(tab === 'dashboard'){ this.loadDashboard(); }
+      else if(tab === 'produtos'){ this.loadProdutos(); }
+      else if(tab === 'cupons'){ this.loadCupons(); this._carregarProdutosSelect(); }
+      else if(tab === 'afiliados'){ this.loadAfiliados(); }
+      else if(tab === 'vendas'){ this.loadVendas(); }
     },
     _bindTabs: function(){
       document.querySelectorAll('.admin-sidebar .nav-link').forEach(function(btn){
@@ -100,7 +100,7 @@
           '<div class="admin-stat"><div class="v">' + nProdutos + '</div><div class="l">Produtos</div></div>' +
           '<div class="admin-stat"><div class="v">' + nCupons + '</div><div class="l">Cupons</div></div>' +
           '<div class="admin-stat"><div class="v">' + nAfiliados + '</div><div class="l">Afiliados</div></div>' +
-          '<div class="admin-stat"><div class="v">' + app._moeda(totalComissao) + '</div><div class="l">Total em comissões</div></div>';
+          '<div class="admin-stat"><div class="v">' + this._moeda(totalComissao) + '</div><div class="l">Total em comissões</div></div>';
         var lista = document.getElementById('dashboardVendas');
         var vendas = rVendas.data || [];
         if(!vendas.length){
