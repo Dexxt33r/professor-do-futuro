@@ -42,17 +42,24 @@
         if(area){ area.textContent = (user && user.name) ? user.name : (user && user.email) ? user.email : 'Usuário'; }
         if(roleEl){ roleEl.textContent = 'Verificando…'; }
         if(!user){ window.location.replace('login.html'); return; }
-        // Busca o role na tabela profiles (não vem do Auth.getUser())
+        // E-mail do dono (fallback caso haja problema de RLS/cache no banco)
+        var DONO_EMAIL = 'klzinnmta202010@gmail.com';
+        var isDonoPorEmail = (user.email && user.email.toLowerCase() === DONO_EMAIL.toLowerCase());
+        // Busca o role na tabela profiles
         sb.from('profiles').select('role').eq('id', user.id).single().then(function(res){
           var role = (res.data && res.data.role) ? res.data.role : '';
           if(roleEl){ roleEl.textContent = role.toUpperCase() || '—'; }
-          if(role !== 'admin'){
+          if(role !== 'admin' && !isDonoPorEmail){
             alert('Acesso restrito ao dono do site (admin).');
             window.location.replace('index.html');
           }
         }).catch(function(){
-          alert('Não foi possível verificar seu perfil. Contate o suporte.');
-          window.location.replace('index.html');
+          // Se falhar ao ler o banco, ainda libera pelo e-mail do dono
+          if(roleEl){ roleEl.textContent = 'ADMIN'; }
+          if(!isDonoPorEmail){
+            alert('Não foi possível verificar seu perfil. Contate o suporte.');
+            window.location.replace('index.html');
+          }
         });
       });
     },
