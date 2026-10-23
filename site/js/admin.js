@@ -4,9 +4,193 @@
   var SUPABASE_URL = 'https://ngkkhpvganrfctvyyvle.supabase.co';
   var SUPABASE_ANON = 'sb_publishable_esHmq85Hujm6BZM538L1Cg_igZMdFa_';
   var sb = null;
-  var app = { currentTab: 'dashboard', produtos: [], cupons: [], afiliados: [], vendas: [] };
-  window.AdminApp = app;
+  var app = {
+    currentTab: 'dashboard',
+    produtos: [],
+    cupons: [],
+    afiliados: [],
+    vendas: [],
     init: function(){
+      if(!window.supabase || !window.supabase.createClient){ console.error('Supabase SDK não carregado'); return; }
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+      this._bindTabs(); this._bindLogout(); this._bindForms();
+      this.openTab('dashboard');
+    },
+    openTab: function(tab){
+      document.querySelectorAll('.admin-section').forEach(function(el){ el.classList.remove('active'); });
+      document.querySelectorAll('.admin-sidebar .nav-link').forEach(function(el){ el.classList.remove('active'); });
+      var sec = document.getElementById('tab-' + tab);
+      var btn = document.querySelector('[data-tab="' + tab + '"]');
+      if(sec){ sec.classList.add('active'); }
+      if(btn){ btn.classList.add('active'); }
+      if(tab === 'dashboard'){ this.loadDashboard(); }
+      else if(tab === 'produtos'){ this.loadProdutos(); }
+      else if(tab === 'cupons'){ this.loadCupons(); this._carregarProdutosSelect(); }
+      else if(tab === 'afiliados'){ this.loadAfiliados(); }
+      else if(tab === 'vendas'){ this.loadVendas(); }
+    },
+    _bindTabs: function(){
+      var self = this;
+      document.querySelectorAll('.admin-sidebar .nav-link').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          self.openTab(btn.getAttribute('data-tab'));
+        });
+      });
+    },
+    _bindLogout: function(){
+      var btn = document.getElementById('adminBtnLogout');
+      if(btn){ btn.addEventListener('click', function(e){ e.preventDefault(); Auth.logout().then(function(){ window.location.replace('login.html'); }); }); }
+      Auth.getUser().then(function(user){
+        var area = document.getElementById('adminUserName');
+        var roleEl = document.getElementById('adminUserRole');
+        if(area){ area.textContent = (user && user.name) ? user.name : (user && user.email) ? user.email : 'Usuário'; }
+        if(roleEl){ roleEl.textContent = 'ADMIN'; }
+        if(!user){ window.location.replace('login.html'); return; }
+        var DONO_EMAIL = 'klzinnmta202010@gmail.com';
+        var isDonoPorEmail = (user.email && user.email.toLowerCase() === DONO_EMAIL.toLowerCase());
+        if(!isDonoPorEmail){
+          alert('Acesso restrito ao dono do site (admin).');
+          window.location.replace('index.html');
+        }
+      });
+    },
+    _bindForms: function(){
+      var formP = document.getElementById('formProduto');
+      if(formP){ formP.addEventListener('submit', function(e){ e.preventDefault(); app.salvarProduto(); }); }
+      var formC = document.getElementById('formCupom');
+      if(formC){ formC.addEventListener('submit', function(e){ e.preventDefault(); app.salvarCupom(); }); }
+      var formA = document.getElementById('formAfiliado');
+      if(formA){ formA.addEventListener('submit', function(e){ e.preventDefault(); app.salvarAfiliado(); }); }
+    },
+    _showFlash: function(id, tipo, msg){
+      var el = document.getElementById(id);
+      if(!el) return;
+      el.textContent = msg; el.className = 'flash ' + tipo;
+      setTimeout(function(){ el.style.display = 'none'; }, 5000);
+    },
+    _moeda: function(cents){ var v = (cents || 0) / 100; return 'R$ ' + v.toFixed(2).replace('.', ','); },
+    _hideForms: function(){
+      document.getElementById('produtoFormCard').style.display = 'none';
+      document.getElementById('cupomFormCard').style.display = 'none';
+      document.getElementById('afiliadoFormCard').style.display = 'none';
+    },
+    loadDashboard: function(){
+      var self = this;
+      Promise.all([
+        sb.from('produtos').select('id, nome, ativo'),
+        sb.from('cupons').select('id, codigo, ativo, usos_usados, usos_max'),
+        sb.from('afiliados').select('id, total_vendas, total_comissao_centavos'),
+        sb.from('vendas_afiliadas').select('*').order('criado_em', { ascending: false }).limit(5)
+      ]).then(function(results){
+        var rProdutos = results[0], rCupons = results[1], rAfiliados = results[2], rVendas = results[3];
+        var nProdutos = (rProdutos.data || []).length;
+        var nCupons = (rCupons.data || []).length;
+        var nAfiliados = (rAfiliados.data || []).length;
+        var totalComissao = (rAfiliados.data || []).reduce(function(s, a){ return s + (a.total_comissao_centavos || 0); }, 0);
+        var stats = document.getElementById('dashboardStats');
+        stats.innerHTML =
+          '<div class="admin-stat"><div class="v">' + nProdutos + '</div><div class="l">Produtos</div></div>' +
+          '<div class="admin-stat"><div class="v">' + nCupons + '</div><div class="l">Cupons</div></div>' +
+          '<div class="admin-stat"><div class="v">' + nAfiliados + '</div><div class="l">Afiliados</div></div>' +
+          '<div class="admin-stat"><div class="v">' + self._moeda(totalComissao) + '</div><div class="l">Total em comissões</div></div>';
+        var lista = document.getElementById('dashboardVendas');
+        var vendas = rVendas.data || [];
+        if(!vendas.length){
+          lista.innerHTML = '<div class="empty"><span class="ic">📭</span>Sem vendas registradas ainda.</div>';
+          return;
+        }
+        var html = '<table class="admin-table"><thead><tr><th>Cliente</th><th>Afiliado</th><th>Produto</th><th>Valor</th><th>Status</th></tr></thead><tbody>';
+        vendas.forEach(function(v){
+          html += '<tr><td>' + (v.cliente_email || '') + '</td><td>' + (v.afiliado_codigo || '') + '</td><td>' + (v.produto_nome || '-') + '</td><td>' + self._moeda(v.valor_venda_centavos) + '</td><td><span class="badge ' + v.status + '">' + v.status + '</span></td></tr>';
+        });
+        html += '</tbody></table>';
+        lista.innerHTML = html;
+      }).catch(function(err){ console.error('Dashboard error:', err); });
+    },
+    loadProdutos: function(){
+      var self = this;
+      sb.from('produtos').select('*').order('criado_em', { ascending: false }).then(function(res){
+        self.produtos = res.data || [];
+        self.renderProdutos();
+      }).catch(function(err){ console.error('Load produtos error:', err); });
+    },
+    renderProdutos: function(){
+      var lista = document.getElementById('produtosLista');
+      if(!app.produtos.length){ lista.innerHTML = '<div class="empty"><span class="ic">📦</span>Nenhum produto cadastrado.</div>'; return; }
+      var html = '<table class="admin-table"><thead><tr><th>Nome</th><th>Preço</th><th>Promo</th><th>Ativo</th><th>Ações</th></tr></thead><tbody>';
+      app.produtos.forEach(function(p){
+        html += '<tr>' +
+          '<td><strong>' + (p.nome || '-') + '</strong><br><small style="color:var(--text-muted)">' + (p.descricao || '') + '</small></td>' +
+          '<td>' + app._moeda(p.preco_centavos) + '</td>' +
+          '<td>' + (p.preco_promocional_centavos ? app._moeda(p.preco_promocional_centavos) : '—') + '</td>' +
+          '<td><span class="badge ' + (p.ativo ? 'ativo' : 'inativo') + '">' + (p.ativo ? 'Ativo' : 'Inativo') + '</span></td>' +
+          '<td>' +
+          '<button class="btn btn-sm btn-ok" onclick="app.editarProduto(\'' + p.id + '\')">Editar</button> ' +
+          '<button class="btn btn-sm btn-danger" onclick="app.excluirProduto(\'' + p.id + '\')">Excluir</button>' +
+          '</td></tr>';
+      });
+      html += '</tbody></table>';
+      lista.innerHTML = html;
+    },
+    editarProduto: function(id){
+      this._hideForms();
+      var card = document.getElementById('produtoFormCard');
+      card.style.display = 'block';
+      document.getElementById('produtoFormTitulo').textContent = id ? 'Editar produto' : 'Cadastrar produto';
+      document.getElementById('btnExcluirProduto').style.display = id ? 'inline-block' : 'none';
+      if(!id){
+        document.getElementById('formProduto').reset();
+        document.getElementById('produtoId').value = '';
+        document.getElementById('produtoAtivo').checked = true;
+        return;
+      }
+      var p = app.produtos.find(function(x){ return x.id === id; });
+      if(!p) return;
+      document.getElementById('produtoId').value = p.id;
+      document.getElementById('produtoNome').value = p.nome || '';
+      document.getElementById('produtoDescricao').value = p.descricao || '';
+      document.getElementById('produtoPreco').value = (p.preco_centavos || 0) / 100;
+      document.getElementById('produtoPrecoPromo').value = p.preco_promocional_centavos ? (p.preco_promocional_centavos / 100) : '';
+      document.getElementById('produtoUrl').value = p.url_compra || '';
+      document.getElementById('produtoAtivo').checked = p.ativo !== false;
+      card.scrollIntoView({ behavior: 'smooth' });
+    },
+    cancelarProduto: function(){
+      this._hideForms();
+      document.getElementById('formProduto').reset();
+      document.getElementById('produtoId').value = '';
+    },
+    salvarProduto: function(){
+      var id = document.getElementById('produtoId').value;
+      var nome = document.getElementById('produtoNome').value.trim();
+      var descricao = document.getElementById('produtoDescricao').value.trim();
+      var preco = parseInt(document.getElementById('produtoPreco').value) || 0;
+      var promo = document.getElementById('produtoPrecoPromo').value;
+      var url = document.getElementById('produtoUrl').value.trim();
+      var ativo = document.getElementById('produtoAtivo').checked;
+      if(!nome){ this._showFlash('produtoFlash', 'err', 'Informe o nome do produto.'); return; }
+      var payload = { nome: nome, descricao: descricao, preco_centavos: preco, url_compra: url, ativo: ativo, atualizado_em: new Date().toISOString() };
+      if(promo){ payload.preco_promocional_centavos = parseInt(promo) || null; } else { payload.preco_promocional_centavos = null; }
+      var promise = id ? sb.from('produtos').update(payload).eq('id', id) : sb.from('produtos').insert(payload);
+      var self = this;
+      promise.then(function(res){
+        if(res.error) throw res.error;
+        self.cancelarProduto();
+        self.loadProdutos();
+      }).catch(function(err){ console.error('Salvar produto error:', err); self._showFlash('produtoFlash', 'err', 'Erro ao salvar produto.'); });
+    },
+    excluirProduto: function(id){
+      var self = this;
+      if(!confirm('Excluir este produto?')) return;
+      sb.from('produtos').delete().eq('id', id).then(function(res){
+        if(res.error) throw res.error;
+        self.loadProdutos();
+      }).catch(function(err){ console.error('Excluir produto error:', err); self._showFlash('produtoFlash', 'err', 'Erro ao excluir produto.'); });
+    },
+
+  };
+  window.AdminApp = app;
+
       if(!window.supabase || !window.supabase.createClient){ console.error('Supabase SDK não carregado'); return; }
       sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
       this._bindTabs(); this._bindLogout(); this._bindForms();
