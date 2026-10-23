@@ -587,5 +587,6 @@
       lista.innerHTML = html;
     }
   };
+  window.AdminApp = app;
 })();
 
