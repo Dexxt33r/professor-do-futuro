@@ -31,3 +31,10 @@ vendas/
 
 # Cache/estado local da CLI do Supabase (não é código-fonte)
 .temp/
+
+# Backend local — scripts e testes de Node (não vão para o repositório público)
+site/backend/scripts/
+site/backend/test/
+site/backend/package.json
+site/backend/package-lock.json
+site/backend/node_modules/
