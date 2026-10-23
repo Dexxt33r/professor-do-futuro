@@ -40,27 +40,15 @@
         var area = document.getElementById('adminUserName');
         var roleEl = document.getElementById('adminUserRole');
         if(area){ area.textContent = (user && user.name) ? user.name : (user && user.email) ? user.email : 'Usuário'; }
-        if(roleEl){ roleEl.textContent = 'Verificando…'; }
+        if(roleEl){ roleEl.textContent = 'ADMIN'; }
         if(!user){ window.location.replace('login.html'); return; }
-        // E-mail do dono (fallback caso haja problema de RLS/cache no banco)
+        // Libera acesso pelo e-mail do dono (não depende da tabela profiles)
         var DONO_EMAIL = 'klzinnmta202010@gmail.com';
         var isDonoPorEmail = (user.email && user.email.toLowerCase() === DONO_EMAIL.toLowerCase());
-        // Busca o role na tabela profiles
-        sb.from('profiles').select('role').eq('id', user.id).single().then(function(res){
-          var role = (res.data && res.data.role) ? res.data.role : '';
-          if(roleEl){ roleEl.textContent = role.toUpperCase() || '—'; }
-          if(role !== 'admin' && !isDonoPorEmail){
-            alert('Acesso restrito ao dono do site (admin).');
-            window.location.replace('index.html');
-          }
-        }).catch(function(){
-          // Se falhar ao ler o banco, ainda libera pelo e-mail do dono
-          if(roleEl){ roleEl.textContent = 'ADMIN'; }
-          if(!isDonoPorEmail){
-            alert('Não foi possível verificar seu perfil. Contate o suporte.');
-            window.location.replace('index.html');
-          }
-        });
+        if(!isDonoPorEmail){
+          alert('Acesso restrito ao dono do site (admin).');
+          window.location.replace('index.html');
+        }
       });
     },
     _bindForms: function(){
