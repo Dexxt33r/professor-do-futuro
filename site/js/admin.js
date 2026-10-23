@@ -6,6 +6,12 @@
   var sb = null;
   var app = { currentTab: 'dashboard', produtos: [], cupons: [], afiliados: [], vendas: [] };
   window.AdminApp = {
+    init: function(){
+      if(!window.supabase || !window.supabase.createClient){ console.error('Supabase SDK não carregado'); return; }
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+      this._bindTabs(); this._bindLogout(); this._bindForms();
+      this.openTab('dashboard');
+    },
     openTab: function(tab){
       app.currentTab = tab;
       document.querySelectorAll('.admin-section').forEach(function(el){ el.classList.remove('active'); });
