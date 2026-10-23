@@ -1961,4 +1961,8 @@ html[data-theme="dark"] .enem-opt.sel.zero .enem-btn{ background:#3a1010; }
   font-weight: 700;
 }
 .mod-done-btn.done:hover { background: var(--indigo-700); border-color: var(--indigo-700); }
+/* ---------- Link do Painel do Dono (somente admins veem) ---------- */
+.nav-link.admin-link{display:none;}
+.nav-link.admin-link.visible{display:block;}
+
 html[data-theme="dark"] .mod-done-btn.done { color: #062b1b; background: var(--indigo-700); border-color: var(--indigo-700); }

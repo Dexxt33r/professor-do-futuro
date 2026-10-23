@@ -30,7 +30,8 @@
     { href:'prompts.html', label:'Prompts' },
     { href:'slides.html', label:'Biblioteca' },
     { href:'perguntas.html', label:'Perguntas' },
-    { href:'ferramentas.html', label:'Laboratório' }
+    { href:'ferramentas.html', label:'Laboratório' },
+    { href:'admin.html', label:'Painel do Dono', adminOnly: true }
   ];
 
   function currentPage(){
@@ -44,7 +45,9 @@
     var links = '';
     NAV_LINKS.forEach(function(l){
       var cls = (currentPage() === l.href) ? 'class="active"' : '';
-      links += '<a href="' + l.href + '" ' + cls + '>' + l.label + '</a>';
+      var adminCls = l.adminOnly ? ' class="nav-link admin-link"' : '';
+      var adminAttr = l.adminOnly ? ' data-admin-only="1"' : '';
+      links += '<a href="' + l.href + '" ' + cls + adminCls + adminAttr + '>' + l.label + '</a>';
     });
 
     // Conta: mostra nome + Sair se logado, senão botão Entrar (preenchido via sessão)
@@ -80,6 +83,12 @@
         area.appendChild(loginA);
       }
       bindLogout();
+      // Mostra o link "Painel do Dono" apenas se o usuário for admin
+      var adminLinks = document.querySelectorAll('[data-admin-only="1"]');
+      adminLinks.forEach(function(el){
+        if(user && user.role === 'admin'){ el.classList.add('visible'); }
+        else { el.classList.remove('visible'); }
+      });
     }
 
     // Preenche o estado da conta de forma assíncrona
