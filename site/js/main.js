@@ -30,8 +30,7 @@
     { href:'prompts.html', label:'Prompts' },
     { href:'slides.html', label:'Biblioteca' },
     { href:'perguntas.html', label:'Perguntas' },
-    { href:'ferramentas.html', label:'Laboratório' },
-    { href:'admin.html', label:'Painel do Dono', adminOnly: true }
+    { href:'ferramentas.html', label:'Laboratório' }
   ];
 
   function currentPage(){
@@ -45,9 +44,7 @@
     var links = '';
     NAV_LINKS.forEach(function(l){
       var cls = (currentPage() === l.href) ? 'class="active"' : '';
-      var adminCls = l.adminOnly ? ' class="nav-link admin-link"' : '';
-      var adminAttr = l.adminOnly ? ' data-admin-only="1"' : '';
-      links += '<a href="' + l.href + '" ' + cls + adminCls + adminAttr + '>' + l.label + '</a>';
+      links += '<a href="' + l.href + '" ' + cls + '>' + l.label + '</a>';
     });
 
     // Conta: mostra nome + Sair se logado, senão botão Entrar (preenchido via sessão)
@@ -83,19 +80,6 @@
         area.appendChild(loginA);
       }
       bindLogout();
-      // Mostra o link "Painel do Dono" apenas se o usuário for admin
-      var adminLinks = document.querySelectorAll('[data-admin-only="1"]');
-      adminLinks.forEach(function(el){ el.classList.remove('visible'); });
-      if(!user) return;
-      // Busca o role na tabela profiles (não vem do Auth.getUser())
-      if(window.SUPABASE){
-        window.SUPABASE.from('profiles').select('role').eq('id', user.id).single().then(function(res){
-          var role = (res.data && res.data.role) ? res.data.role : '';
-          if(role === 'admin'){
-            adminLinks.forEach(function(el){ el.classList.add('visible'); });
-          }
-        }).catch(function(){});
-      }
     }
 
     // Preenche o estado da conta de forma assíncrona

@@ -32,6 +32,9 @@ vendas/
 # Cache/estado local da CLI do Supabase (não é código-fonte)
 .temp/
 
+# Log de vendas do gerenciador local
+site/backend/vendas-log.txt
+
 # Backend local — scripts e testes de Node (não vão para o repositório público)
 site/backend/scripts/
 site/backend/test/
