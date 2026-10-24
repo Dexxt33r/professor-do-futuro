@@ -4,7 +4,7 @@
    ============================================================ */
 
 const SUPABASE_URL = 'https://ngkkhpvganrfctvyyvle.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || 'COLE_SUA_SERVICE_ROLE_KEY_AQUI';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5na2tocHZnYW5yZmN0dnl5dmxlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4ODA4MzQ1NSwiZXhwIjoyMTAzNjU5NDU1fQ.fqMur7xg1v0l9ePdECAO79C7LWmhf_gKPEynnkE0fEc';
 const LOG_FILE = require('path').join(__dirname, 'vendas-log.txt');
 const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1563360369680973844/FUv-PvFw3HQCm44oErDWzQ_4zeU1FTLfsdMfkMmQW3N_tMJNp7HlNqJYQkLAnXIqEbdT';
 
