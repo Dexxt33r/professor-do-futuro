@@ -1,6 +1,7 @@
 ﻿/* ============================================================
    PROFESSOR DO FUTURO — Gerenciador Local SIMPLIFICADO
-   1 produto fixo | Cupom % | Comissão fixa R$ 30,00 | Log + Discord
+   1 produto fixo | 1 afiliado = 1 cupom | Comissão fixa R$ 30
+   Cliente digita cupom OU código do afiliado
    Rode: node gerenciar-local.js
    ============================================================ */
 
@@ -73,18 +74,141 @@ async function garantirProduto() {
   return criado.id;
 }
 
+async function cadastrarAfiliado() {
+  cabecalho('CRIAR AFILIADO');
+  const nome = await pergunta('Nome: ');
+  const email = await pergunta('E-mail: ');
+  const codigo = await pergunta('Código do afiliado (ex: MARIA10): ');
+
+  // Cria o cupom primeiro
+  const cupom = await requisicao('POST', 'cupons', {
+    codigo: codigo,
+    tipo: 'percentual',
+    valor: 0,
+    produto_id: null,
+    data_expiracao: null,
+    usos_max: null,
+    ativo: true
+  });
+
+  // Cria o afiliado vinculado ao cupom
+  const afiliado = await requisicao('POST', 'afiliados', {
+    nome: nome,
+    email: email,
+    codigo_afiliado: codigo,
+    cupom_codigo: codigo,
+    comissao_fixa_centavos: COMISSAO_FIXA_CENTAVOS,
+    ativo: true
+  });
+
+  console.log('\n✅ Afiliado', codigo, 'criado!');
+  console.log('   Cupom:', codigo, '(desconto % definido depois na opção 2)');
+  console.log('   Link:', 'https://seusite.com/?afiliado=' + codigo);
+  console.log('   Comissão fixa: R$ 30,00 por venda.');
+}
+
+async function listarAfiliados() {
+  cabecalho('AFILIADOS E CUPONS');
+  const afiliados = await requisicao('GET', 'afiliados?select=*,cupons(*)&order=criado_em.desc');
+  if (!afiliados.length) { console.log('Nenhum afiliado.'); return; }
+  afiliados.forEach(function(a) {
+    const cupom = a.cupons && a.cupons[0] ? a.cupons[0] : null;
+    const desconto = cupom ? cupom.valor + '%' : 'não definido';
+    console.log(a.codigo_afiliado + ' | ' + a.nome + ' | Cupom: ' + a.cupom_codigo + ' | Desconto: ' + desconto + ' | Vendas: ' + a.total_vendas + ' | Comissão total: R$ ' + (a.total_comissao_centavos / 100).toFixed(2));
+  });
+}
+
+async function registrarVenda(produtoId) {
+  cabecalho('REGISTRAR VENDA');
+  const cliente = await pergunta('E-mail do cliente: ');
+  const codigo = await pergunta('Cupom OU código do afiliado: ');
+
+  let descontoCentavos = 0;
+  let cupomInfo = null;
+  let afiliadoInfo = null;
+
+  // Tenta buscar como cupom
+  const cupom = await requisicao('GET', 'cupons?codigo=eq.' + codigo + '&select=*');
+  if (cupom[0]) {
+    cupomInfo = cupom[0];
+    descontoCentavos = Math.round((PRODUTO_PRECO_CENTAVOS * cupomInfo.valor) / 100);
+    if (descontoCentavos > PRODUTO_PRECO_CENTAVOS) descontoCentavos = PRODUTO_PRECO_CENTAVOS;
+    // Busca afiliado pelo cupom_codigo
+    const af = await requisicao('GET', 'afiliados?cupom_codigo=eq.' + codigo + '&select=*');
+    if (af[0]) afiliadoInfo = af[0];
+  } else {
+    // Tenta buscar como código de afiliado
+    const af = await requisicao('GET', 'afiliados?codigo_afiliado=eq.' + codigo + '&select=*');
+    if (af[0]) {
+      afiliadoInfo = af[0];
+      // Busca o cupom vinculado
+      const c = await requisicao('GET', 'cupons?codigo=eq.' + af[0].cupom_codigo + '&select=*');
+      if (c[0]) {
+        cupomInfo = c[0];
+        descontoCentavos = Math.round((PRODUTO_PRECO_CENTAVOS * c[0].valor) / 100);
+        if (descontoCentavos > PRODUTO_PRECO_CENTAVOS) descontoCentavos = PRODUTO_PRECO_CENTAVOS;
+      }
+    }
+  }
+
+  let comissaoCentavos = afiliadoInfo ? COMISSAO_FIXA_CENTAVOS : 0;
+  const valorFinal = PRODUTO_PRECO_CENTAVOS - descontoCentavos;
+
+  await requisicao('POST', 'vendas_afiliadas', {
+    afiliado_id: afiliadoInfo ? afiliadoInfo.id : null,
+    cupom_codigo: cupomInfo ? cupomInfo.codigo : codigo,
+    cliente_email: cliente,
+    produto_id: produtoId,
+    produto_nome: PRODUTO_NOME,
+    valor_venda_centavos: valorFinal,
+    desconto_centavos: descontoCentavos,
+    comissao_centavos: comissaoCentavos,
+    status: 'paga'
+  });
+
+  if (cupomInfo) {
+    await requisicao('PATCH', 'cupons?id=eq.' + cupomInfo.id, { usos_usados: (cupomInfo.usos_usados || 0) + 1 });
+  }
+  if (afiliadoInfo) {
+    await requisicao('PATCH', 'afiliados?id=eq.' + afiliadoInfo.id, {
+      total_vendas: (afiliadoInfo.total_vendas || 0) + 1,
+      total_comissao_centavos: ((afiliadoInfo.total_comissao_centavos || 0) + comissaoCentavos)
+    });
+  }
+
+  const agora = new Date().toLocaleString('pt-BR');
+  const linha = '[' + agora + '] VENDA | Cliente: ' + cliente + ' | Produto: Professor do Futuro | Valor: R$ ' + (valorFinal / 100).toFixed(2) + ' | Cupom: ' + (cupomInfo ? cupomInfo.codigo : codigo) + ' | Afiliado: ' + (afiliadoInfo ? afiliadoInfo.codigo_afiliado : '—') + ' | Comissão: R$ ' + (comissaoCentavos / 100).toFixed(2) + ' | Status: paga';
+  gravarLog(linha);
+
+  await enviarDiscord('💰 **NOVA VENDA**\n👤 Cliente: ' + cliente + '\n📦 Produto: Professor do Futuro\n💵 Valor: R$ ' + (valorFinal / 100).toFixed(2) + '\n🎟️ Cupom: ' + (cupomInfo ? cupomInfo.codigo : codigo) + '\n🤝 Afiliado: ' + (afiliadoInfo ? afiliadoInfo.codigo_afiliado : '—') + '\n💸 Comissão: R$ ' + (comissaoCentavos / 100).toFixed(2) + '\n📅 ' + agora);
+
+  console.log('\n✅ Venda registrada!');
+  console.log('   Valor produto: R$ ' + (PRODUTO_PRECO_CENTAVOS / 100).toFixed(2));
+  console.log('   Desconto cupom: R$ ' + (descontoCentavos / 100).toFixed(2));
+  console.log('   Valor final: R$ ' + (valorFinal / 100).toFixed(2));
+  console.log('   Comissão afiliado: R$ ' + (comissaoCentavos / 100).toFixed(2));
+}
+
+async function listarCupons() {
+  cabecalho('CUPOM CADASTRADOS');
+  const cupons = await requisicao('GET', 'cupons?select=*&order=criado_em.desc');
+  if (!cupons.length) { console.log('Nenhum cupom.'); return; }
+  cupons.forEach(function(c) {
+    const ativo = c.ativo ? '✅' : '❌';
+    console.log(ativo + ' ' + c.codigo + ' | Desconto: ' + c.valor + '% | Usos: ' + c.usos_usados + '/' + (c.usos_max || '∞'));
+  });
+}
+
 async function main() {
   const produtoId = await garantirProduto();
-  console.log('🎓 Professor do Futuro — Gerenciador (Produto único ativo)\n');
+  console.log('🎓 Professor do Futuro — Gerenciador Local\n');
 
   while (true) {
     console.log('\n════════════════════════════════════════');
-    console.log(' 1. Criar cupom (desconto %)');
-    console.log(' 2. Listar cupons');
-    console.log(' 3. Criar afiliado (comissão fixa R$ 30)');
-    console.log(' 4. Listar afiliados');
-    console.log(' 5. Registrar venda');
-    console.log(' 6. Ver log de vendas');
+    console.log(' 1. Criar afiliado (gera cupom automaticamente)');
+    console.log(' 2. Listar afiliados e cupons');
+    console.log(' 3. Registrar venda (digite cupom OU código do afiliado)');
+    console.log(' 4. Ver log de vendas');
     console.log(' 0. Sair');
     console.log('═════════════════════════════════════════');
 
@@ -92,131 +216,18 @@ async function main() {
     if (opcao === '0') break;
 
     if (opcao === '1') {
-      cabecalho('CRIAR CUPOM');
-      const codigo = await pergunta('Código (ex: BLACK20): ');
-      const percentual = parseFloat(await pergunta('Desconto % (ex: 20): '));
-      const expiracao = await pergunta('Expira em (YYYY-MM-DD ou enter para nunca): ') || null;
-      const usos_max = await pergunta('Máx. usos (enter para ilimitado): ') || null;
-
-      await requisicao('POST', 'cupons', {
-        codigo: codigo,
-        tipo: 'percentual',
-        valor: percentual,
-        produto_id: produtoId,
-        data_expiracao: expiracao,
-        usos_max: usos_max ? parseInt(usos_max) : null,
-        ativo: true
-      });
-      console.log('\n✅ Cupom', codigo, 'criado com', percentual, '% de desconto.');
-    }
-
-    else if (opcao === '2') {
-      cabecalho('CUPOM CADASTRADOS');
-      const cupons = await requisicao('GET', 'cupons?select=*&produto_id=eq.' + produtoId + '&order=criado_em.desc');
-      if (!cupons.length) { console.log('Nenhum cupom.'); continue; }
-      cupons.forEach(function(c) {
-        const ativo = c.ativo ? '✅' : '❌';
-        console.log(ativo + ' ' + c.codigo + ' | Desconto: ' + c.valor + '% | Usos: ' + c.usos_usados + '/' + (c.usos_max || '∞'));
-      });
-    }
-
-    else if (opcao === '3') {
-      cabecalho('CRIAR AFILIADO');
-      const nome = await pergunta('Nome: ');
-      const email = await pergunta('E-mail: ');
-      const codigo = await pergunta('Código (ex: MARIA10): ');
-
-      await requisicao('POST', 'afiliados', {
-        nome: nome,
-        email: email,
-        codigo_afiliado: codigo,
-        comissao_percentual: 0,
-        ativo: true
-      });
-      console.log('\n✅ Afiliado', codigo, 'criado!');
-      console.log('   Link: https://seusite.com/?afiliado=' + codigo);
-      console.log('   Comissão fixa: R$ 30,00 por venda.');
-    }
-
-    else if (opcao === '4') {
-      cabecalho('AFILIADOS');
-      const afiliados = await requisicao('GET', 'afiliados?select=*&order=criado_em.desc');
-      if (!afiliados.length) { console.log('Nenhum afiliado.'); continue; }
-      afiliados.forEach(function(a) {
-        console.log(a.codigo_afiliado + ' | ' + a.nome + ' | ' + a.email + ' | Vendas: ' + a.total_vendas + ' | Total comissão: R$ ' + (a.total_comissao_centavos / 100).toFixed(2));
-      });
-    }
-
-    else if (opcao === '5') {
-      cabecalho('REGISTRAR VENDA');
-      const cliente = await pergunta('E-mail do cliente: ');
-      const cupomCod = await pergunta('Cupom (ou enter para nenhum): ') || null;
-      const afiliadoCod = await pergunta('Código do afiliado (ou enter para nenhum): ') || null;
-
-      let descontoCentavos = 0;
-      let cupomInfo = null;
-      if (cupomCod) {
-        const cupom = await requisicao('GET', 'cupons?codigo=eq.' + cupomCod + '&select=*');
-        if (cupom[0]) {
-          cupomInfo = cupom[0];
-          descontoCentavos = Math.round((PRODUTO_PRECO_CENTAVOS * cupomInfo.valor) / 100);
-          if (descontoCentavos > PRODUTO_PRECO_CENTAVOS) descontoCentavos = PRODUTO_PRECO_CENTAVOS;
-        }
-      }
-
-      let comissaoCentavos = 0;
-      let afiliadoInfo = null;
-      if (afiliadoCod) {
-        const af = await requisicao('GET', 'afiliados?codigo_afiliado=eq.' + afiliadoCod + '&select=*');
-        if (af[0]) {
-          afiliadoInfo = af[0];
-          comissaoCentavos = COMISSAO_FIXA_CENTAVOS;
-        }
-      }
-
-      const valorFinal = PRODUTO_PRECO_CENTAVOS - descontoCentavos;
-
-      await requisicao('POST', 'vendas_afiliadas', {
-        cliente_email: cliente,
-        produto_id: produtoId,
-        produto_nome: PRODUTO_NOME,
-        valor_venda_centavos: valorFinal,
-        comissao_centavos: comissaoCentavos,
-        status: 'paga'
-      });
-
-      if (cupomInfo) {
-        await requisicao('PATCH', 'cupons?id=eq.' + cupomInfo.id, { usos_usados: (cupomInfo.usos_usados || 0) + 1 });
-      }
-      if (afiliadoInfo) {
-        await requisicao('PATCH', 'afiliados?id=eq.' + afiliadoInfo.id, {
-          total_vendas: (afiliadoInfo.total_vendas || 0) + 1,
-          total_comissao_centavos: ((afiliadoInfo.total_comissao_centavos || 0) + comissaoCentavos)
-        });
-      }
-
-      const agora = new Date().toLocaleString('pt-BR');
-      const linha = '[' + agora + '] VENDA | Cliente: ' + cliente + ' | Produto: Professor do Futuro | Valor: R$ ' + (valorFinal / 100).toFixed(2) + ' | Cupom: ' + (cupomCod || '—') + ' | Afiliado: ' + (afiliadoCod || '—') + ' | Comissão: R$ ' + (comissaoCentavos / 100).toFixed(2) + ' | Status: paga';
-      gravarLog(linha);
-
-      await enviarDiscord('💰 **NOVA VENDA**\n👤 Cliente: ' + cliente + '\n📦 Produto: Professor do Futuro\n💵 Valor: R$ ' + (valorFinal / 100).toFixed(2) + '\n🎟️ Cupom: ' + (cupomCod || '—') + '\n🤝 Afiliado: ' + (afiliadoCod || '—') + '\n💸 Comissão: R$ ' + (comissaoCentavos / 100).toFixed(2) + '\n📅 ' + agora);
-
-      console.log('\n✅ Venda registrada!');
-      console.log('   Valor produto: R$ ' + (PRODUTO_PRECO_CENTAVOS / 100).toFixed(2));
-      console.log('   Desconto cupom: R$ ' + (descontoCentavos / 100).toFixed(2));
-      console.log('   Valor final: R$ ' + (valorFinal / 100).toFixed(2));
-      console.log('   Comissão afiliado: R$ ' + (comissaoCentavos / 100).toFixed(2));
-    }
-
-    else if (opcao === '6') {
+      await cadastrarAfiliado();
+    } else if (opcao === '2') {
+      await listarAfiliados();
+    } else if (opcao === '3') {
+      await registrarVenda(produtoId);
+    } else if (opcao === '4') {
       cabecalho('LOG DE VENDAS');
       if (!fs.existsSync(LOG_FILE)) { console.log('Nenhuma venda.'); continue; }
       const conteudo = fs.readFileSync(LOG_FILE, 'utf8').trim();
       if (!conteudo) { console.log('Nenhuma venda.'); continue; }
       console.log(conteudo);
-    }
-
-    else {
+    } else {
       console.log('Opção inválida.');
     }
   }
