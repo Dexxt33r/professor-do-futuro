@@ -25,6 +25,19 @@ create table if not exists public.produtos (
   atualizado_em timestamptz not null default now()
 );
 
+-- Garantir constraint UNIQUE na coluna nome (necessário para ON CONFLICT)
+do $$
+begin
+  if not exists (
+    select 1 from pg_constraint
+    where conrelid = 'public.produtos'::regclass
+      and contype = 'u'
+      and conname = 'produtos_nome_key'
+  ) then
+    alter table public.produtos add constraint produtos_nome_key unique (nome);
+  end if;
+end $$;
+
 -- 3) Cupons de desconto
 create table if not exists public.cupons (
   id uuid default gen_random_uuid() primary key,
