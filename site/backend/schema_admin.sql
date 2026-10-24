@@ -88,29 +88,29 @@ alter table public.cupons enable row level security;
 alter table public.afiliados enable row level security;
 alter table public.vendas_afiliadas enable row level security;
 
-create policy if not exists "profiles_select_auth" on public.profiles
+create policy "profiles_select_auth" on public.profiles
   for select using (auth.role() = 'authenticated');
-create policy if not exists "profiles_admin_write" on public.profiles
+create policy "profiles_admin_write" on public.profiles
   for all using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
-create policy if not exists "produtos_select_ativos" on public.produtos
+create policy "produtos_select_ativos" on public.produtos
   for select using (ativo = true);
-create policy if not exists "produtos_admin_write" on public.produtos
+create policy "produtos_admin_write" on public.produtos
   for all using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
-create policy if not exists "cupons_select_ativos" on public.cupons
+create policy "cupons_select_ativos" on public.cupons
   for select using (ativo = true);
-create policy if not exists "cupons_admin_write" on public.cupons
+create policy "cupons_admin_write" on public.cupons
   for all using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
-create policy if not exists "afiliados_select_ativos" on public.afiliados
+create policy "afiliados_select_ativos" on public.afiliados
   for select using (ativo = true);
-create policy if not exists "afiliados_admin_write" on public.afiliados
+create policy "afiliados_admin_write" on public.afiliados
   for all using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
-create policy if not exists "vendas_afiliadas_select_own" on public.vendas_afiliadas
+create policy "vendas_afiliadas_select_own" on public.vendas_afiliadas
   for select using (exists (select 1 from public.afiliados a where a.id = vendas_afiliadas.afiliado_id and a.profile_id = auth.uid()));
-create policy if not exists "vendas_afiliadas_admin_all" on public.vendas_afiliadas
+create policy "vendas_afiliadas_admin_all" on public.vendas_afiliadas
   for all using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'));
 
 -- Inserir produto único
