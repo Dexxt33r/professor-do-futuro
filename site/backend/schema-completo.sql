@@ -1,5 +1,5 @@
 ﻿-- ============================================================
--- PROFESSOR DO FUTURO — Schema Completo (idempotente)
+-- PROFESSOR DO FUTURO — Schema Completo (versão simples)
 -- Rode no Supabase: SQL Editor → cole e execute
 -- ============================================================
 
@@ -73,7 +73,6 @@ create table if not exists public.vendas_afiliadas (
   atualizado_em timestamptz not null default now()
 );
 
-
 -- Adicionar colunas faltantes se as tabelas já existirem
 alter table public.vendas_afiliadas add column if not exists cupom_codigo text;
 alter table public.afiliados add column if not exists cupom_codigo text unique;
@@ -81,15 +80,7 @@ alter table public.afiliados add column if not exists codigo_afiliado text uniqu
 alter table public.afiliados add column if not exists comissao_fixa_centavos integer not null default 3000;
 alter table public.profiles add column if not exists codigo_afiliado text unique;
 
--- UNIQUE constraint na coluna nome da tabela produtos
-do 
-begin
-  if not exists (select 1 from pg_constraint where conrelid='public.produtos'::regclass and contype='u' and conname='produtos_nome_key') then
-    alter table public.produtos add constraint produtos_nome_key unique (nome);
-  end if;
-end ;
-
--- Habilitar RLS (não falha se já ativo)
+-- Habilitar RLS
 alter table public.profiles enable row level security;
 alter table public.produtos enable row level security;
 alter table public.cupons enable row level security;
@@ -137,6 +128,6 @@ values (
 )
 on conflict (nome) do nothing;
 
--- Definir admin (descomente se quiser)
+-- Definir seu perfil como admin (descomente se necessário)
 -- update public.profiles set role = 'admin' where email = 'klzinnmta202010@gmail.com';
 
