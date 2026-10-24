@@ -65,12 +65,14 @@ async function main() {
 
   while (true) {
     console.log('\n════════════════════════════════════════');
-    console.log(' 1. Criar cupom de desconto');
-    console.log(' 2. Listar cupons');
-    console.log(' 3. Criar afiliado');
-    console.log(' 4. Listar afiliados');
-    console.log(' 5. Registrar venda (com cupom + afiliado)');
-    console.log(' 6. Ver log de vendas');
+    console.log(' 1. Criar produto');
+    console.log(' 2. Listar produtos');
+    console.log(' 3. Criar cupom de desconto');
+    console.log(' 4. Listar cupons');
+    console.log(' 5. Criar afiliado');
+    console.log(' 6. Listar afiliados');
+    console.log(' 7. Registrar venda (com cupom + afiliado)');
+    console.log(' 8. Ver log de vendas');
     console.log(' 0. Sair');
     console.log('════════════════════════════════════════');
 
@@ -82,6 +84,41 @@ async function main() {
     // 1. CRIAR CUPON
     // -------------------------------------------------
     if (opcao === '1') {
+      cabecalho('CRIAR PRODUTO');
+      const nome = await pergunta('Nome do produto: ');
+      const descricao = await pergunta('Descrição: ');
+      const preco = parseFloat(await pergunta('Preço (ex: 197 para R$197,00): '));
+      const preco_promo = await pergunta('Preço promocional (ou enter para nenhum): ') || null;
+      const url_compra = await pergunta('Link de compra (ou enter para nenhum): ') || null;
+      const ativo = await pergunta('Ativo? (s/n): ') || 's';
+
+      const produto = await requisicao('POST', 'produtos', {
+        nome: nome, descricao: descricao, preco_centavos: Math.round(preco * 100),
+        preco_promocional_centavos: preco_promo ? Math.round(parseFloat(preco_promo) * 100) : null,
+        url_compra: url_compra,
+        ativo: ativo.toLowerCase() === 's'
+      });
+      console.log('\n✅ Produto criado:', produto.nome);
+    }
+
+    // -------------------------------------------------
+    // 2. LISTAR PRODUTOS
+    // -------------------------------------------------
+    else if (opcao === '2') {
+      cabecalho('PRODUTOS CADASTRADOS');
+      const produtos = await requisicao('GET', 'produtos?select=*&order=criado_em.desc');
+      if (!produtos.length) { console.log('Nenhum produto.'); continue; }
+      produtos.forEach(function(p) {
+        const preco = (p.preco_promocional_centavos || p.preco_centavos) / 100;
+        const ativo = p.ativo ? '✅' : '❌';
+        console.log(ativo + ' ' + p.nome + ' | R$ ' + preco.toFixed(2) + ' | Ativo: ' + p.ativo);
+      });
+    }
+
+    // -------------------------------------------------
+    // 3. CRIAR CUPON
+    // -------------------------------------------------
+    else if (opcao === '3') {
       cabecalho('CRIAR CUPON');
       const codigo = await pergunta('Código (ex: BLACK20): ');
       const tipo = await pergunta('Tipo (percentual/fixo): ');
@@ -138,9 +175,9 @@ async function main() {
     }
 
     // -------------------------------------------------
-    // 4. LISTAR AFILIADOS
+    // 6. LISTAR AFILIADOS
     // -------------------------------------------------
-    else if (opcao === '4') {
+    else if (opcao === '6') {
       cabecalho('AFILIADOS');
       const afiliados = await requisicao('GET', 'afiliados?select=*&order=criado_em.desc');
       if (!afiliados.length) { console.log('Nenhum afiliado.'); continue; }
@@ -150,9 +187,9 @@ async function main() {
     }
 
     // -------------------------------------------------
-    // 5. REGISTRAR VENDA
+    // 7. REGISTRAR VENDA
     // -------------------------------------------------
-    else if (opcao === '5') {
+    else if (opcao === '7') {
       cabecalho('REGISTRAR VENDA');
       const produtos = await listarProdutos();
       console.log('\nProdutos:');
@@ -227,9 +264,9 @@ async function main() {
     }
 
     // -------------------------------------------------
-    // 6. VER LOG DE VENDAS
+    // 8. VER LOG DE VENDAS
     // -------------------------------------------------
-    else if (opcao === '6') {
+    else if (opcao === '8') {
       cabecalho('LOG DE VENDAS');
       if (!fs.existsSync(LOG_FILE)) {
         console.log('Nenhuma venda registrada ainda.');
