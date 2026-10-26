@@ -80,41 +80,78 @@ async function cadastrarAfiliado() {
   const email = await pergunta('E-mail: ');
   const codigo = await pergunta('Código do afiliado (ex: MARIA10): ');
 
-  // Cria o cupom primeiro
-  const cupom = await requisicao('POST', 'cupons', {
-    codigo: codigo,
-    tipo: 'percentual',
-    valor: 0,
-    produto_id: null,
-    data_expiracao: null,
-    usos_max: null,
-    ativo: true
-  });
+  // Verificar se já existe cupom com este código
+  let cupomExistente = null;
+  try {
+    const cupons = await requisicao('GET', 'cupons?select=*&codigo=eq.' + encodeURIComponent(codigo));
+    if (cupons.length > 0) {
+      cupomExistente = cupons[0];
+    }
+  } catch (e) {}
 
-  // Cria o afiliado vinculado ao cupom
-  const afiliado = await requisicao('POST', 'afiliados', {
-    nome: nome,
-    email: email,
-    codigo_afiliado: codigo,
-    cupom_codigo: codigo,
-    comissao_fixa_centavos: COMISSAO_FIXA_CENTAVOS,
-    ativo: true
-  });
+  let cupomValor;
+  if (cupomExistente) {
+    cupomValor = cupomExistente.valor;
+    console.log('\n⚠️  Cupom "' + codigo + '" já existe. Usando cupom existente.');
+    console.log('   Desconto atual: ' + cupomExistente.valor + '%');
+  } else {
+    // Criar o cupom primeiro
+    await requisicao('POST', 'cupons', {
+      codigo: codigo,
+      tipo: 'percentual',
+      valor: 0,
+      produto_id: null,
+      data_expiracao: null,
+      usos_max: null,
+      ativo: true
+    });
+    cupomValor = 0;
+  }
 
-  console.log('\n✅ Afiliado', codigo, 'criado!');
-  console.log('   Cupom:', codigo, '(desconto % definido depois na opção 2)');
-  console.log('   Link:', 'https://seusite.com/?afiliado=' + codigo);
-  console.log('   Comissão fixa: R$ 30,00 por venda.');
+  // Verificar se já existe afiliado com este código
+  let afiliadoExistente = null;
+  try {
+    const afiliados = await requisicao('GET', 'afiliados?select=*&codigo_afiliado=eq.' + encodeURIComponent(codigo));
+    if (afiliados.length > 0) {
+      afiliadoExistente = afiliados[0];
+    }
+  } catch (e) {}
+
+  if (afiliadoExistente) {
+    console.log('\n⚠️  Afiliado "' + codigo + '" já existe. Atualizando dados...');
+    await requisicao('PATCH', 'afiliados?id=eq.' + afiliadoExistente.id, {
+      nome: nome,
+      email: email,
+      cupom_codigo: codigo,
+      comissao_fixa_centavos: COMISSAO_FIXA_CENTAVOS,
+      ativo: true
+    });
+    console.log('\n✅ Afiliado atualizado!');
+  } else {
+    // Criar o afiliado vinculado ao cupom
+    await requisicao('POST', 'afiliados', {
+      nome: nome,
+      email: email,
+      codigo_afiliado: codigo,
+      cupom_codigo: codigo,
+      comissao_fixa_centavos: COMISSAO_FIXA_CENTAVOS,
+      ativo: true
+    });
+    console.log('\n✅ Afiliado cadastrado!');
+  }
+
+  console.log('   Código: ' + codigo);
+  console.log('   Cupom: ' + codigo + ' (desconto: ' + cupomValor + '%)');
+  console.log('   Comissão: R$ ' + (COMISSAO_FIXA_CENTAVOS / 100).toFixed(2));
+  console.log('   Link: https://professor-do-futuro-brown.vercel.app/?afiliado=' + codigo);
 }
 
 async function listarAfiliados() {
   cabecalho('AFILIADOS E CUPONS');
-  const afiliados = await requisicao('GET', 'afiliados?select=*,cupons(*)&order=criado_em.desc');
+  const afiliados = await requisicao('GET', 'afiliados?select=*&order=criado_em.desc');
   if (!afiliados.length) { console.log('Nenhum afiliado.'); return; }
   afiliados.forEach(function(a) {
-    const cupom = a.cupons && a.cupons[0] ? a.cupons[0] : null;
-    const desconto = cupom ? cupom.valor + '%' : 'não definido';
-    console.log(a.codigo_afiliado + ' | ' + a.nome + ' | Cupom: ' + a.cupom_codigo + ' | Desconto: ' + desconto + ' | Vendas: ' + a.total_vendas + ' | Comissão total: R$ ' + (a.total_comissao_centavos / 100).toFixed(2));
+    console.log(a.codigo_afiliado + ' | ' + a.nome + ' | ' + a.email + ' | Cupom: ' + a.cupom_codigo + ' | Comissão: R$ ' + (a.comissao_fixa_centavos / 100).toFixed(2) + ' | Vendas: ' + a.total_vendas);
   });
 }
 
@@ -128,21 +165,25 @@ async function registrarVenda(produtoId) {
   let afiliadoInfo = null;
 
   // Tenta buscar como cupom
-  const cupom = await requisicao('GET', 'cupons?codigo=eq.' + codigo + '&select=*');
-  if (cupom[0]) {
-    cupomInfo = cupom[0];
-    descontoCentavos = Math.round((PRODUTO_PRECO_CENTAVOS * cupomInfo.valor) / 100);
-    if (descontoCentavos > PRODUTO_PRECO_CENTAVOS) descontoCentavos = PRODUTO_PRECO_CENTAVOS;
-    // Busca afiliado pelo cupom_codigo
-    const af = await requisicao('GET', 'afiliados?cupom_codigo=eq.' + codigo + '&select=*');
-    if (af[0]) afiliadoInfo = af[0];
-  } else {
-    // Tenta buscar como código de afiliado
-    const af = await requisicao('GET', 'afiliados?codigo_afiliado=eq.' + codigo + '&select=*');
+  if (codigo) {
+    const cupom = await requisicao('GET', 'cupons?select=*&codigo=eq.' + codigo);
+    if (cupom[0]) {
+      cupomInfo = cupom[0];
+      descontoCentavos = Math.round((PRODUTO_PRECO_CENTAVOS * cupomInfo.valor) / 100);
+      if (descontoCentavos > PRODUTO_PRECO_CENTAVOS) descontoCentavos = PRODUTO_PRECO_CENTAVOS;
+      // Busca afiliado pelo cupom_codigo
+      const af = await requisicao('GET', 'afiliados?select=*&cupom_codigo=eq.' + codigo);
+      if (af[0]) afiliadoInfo = af[0];
+    }
+  }
+
+  // Se não encontrou por cupom, tentar por código de afiliado
+  if (!afiliadoInfo && codigo) {
+    const af = await requisicao('GET', 'afiliados?select=*&codigo_afiliado=eq.' + codigo);
     if (af[0]) {
       afiliadoInfo = af[0];
       // Busca o cupom vinculado
-      const c = await requisicao('GET', 'cupons?codigo=eq.' + af[0].cupom_codigo + '&select=*');
+      const c = await requisicao('GET', 'cupons?select=*&codigo=eq.' + af[0].cupom_codigo);
       if (c[0]) {
         cupomInfo = c[0];
         descontoCentavos = Math.round((PRODUTO_PRECO_CENTAVOS * c[0].valor) / 100);
@@ -155,12 +196,10 @@ async function registrarVenda(produtoId) {
   const valorFinal = PRODUTO_PRECO_CENTAVOS - descontoCentavos;
 
   await requisicao('POST', 'vendas_afiliadas', {
-    afiliado_id: afiliadoInfo ? afiliadoInfo.id : null,
-    cupom_codigo: cupomInfo ? cupomInfo.codigo : codigo,
     cliente_email: cliente,
     produto_id: produtoId,
     produto_nome: PRODUTO_NOME,
-    valor_venda_centavos: valorFinal,
+    valor_venda_centavos: PRODUTO_PRECO_CENTAVOS,
     desconto_centavos: descontoCentavos,
     comissao_centavos: comissaoCentavos,
     status: 'paga'
