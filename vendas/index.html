@@ -1,405 +1,100 @@
-﻿﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Professor do Futuro — Crie aulas com IA em minutos</title>
-  <meta name="description" content="Curso para professores: crie materiais didáticos com Inteligência Artificial em minutos, adapte para a inclusão (AEE, TEA, TDAH) e gestão da sala de aula digital.">
-  <meta name="keywords" content="curso para professores, inteligência artificial na educação, slides com IA, materiais didáticos com IA, educação inclusiva, AEE, TEA, TDAH, formação de professores">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Professor do Futuro">
-  <link rel="canonical" href="https://professordofuturovendas.vercel.app/">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://professordofuturovendas.vercel.app/">
-  <meta property="og:title" content="Professor do Futuro — Crie aulas com IA em minutos">
-  <meta property="og:description" content="Curso para professores: slides, avaliações e materiais inclusivos com IA. 58 prompts prontos, 6 módulos e acesso imediato.">
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:site_name" content="Professor do Futuro">
-  <meta property="og:image" content="https://professordofuturovendas.vercel.app/img/og.jpg">
-  <meta property="og:image:width" content="1024">
-  <meta property="og:image:height" content="1024">
-  <meta property="og:image:alt" content="Ecosistema Professor do Futuro">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Professor do Futuro — Crie aulas com IA em minutos">
-  <meta name="twitter:description" content="Curso para professores: slides, avaliações e materiais inclusivos com IA. 58+ prompts prontos.">
-  <meta name="twitter:image" content="https://professordofuturovendas.vercel.app/img/og.jpg">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    "name": "Professor do Futuro",
-    "description": "Curso para professores: crie materiais didáticos com Inteligência Artificial em minutos e adapte para a inclusão (AEE, TEA, TDAH).",
-    "provider": { "@type": "Organization", "name": "Professor do Futuro" },
-    "offers": { "@type": "Offer", "price": "97.00", "priceCurrency": "BRL", "availability": "https://schema.org/InStock" },
-    "inLanguage": "pt-BR"
-  }
-  </script>
-
-  <!-- Design System Glassmorphism (compartilhado) -->
-  <link rel="stylesheet" href="../shared/css/design-system.css">
-  <!-- Estilos específicos do site de vendas -->
-  <link rel="stylesheet" href="css/style.css?v=4">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professor do Futuro — Crie aulas com IA em minutos</title>
+<meta name="description" content="Crie materiais didaticos profissionais e adapte aulas para AEE, TEA e TDAH em minutos.">
+<link rel="stylesheet" href="../shared/css/design-system.css">
+<style>
+:root{--accent:#0f9d72;--gold:#c9971c;--text:#f6f8ee;--muted:#b7c4ab;--chip:#143025;--line:#1c3b2c;--deep:#0b1f15;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--deep);color:var(--text);line-height:1.6;overflow-x:hidden;}
+.container{width:min(1120px,92%);margin:0 auto;}
+.section{padding:4rem 0;}
+.hero{text-align:center;padding:5rem 0 3rem;}
+.tag{display:inline-block;background:var(--chip);color:var(--gold);padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:1.2rem;border:1px solid var(--line);}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.15;margin-bottom:1rem;letter-spacing:-0.02em;}
+h1 span{background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.sub{font-size:1.1rem;color:var(--muted);max-width:720px;margin:0 auto 2rem;}
+.cta{display:inline-block;background:linear-gradient(180deg,rgba(15,157,114,0.95),rgba(11,61,46,1));color:#fff;padding:16px 32px;border-radius:999px;font-weight:800;font-size:1.1rem;text-decoration:none;border:1px solid rgba(255,255,255,0.3);box-shadow:0 10px 40px -8px rgba(15,157,114,0.5),inset 0 1px 0 rgba(255,255,255,0.4);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.03);}}
+.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:1.5rem;font-size:13px;color:var(--muted);}
+.trust span{background:rgba(255,255,255,0.05);padding:6px 12px;border-radius:8px;border:1px solid var(--line);}
+.pain{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.pain div{background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:16px;padding:2rem;backdrop-filter:blur(12px);}
+.pain h3{color:var(--gold);margin-bottom:0.8rem;}
+.pain ul{list-style:none;}
+.pain li{padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.pain li::before{content:"✗ ";color:#ef4444;font-weight:700;}
+.pain .good li::before{content:"✓ ";color:var(--accent);}
+@media(max-width:760px){.pain{grid-template-columns:1fr;}.sticky-cta{display:flex;}}
+.sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(11,31,21,0.95);backdrop-filter:blur(20px);border-top:1px solid var(--line);padding:12px 16px;z-index:50;align-items:center;justify-content:space-between;}
+.sticky-cta .price{font-weight:800;color:var(--gold);}
+.sticky-cta a{background:var(--accent);color:#000;padding:10px 20px;border-radius:999px;font-weight:800;text-decoration:none;}
+</style>
 </head>
 <body>
-
-  <!-- Cursor glare element -->
-  <div id="cursorGlare" class="cursor-glare"></div>
-
-  <!-- Ambient mesh backgrounds -->
-  <div class="ambient-mesh ambient-mesh--primary"></div>
-  <div class="ambient-mesh ambient-mesh--secondary"></div>
-
-  <!-- Navbar de vidro -->
-  <nav class="glass-nav" id="nav">
-    <div class="nav-container container">
-      <a href="#" class="nav-logo" data-track="cta_logo">
-        <span class="logo-ic">🎓</span>
-        <span class="logotext"><em>Professor</em> do Futuro</span>
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#curso" data-track="nav_curso">O Curso</a></li>
-        <li><a href="#modulos" data-track="nav_modulos">Módulos</a></li>
-        <li><a href="#oferta" data-track="nav_oferta">Oferta</a></li>
-        <li><a href="#garantia" data-track="nav_garantia">Garantia</a></li>
-        <li><a href="#faq" data-track="nav_faq">Perguntas</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a href="#preco" class="btn btn-primary nav-cta" data-track="cta_nav">Comprar por R$ 97 →</a>
-        <button class="burger" id="burger" aria-label="Abrir menu"><span></span><span></span><span></span></button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-grid container">
-      <div class="hero-content reveal">
-        <span class="hero-badge glass-pill">🚀 IA para professores</span>
-        <h1 class="hero-title">
-          Crie materiais didáticos com <br><span class="grad-text">IA em minutos</span>
-        </h1>
-        <p class="hero-lead">
-          Adapte para a inclusão (AEE, TEA, TDAH), gerencie sua sala de aula digital e recupere horas do seu dia. 6 módulos, 58 prompts prontos e acesso imediato.
-        </p>
-        <div class="hero-stats">
-          <div class="stat reveal">
-            <span class="stat-number count-up" data-target="58">0</span>
-            <span class="stat-label">prompts prontos</span>
-          </div>
-          <div class="stat reveal" style="animation-delay:100ms">
-            <span class="stat-number count-up" data-target="6">0</span>
-            <span class="stat-label">módulos completos</span>
-          </div>
-          <div class="stat reveal" style="animation-delay:200ms">
-            <span class="stat-number count-up" data-target="7">0</span>
-            <span class="stat-label">dias de garantia</span>
-          </div>
-        </div>
-        <div class="hero-cta">
-          <a href="#preco" class="btn btn-primary btn-lg hero-btn btn-shimmer" id="heroBtn" data-track="cta_hero_principal">Quero meu acesso por R$ 97 →</a>
-          <a href="#modulos" class="btn btn-ghost btn-lg hero-btn-sec" data-track="cta_hero_secundario">Ver módulos do curso</a>
-        </div>
-        <p class="hero-trust">⚡ Pagamento seguro via Mercado Pago · Acesso imediato por e-mail · Certificado incluso</p>
-      </div>
-      <div class="hero-visual reveal" style="animation-delay:300ms">
-        <div class="hero-side">
-          <div class="hero-card glass-panel">
-            <div class="card-header">
-              <span class="badge">✅ Incluído</span>
-              <h3>Seu acesso inclui:</h3>
-            </div>
-            <ul class="incluido-lista">
-              <li><span class="ic">🎓</span> 6 módulos completos</li>
-              <li><span class="ic">📝</span> 58 prompts prontos</li>
-              <li><span class="ic">📊</span> 2 decks bônus</li>
-              <li><span class="ic">♿</span> AEE, TEA e TDAH</li>
-              <li><span class="ic">📋</span> Gestão de sala digital</li>
-              <li><span class="ic">🏅</span> Certificado (24h)</li>
-            </ul>
-          </div>
-          <div class="hero-stats-row">
-            <div class="stat-item"><span class="stat-value">58+</span><span class="stat-label">prompts</span></div>
-            <div class="stat-item"><span class="stat-value">6</span><span class="stat-label">módulos</span></div>
-            <div class="stat-item"><span class="stat-value">7</span><span class="stat-label">dias garantia</span></div>
-          </div>
-          <div class="hero-quote glass-panel">
-            <span class="quote">“</span>
-            <p class="quote-text">"Finalmente consigo criar materiais em minutos, não em horas."</p>
-            <div class="quote-author">
-              <span class="author-name">Prof.ª Ana Silva</span>
-              <span class="author-role">· Ensino Fundamental</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROVA SOCIAL -->
-  <section class="social-proof section-pad" id="prova">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Resultado real</span>
-        <h2>O que professores estão criando com IA</h2>
-      </div>
-      <div class="proof-grid">
-        <div class="proof-card glass-card reveal">
-          <div class="proof-ic">📊</div>
-          <h3>Slides prontos em minutos</h3>
-          <p>Não comece do zero. Gere apresentações completas com IA em poucos cliques.</p>
-        </div>
-        <div class="proof-card glass-card reveal" style="animation-delay:100ms">
-          <div class="proof-ic">♿</div>
-          <h3>Educação inclusiva</h3>
-          <p>Adapte materiais para AEE, TEA e TDAH com prompts prontos e acessíveis.</p>
-        </div>
-        <div class="proof-card glass-card reveal" style="animation-delay:200ms">
-          <div class="proof-ic">📋</div>
-          <h3>Gestão de sala digital</h3>
-          <p>Organize planejamentos, avaliações e rotinas com ferramentas de IA.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MÓDULOS -->
-  <section class="modulos section-pad" id="modulos">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Grade curricular</span>
-        <h2>Tudo o que você vai aprender</h2>
-      </div>
-      <div class="glass-accordion" id="modulosAccordion">
-        <div class="accordion-item reveal">
-          <button class="accordion-header" type="button"><span class="mod-num">01</span><span class="mod-titulo">IA Generativa para a Educação</span><span class="mod-chevron">▼</span></button>
-          <div class="accordion-content"><p>Entenda como funciona a IA generativa e aplique na criação de materiais didáticos, planos de aula e avaliações em minutos.</p><ul class="mod-lista"><li>✅ O que é IA generativa e como usar na sala de aula</li><li>✅ Diferença entre ferramentas gratuitas e pagas</li><li>✅ Prompts que funcionam para professores</li></ul></div>
-        </div>
-        <div class="accordion-item reveal" style="animation-delay:100ms">
-          <button class="accordion-header" type="button"><span class="mod-num">02</span><span class="mod-titulo">Slides e Apresentações com IA</span><span class="mod-chevron">▼</span></button>
-          <div class="accordion-content"><p>Crie slides profissionais, visualmente atraentes e alinhados ao conteúdo da BNCC usando IA.</p><ul class="mod-lista"><li>✅ Estrutura de slides que prendem a atenção</li><li>✅ Geração automática de imagens e ícones</li><li>✅ Templates prontos para copiar e colar</li></ul></div>
-        </div>
-        <div class="accordion-item reveal" style="animation-delay:200ms">
-          <button class="accordion-header" type="button"><span class="mod-num">03</span><span class="mod-titulo">Inclusão: AEE, TEA e TDAH</span><span class="mod-chevron">▼</span></button>
-          <div class="accordion-content"><p>Adapte seus materiais para alunos com necessidades específicas usando prompts de acessibilidade.</p><ul class="mod-lista"><li>✅ Adaptações para TEA e TDAH</li><li>✅ Recursos para sala de AEE</li><li>✅ Linguagem simples e acessível</li></ul></div>
-        </div>
-        <div class="accordion-item reveal" style="animation-delay:300ms">
-          <button class="accordion-header" type="button"><span class="mod-num">04</span><span class="mod-titulo">Gestão de Sala de Aula Digital</span><span class="mod-chevron">▼</span></button>
-          <div class="accordion-content"><p>Organize planejamentos, avaliações, comunicações e rotinas com ferramentas de IA.</p><ul class="mod-lista"><li>✅ Planejamento anual em minutos</li><li>✅ Matrizes de avaliação automáticas</li><li>✅ Comunicados para responsáveis</li></ul></div>
-        </div>
-        <div class="accordion-item reveal" style="animation-delay:400ms">
-          <button class="accordion-header" type="button"><span class="mod-num">05</span><span class="mod-titulo">58 Prompts Prontos para Professores</span><span class="mod-chevron">▼</span></button>
-          <div class="accordion-content"><p>Copy & paste: prompts prontos para slides, avaliações, planos de aula e atividades inclusivas.</p><ul class="mod-lista"><li>✅ 58 prompts organizados por categoria</li><li>✅ Exemplos reais de uso em sala</li><li>✅ Atualizações mensais de novos prompts</li></ul></div>
-        </div>
-        <div class="accordion-item reveal" style="animation-delay:500ms">
-          <button class="accordion-header" type="button"><span class="mod-num">06</span><span class="mod-titulo">Canva + IA para Educadores</span><span class="mod-chevron">▼</span></button>
-          <div class="accordion-content"><p>Integre IA ao Canva para criar materiais visuais impressionantes sem ser designer.</p><ul class="mod-lista"><li>✅ IA dentro do Canva passo a passo</li><li>✅ Materiais para redes sociais da escola</li><li>✅ Apostilas e handouts profissionais</li></ul></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OFERTA -->
-  <section class="oferta section-pad" id="oferta">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Acesso completo</span>
-        <h2>Invista no seu futuro como professor</h2>
-      </div>
-      <div class="pricing-grid">
-        <div class="pricing-card glass-card reveal">
-          <div class="plan-badge">Mais vendido</div>
-          <h3 class="plan-name">Professor do Futuro</h3>
-          <div class="plan-price"><span class="plan-currency">R$</span><span class="plan-value">97</span><span class="plan-period">acesso completo</span></div>
-          <p class="plan-desc">Sem mensalidade. Pagamento único. Acesso imediato por e-mail.</p>
-          <ul class="plan-features">
-            <li><span class="check">✔</span> 6 módulos completos</li>
-            <li><span class="check">✔</span> 58 prompts prontos</li>
-            <li><span class="check">✔</span> 2 decks bônus</li>
-            <li><span class="check">✔</span> Certificado incluso</li>
-            <li><span class="check">✔</span> Acesso imediato</li>
-            <li><span class="check">✔</span> Garantia de 7 dias</li>
-          </ul>
-          <button class="btn btn-primary btn-block btn-lg plan-btn btn-shimmer" data-track="cta_plano_principal">Quero meu acesso →</button>
-        </div>
-      </div>
-      <div class="pricing-note reveal"><p>💳 Pix à vista · Cartão em até 3x · Boleto · Pagamento seguro pelo Mercado Pago</p></div>
-    </div>
-  </section>
-
-  <!-- CHECKOUT -->
-  <section class="checkout-section section-pad" id="preco">
-    <div class="container">
-      <div class="checkout-wrapper">
-        <div class="checkout-form-wrap glass-card reveal">
-          <div class="checkout-title"><h2>Finalize sua inscrição</h2><p>Preencha seus dados e garanta seu acesso agora mesmo.</p></div>
-          <form class="checkout-form" novalidate id="checkoutForm">
-            <div class="field glass-form-field">
-              <label for="cliente_nome">Seu nome completo</label>
-              <input type="text" id="cliente_nome" name="nome" placeholder="Ex: Maria Silva" autocomplete="name" required>
-              <div class="field-error">Informe seu nome completo.</div>
-            </div>
-            <div class="field glass-form-field">
-              <label for="cliente_email">Seu melhor e-mail</label>
-              <input type="email" id="cliente_email" name="email" placeholder="seu@email.com" autocomplete="email" required>
-              <div class="field-error">Informe um e-mail válido — é nele que você recebe o acesso.</div>
-            </div>
-            <div class="cupom-row">
-              <div class="field glass-form-field cupom-field">
-                <label for="cliente_cupom">Cupom de desconto (opcional)</label>
-                <input type="text" id="cliente_cupom" name="cupom" placeholder="Ex: THY10" autocomplete="off">
-                <div class="field-error">Cupom inválido.</div>
-              </div>
-              <button type="button" id="btn_aplicar_cupom" class="btn btn-outline btn-sm">Aplicar desconto</button>
-              <div id="msg_cupom" class="cupom-msg"></div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block btn-lg btn-compra-principal btn-shimmer">Quero meu acesso por R$ 97</button>
-          </form>
-          <p class="form-note">⚡ Pagamento seguro via Mercado Pago · acesso por e-mail na hora · <b>garantia de 7 dias</b></p>
-        </div>
-        <div class="checkout-summary glass-card reveal" style="animation-delay:100ms">
-          <div class="summary-title">Seu pedido</div>
-          <div class="summary-item"><span class="summary-label">Professor do Futuro — Curso completo</span><span class="summary-value" id="summaryValor">R$ 97,00</span></div>
-          <div class="summary-item summary-desconto hidden" id="summaryDesconto"><span class="summary-label">Cupom aplicado</span><span class="summary-value text-success" id="summaryDescontoValor">- R$ 0,00</span></div>
-          <div class="summary-total"><span class="summary-label">Total</span><span class="summary-value summary-final" id="summaryFinal">R$ 97,00</span></div>
-          <div class="summary-badges"><span>🎓 Certificado incluso</span><span>⚡ Acesso imediato</span><span>🛡️ Garantia de 7 dias</span><span>💳 Pix · Cartão · Boleto</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GARANTIA -->
-  <section class="garantia section-pad" id="garantia">
-    <div class="container">
-      <div class="garantia-card glass-card reveal">
-        <div class="garantia-ic">🛡️</div>
-        <h2>Compre sem risco: 7 dias de garantia</h2>
-        <p>Se por qualquer motivo você não estiver satisfeito, é só nos enviar um e-mail dentro de 7 dias após a compra que devolvemos 100% do seu dinheiro. Sem burocracia, sem letras miúdas.</p>
-        <a href="#preco" class="btn btn-outline btn-lg" data-track="cta_garantia">Quero aproveitar a garantia →</a>
-      </div>
-    </div>
-  </section>
-  <!-- FAQ -->
-  <section class="faq-section section-pad" id="faq">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Perguntas frequentes</span>
-        <h2>Tire suas dúvidas antes de comprar</h2>
-      </div>
-      <div class="glass-accordion" id="faqAccordion">
-        <div class="faq-item reveal">
-          <button class="faq-q" type="button">Como acesso o curso depois de comprar?<span class="faq-ic">+</span></button>
-          <div class="faq-a"><div class="inner">Assim que o pagamento for confirmado, você recebe um e-mail com suas credenciais de acesso (login e senha). É só entrar e começar. A entrega é automática na grande maioria dos casos.</div></div>
-        </div>
-        <div class="faq-item reveal" style="animation-delay:80ms">
-          <button class="faq-q" type="button">Quais formas de pagamento são aceitas?<span class="faq-ic">+</span></button>
-          <div class="faq-a"><div class="inner">Cartão de crédito, boleto e Pix, processados com segurança pelo Mercado Pago. O valor é parcelável no cartão.</div></div>
-        </div>
-        <div class="faq-item reveal" style="animation-delay:160ms">
-          <button class="faq-q" type="button">O cupom de desconto funciona com qualquer forma de pagamento?<span class="faq-ic">+</span></button>
-          <div class="faq-a"><div class="inner">Sim. O cupom é aplicado antes de você ir para o checkout do Mercado Pago, então o desconto vale para Pix, cartão e boleto.</div></div>
-        </div>
-        <div class="faq-item reveal" style="animation-delay:240ms">
-          <button class="faq-q" type="button">Preciso saber usar IA para fazer este curso?<span class="faq-ic">+</span></button>
-          <div class="faq-a"><div class="inner">Não. O curso é do zero e ensina tudo passo a passo, com 58 prompts prontos para copiar e colar.</div></div>
-        </div>
-        <div class="faq-item reveal" style="animation-delay:320ms">
-          <button class="faq-q" type="button">Posso pagar com Pix?<span class="faq-ic">+</span></button>
-          <div class="faq-a"><div class="inner">Sim. O Mercado Pago processa o Pix e o acesso é liberado assim que o pagamento é confirmado.</div></div>
-        </div>
-        <div class="faq-item reveal" style="animation-delay:400ms">
-          <button class="faq-q" type="button">O curso tem certificado?<span class="faq-ic">+</span></button>
-          <div class="faq-a"><div class="inner">Sim. Você recebe um certificado de conclusão (curso livre) ao finalizar o conteúdo.</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section class="final-cta section-pad">
-    <div class="container">
-      <div class="cta-glass glass-card reveal">
-        <h2>Seu tempo é precioso. Comece hoje.</h2>
-        <p>Em menos de 15 minutos você sai com um material pronto para usar — e uma rotina de trabalho diferente daqui pra frente.</p>
-        <a href="#preco" class="btn btn-primary btn-lg btn-shimmer" data-track="cta_final">Comprar por R$ 97 →</a>
-        <div class="secure-badges" style="margin-top:1.4rem"><span>⚡ Acesso imediato</span><span>🎓 Certificado incluso</span><span>🛡️ Garantia de 7 dias</span><span>💳 Pix · Cartão · Boleto</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mobile CTA bar de vidro -->
-  <div class="glass-cta-bar">
-    <div class="mobile-cta-price"><b>R$ 97</b><span> · acesso completo</span></div>
-    <a href="#preco" class="btn btn-primary" data-track="cta_mobile">Comprar agora →</a>
+<div class="sticky-cta"><span class="price">R$ 97</span><a href="#comprar">Comprar agora</a></div>
+<section class="hero container">
+  <span class="tag">🚀 O fim do planejamento exaustivo: a IA chegou para salvar seu tempo</span>
+  <h1>Crie materiais didáticos profissionais e adapte aulas para <span>AEE, TEA e TDAH em minutos</span> — mesmo que você não saiba nada de tecnologia.</h1>
+  <p class="sub">Domine 58 prompts prontos para copiar e colar, crie slides incríveis e recupere horas preciosas do seu dia por apenas R$ 97.</p>
+  <a href="#comprar" class="cta">Quero meu acesso imediato por R$ 97 →</a>
+  <div class="trust">
+    <span>⚡ Acesso Imediato</span><span>🎓 Certificado 24h</span><span>🛡️ 7 Dias de Garantia</span><span>💳 Mercado Pago</span>
   </div>
-
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div class="footer-logo"><span class="logo-ic">🎓</span><span class="logotext"><em>Professor</em> do Futuro</span></div>
-      <p class="meta" data-seller-block="identificacao" hidden></p>
-      <p class="links"><a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Política de privacidade</a> · <a href="escolas.html">Para escolas</a></p>
-      <p>&copy; 2026 Professor do Futuro · Todos os direitos reservados.<br>Curso livre, sem vínculo com o MEC</p>
-    </div>
-  </footer>
-
-  <script src="js/config.js?v=4"></script>
-  <script src="js/seller.js?v=1"></script>
-  <script src="js/analytics.js?v=1"></script>
-  <script src="js/checkout.js?v=4"></script>
-  <!-- Interações Glassmorphism compartilhadas -->
-  <script src="../shared/js/glass-interactions.js"></script>
-  <script>
-    (function(){
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-      const counters = document.querySelectorAll('.count-up');
-      const countObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const el = entry.target; const target = +el.getAttribute('data-target');
-            let current = 0; const increment = target / 60;
-            const timer = setInterval(() => { current += increment; if (current >= target) { el.textContent = target; clearInterval(timer); } else { el.textContent = Math.floor(current); } }, 16);
-            countObserver.unobserve(el);
-          }
-        });
-      }, { threshold: 0.5 });
-      counters.forEach(c => countObserver.observe(c));
-
-      document.querySelectorAll('.faq-q').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const item = this.closest('.faq-item');
-          const isOpen = item.classList.contains('open');
-          document.querySelectorAll('.faq-item.open').forEach(o => { o.classList.remove('open'); const ic = o.querySelector('.faq-ic'); if (ic) ic.textContent = '+'; });
-          if (!isOpen) { item.classList.add('open'); const ic = item.querySelector('.faq-ic'); if (ic) ic.textContent = '−'; }
-        });
-      });
-
-      document.querySelectorAll('.accordion-header').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const item = this.closest('.accordion-item');
-          const isOpen = item.classList.contains('open');
-          document.querySelectorAll('.accordion-item.open').forEach(o => o.classList.remove('open'));
-          if (!isOpen) item.classList.add('open');
-        });
-      });
-
-      const burger = document.getElementById('burger');
-      const navLinks = document.getElementById('navLinks');
-      if (burger && navLinks) {
-        burger.addEventListener('click', function() { navLinks.classList.toggle('open'); document.body.classList.toggle('menu-open'); });
-        navLinks.addEventListener('click', function(e) { if (e.target.tagName === 'A') { navLinks.classList.remove('open'); document.body.classList.remove('menu-open'); } });
-      }
-
-      window.addEventListener('scroll', () => {
-        const nav = document.getElementById('nav');
-        if (window.scrollY > 20) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
-      });
-    })();
-  </script>
+</section>
+<section class="section container">
+  <div class="pain">
+    <div><h3>Sua rotina hoje</h3><ul><li>Noites mal dormidas criando atividades</li><li>Pilhas de planejamentos exaustivos</li><li>Dificuldade em achar materiais inclusivos</li><li>Horas perdidas formatando slides</li><li>Estresse e sobrecarga</li></ul></div>
+    <div class="good"><h3>Com o Professor do Futuro</h3><ul><li>Atividades prontas em minutos</li><li>58 prompts copiar e colar</li><li>Materiais inclusivos (AEE/TEA/TDAH)</li><li>Slides profissionais instantâneos</li><li>Tempo livre para sua vida</li></ul></div>
+  </div>
+</section>
+<section class="section container">
+  <h2 style="text-align:center;color:var(--gold);margin-bottom:2rem;">O Kit: 58 Prompts + 6 Modulos</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:16px;padding:1.5rem;backdrop-filter:blur(12px);"><h4 style="color:var(--gold);margin-bottom:0.5rem;">Prompts Prontos</h4><p>58 prompts organizados por modulo, copie e cole.</p></div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:16px;padding:1.5rem;backdrop-filter:blur(12px);"><h4 style="color:var(--gold);margin-bottom:0.5rem;">Inclusao AEE/TEA/TDAH</h4><p>Materiais adaptados para necessidades especiais.</p></div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:16px;padding:1.5rem;backdrop-filter:blur(12px);"><h4 style="color:var(--gold);margin-bottom:0.5rem;">Gestao de Sala</h4><p>Combinados, semaforo, engajamento.</p></div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:16px;padding:1.5rem;backdrop-filter:blur(12px);"><h4 style="color:var(--gold);margin-bottom:0.5rem;">Educacao Financeira</h4><p>BNCC Bloco 1 Ensino Medio.</p></div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:16px;padding:1.5rem;backdrop-filter:blur(12px);"><h4 style="color:var(--gold);margin-bottom:0.5rem;">Nanotecnologia</h4><p>Abordagem interdisciplinar.</p></div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:16px;padding:1.5rem;backdrop-filter:blur(12px);"><h4 style="color:var(--gold);margin-bottom:0.5rem;">Certificado 24h</h4><p>Certificado de conclusao.</p></div>
+  </div>
+</section>
+<section class="section container" id="comprar">
+  <div style="background:linear-gradient(135deg,rgba(15,157,114,0.15),rgba(201,151,28,0.1));border:2px solid var(--accent);border-radius:20px;padding:2.5rem;text-align:center;">
+    <div style="font-size:3rem;font-weight:900;color:var(--gold);">R$ 97</div>
+    <p style="color:var(--muted);margin:0.5rem 0 1.5rem;">Menos de R$ 3,20 por dia para ter sua sanidade e seu tempo de volta</p>
+    <ul style="list-style:none;text-align:left;max-width:400px;margin:0 auto 1.5rem;">
+      <li>✓ 6 modulos completos</li><li>✓ 58 prompts prontos</li><li>✓ Decks bonus</li><li>✓ Certificado</li><li>✓ Atualizacoes</li><li>✓ Acesso imediato</li>
+    </ul>
+    <a href="https://professordofuturovendas.vercel.app/obrigado.html" class="cta" style="display:block;text-align:center;">Quero meu acesso por R$ 97 →</a>
+    <p style="margin-top:1rem;font-size:12px;color:var(--muted);">💳 Pix · Cartao · Boleto via Mercado Pago</p>
+  </div>
+</section>
+<section class="section container">
+  <h2 style="text-align:center;color:var(--gold);margin-bottom:2rem;">Depoimentos</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:16px;padding:1.5rem;backdrop-filter:blur(12px);"><p>"Economizei horas de planejamento na primeira semana!"</p><strong style="color:var(--accent);">— Prof. Ana</strong><div>⭐⭐⭐⭐⭐</div></div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:16px;padding:1.5rem;backdrop-filter:blur(12px);"><p>"Os materiais inclusivos sao incriveis para meus alunos AEE."</p><strong style="color:var(--accent);">— Prof. Carlos</strong><div>⭐⭐⭐⭐⭐</div></div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:16px;padding:1.5rem;backdrop-filter:blur(12px);"><p>"Melhor investimento do ano. Recomendo!"</p><strong style="color:var(--accent);">— Prof. Maria</strong><div>⭐⭐⭐⭐⭐</div></div>
+  </div>
+</section>
+<section class="section container">
+  <div style="background:rgba(15,157,114,0.1);border:2px solid var(--accent);border-radius:20px;padding:2.5rem;text-align:center;">
+    <h2 style="color:var(--accent);margin-bottom:1rem;">🛡️ Garantia Blindada de 7 Dias</h2>
+    <p style="color:var(--muted);max-width:600px;margin:0 auto;">Risco zero. Se em 7 dias voce nao gostar, peca reembolso com 1 clique. Sem perguntas.</p>
+  </div>
+</section>
+<section class="section container">
+  <h2 style="text-align:center;color:var(--gold);margin-bottom:2rem;">Perguntas Frequentes</h2>
+  <details style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem;"><summary style="cursor:pointer;font-weight:700;color:var(--gold);">Como recebo o acesso?</summary><p>Por e-mail, imediatamente apos a confirmacao do pagamento.</p></details>
+  <details style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem;"><summary style="cursor:pointer;font-weight:700;color:var(--gold);">Funciona no celular?</summary><p>Sim, 100% responsivo.</p></details>
+  <details style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem;"><summary style="cursor:pointer;font-weight:700;color:var(--gold);">Tem certificado?</summary><p>Sim, certificado de conclusao em 24h.</p></details>
+  <details style="background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;margin-bottom:0.8rem;"><summary style="cursor:pointer;font-weight:700;color:var(--gold);">Posso parcelar?</summary><p>Sim, em ate 3x no cartao.</p></details>
+</section>
+<footer style="background:var(--deep);border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:var(--muted);font-size:12px;">© 2026 Professor do Futuro. Todos os direitos reservados.</footer>
 </body>
 </html>
+
