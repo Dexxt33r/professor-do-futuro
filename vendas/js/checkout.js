@@ -171,15 +171,17 @@
     storeCustomer(email, name, password);
     setLoading(btn, true, btnText || "Quero meu acesso por R$ 97", "Abrindo checkout…");
 
-    function withCredentials(url) {
+    function withEmailOnly(url) {
       try {
         var u = url + (url.indexOf("?") === -1 ? "?" : "&") +
-          "email=" + encodeURIComponent(email) +
-          "&senha=" + encodeURIComponent(password);
+          "email=" + encodeURIComponent(email);
         return u;
       } catch (e) { return url; }
     }
 
+    // A senha NÃO viaja na URL (evita exposição em histórico/logs/Referer).
+    // Ela é exibida apenas no contexto do navegador que gerou a compra
+    // (localStorage) e, opcionalmente, enviada por e-mail via Brevo no webhook.
     var payload = {
       product_id: cfg.productId,
       customer: { name: name, email: email, password: password },
@@ -187,9 +189,9 @@
       desconto_centavos: descontoCentavos,
       valor_final_centavos: valorFinal,
       back_urls: {
-        success: withCredentials(resolveUrl(cfg.successUrl)),
-        pending: withCredentials(resolveUrl(cfg.pendingUrl)),
-        failure: withCredentials(resolveUrl(cfg.failureUrl))
+        success: withEmailOnly(resolveUrl(cfg.successUrl)),
+        pending: withEmailOnly(resolveUrl(cfg.pendingUrl)),
+        failure: withEmailOnly(resolveUrl(cfg.failureUrl))
       }
     };
 

@@ -151,7 +151,13 @@ ul { list-style: none; }
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
   background: var(--bg); border-radius: 60% 60% 0 0 / 100% 100% 0 0;
 }
-.hero .container { position: relative; z-index: 2; display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; }
+.hero-grid {
+  position: relative; z-index: 2; display: grid; grid-template-columns: 1.2fr .8fr; gap: 3rem; align-items: center;
+}
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+.hero-text { max-width: 620px; }
 .hero-badge {
   display: inline-flex; gap: .5rem; align-items: center;
   background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);

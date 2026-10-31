@@ -63,7 +63,7 @@ serve(async (req) => {
 
     // Força URLs ABSOLUTAS de retorno (o Mercado Pago exige e o navegador
     // pode ter cache antigo enviando caminhos relativos como "pendente.html").
-    const SITE = 'https://professor-do-futuro-vendas.vercel.app';
+    const SITE = 'https://professordofuturovendas.vercel.app';
     function absUrl(u: unknown, fallback: string): string {
       const s = String(u || '').trim();
       if (/^https?:\/\//i.test(s)) return s;

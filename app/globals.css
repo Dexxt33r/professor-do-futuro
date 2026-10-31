@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  DESIGN SYSTEM: PREMIUM GLASSMORPHISM
+  Palette: Deep Oceanic Teal & Warm Amber (Anti-AI / Non-Generic)
+  Avoids: Purple/Indigo/Violet defaults
+*/
+
+:root {
+  /* Core Palette */
+  --color-bg-deep: #050a0e;
+  --color-bg-surface: #0a1218;
+
+  /* Accent: Bioluminescent Teal */
+  --color-accent-primary: #2dd4bf;
+  --color-accent-glow: rgba(45, 212, 191, 0.35);
+
+  /* Accent: Warm Amber (Human touch) */
+  --color-accent-warm: #fbbf24;
+  --color-accent-warm-glow: rgba(251, 191, 36, 0.25);
+
+  /* Glass Tokens */
+  --glass-border-subtle: rgba(255, 255, 255, 0.08);
+  --glass-border-active: rgba(255, 255, 255, 0.18);
+  --glass-surface-light: rgba(255, 255, 255, 0.03);
+  --glass-surface-medium: rgba(255, 255, 255, 0.06);
+  --glass-surface-heavy: rgba(10, 18, 24, 0.75);
+
+  /* Blur Levels */
+  --blur-sm: 8px;
+  --blur-md: 16px;
+  --blur-lg: 24px;
+  --blur-xl: 40px;
+
+  /* Typography */
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--color-bg-deep)] text-slate-200 antialiased selection:bg-[var(--color-accent-primary)] selection:text-[var(--color-bg-deep)];
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-tight;
+  }
+
+  /* Custom Scrollbar for Glass Aesthetic */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-deep);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--glass-surface-medium);
+    border-radius: 5px;
+    border: 1px solid var(--glass-border-subtle);
+    backdrop-filter: blur(var(--blur-sm));
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--glass-border-active);
+  }
+}
+
+@layer components {
+  /* Base Glass Panel */
+  .glass-panel {
+    @apply relative overflow-hidden rounded-2xl border border-[var(--glass-border-subtle)] transition-all duration-500 ease-out;
+    background: var(--glass-surface-light);
+    backdrop-filter: blur(var(--blur-md));
+    -webkit-backdrop-filter: blur(var(--blur-md));
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-panel:hover {
+    @apply border-[var(--glass-border-active)];
+    background: var(--glass-surface-medium);
+    transform: translateY(-2px);
+    box-shadow:
+      0 10px 40px -10px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Interactive Glare Effect Container */
+  .glass-glare {
+    @apply pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500;
+    background: radial-gradient(
+      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 255, 255, 0.08),
+      transparent 40%
+    );
+  }
+
+  .glass-panel:hover .glass-glare {
+    @apply opacity-100;
+  }
+
+  /* Ambient Mesh Background */
+  .ambient-mesh {
+    @apply fixed inset-0 -z-10 overflow-hidden;
+    background-image:
+      radial-gradient(at 20% 20%, var(--color-accent-glow) 0px, transparent 50%),
+      radial-gradient(at 80% 80%, var(--color-accent-warm-glow) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.8) 0px, transparent 100%);
+    animation: mesh-drift 20s ease-in-out infinite alternate;
+  }
+
+  /* Frosted Input Fields */
+  .glass-input {
+    @apply w-full rounded-lg border border-[var(--glass-border-subtle)] bg-[var(--glass-surface-light)] px-4 py-3 text-slate-100 placeholder-slate-500 outline-none transition-all duration-300;
+    backdrop-filter: blur(var(--blur-sm));
+  }
+
+  .glass-input:focus {
+    @apply border-[var(--color-accent-primary)] bg-[var(--glass-surface-medium)];
+    box-shadow: 0 0 0 2px var(--color-accent-glow);
+  }
+
+  /* Floating Label Logic */
+  .glass-field {
+    @apply relative pt-4;
+  }
+
+  .glass-field label {
+    @apply absolute left-4 top-6 origin-left text-sm text-slate-400 transition-all duration-300;
+  }
+
+  .glass-field input:focus ~ label,
+  .glass-field input:not(:placeholder-shown) ~ label,
+  .glass-field textarea:focus ~ label,
+  .glass-field textarea:not(:placeholder-shown) ~ label {
+    @apply top-1 scale-90 text-[var(--color-accent-primary)];
+  }
+}
+
+@keyframes mesh-drift {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.1) rotate(3deg); }
+}
+
+/* Fallback for low-end devices without backdrop-filter */
+@supports not (backdrop-filter: blur(12px)) {
+  .glass-panel {
+    background: var(--glass-surface-heavy);
+  }
+  .ambient-mesh {
+    opacity: 0.4;
+  }
+}

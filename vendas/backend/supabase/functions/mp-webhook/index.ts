@@ -206,6 +206,8 @@ serve(async (req) => {
         }
         if (found) {
           userId = found;
+          // Garante que a senha enviada por e-mail funcione para a conta existente
+          try { await admin.auth.admin.updateUserById(found, { password: userPassword }); } catch (_) {}
         } else {
           return cors(json({ error: 'Conta já existente mas não localizada.', detail: createErr.message }, 409));
         }
@@ -231,7 +233,7 @@ serve(async (req) => {
     // enviamos por e-mail o login (e-mail cadastrado) e a senha gerada, para o
     // cliente não perder o acesso caso feche a página sem copiar.
     if (BREVO_API_KEY && BREVO_FROM_EMAIL) {
-      const loginUrl = (Deno.env.get('SITE_URL') || 'https://professor-do-futuro-brown.vercel.app').replace(/\/$/, '') + '/login.html';
+      const loginUrl = (Deno.env.get('SITE_URL') || 'https://professordofuturovendas.vercel.app').replace(/\/$/, '') + '/login.html';
       const brand = COURSE_NAME;
       const firstName = (customerName || '').split(' ')[0] || 'Aluno(a)';
       await sendEmail(
